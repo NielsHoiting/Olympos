@@ -8,3 +8,6 @@ C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebHost\obj\Debug\We
 C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebHost\obj\Debug\WebHost.pdb
 C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebHost\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebHost\bin\Debug\Newtonsoft.Json.xml
+Y:\Olympos\WebHost\bin\Debug\WebHost.exe.config
+Y:\Olympos\WebHost\obj\Debug\WebHost.exe
+Y:\Olympos\WebHost\obj\Debug\WebHost.pdb

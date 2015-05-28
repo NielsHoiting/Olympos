@@ -5,3 +5,5 @@ C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebserviceLibrary\ob
 C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebserviceLibrary\obj\Debug\WebserviceLibrary.csprojResolveAssemblyReference.cache
 C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebserviceLibrary\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebserviceLibrary\bin\Debug\Newtonsoft.Json.xml
+Y:\Olympos\WebserviceLibrary\obj\Debug\WebserviceLibrary.csprojResolveAssemblyReference.cache
+Y:\Olympos\WebserviceLibrary\obj\Debug\WebserviceLibrary.dll
