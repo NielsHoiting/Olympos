@@ -1,0 +1,7 @@
+c:\Users\Mark\documents\visual studio 2012\Projects\Olympos\Persistence\bin\Debug\Persistence.dll
+c:\Users\Mark\documents\visual studio 2012\Projects\Olympos\Persistence\bin\Debug\Persistence.pdb
+c:\Users\Mark\documents\visual studio 2012\Projects\Olympos\Persistence\obj\Debug\Persistence.csprojResolveAssemblyReference.cache
+c:\Users\Mark\documents\visual studio 2012\Projects\Olympos\Persistence\obj\Debug\Persistence.dll
+c:\Users\Mark\documents\visual studio 2012\Projects\Olympos\Persistence\obj\Debug\Persistence.pdb
+C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\Persistence\bin\Debug\WebserviceLibrary.dll
+C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\Persistence\bin\Debug\WebserviceLibrary.pdb
