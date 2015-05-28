@@ -13,11 +13,14 @@ namespace WebserviceLibrary
     {
         [WebInvoke(Method = "GET",
                     ResponseFormat = WebMessageFormat.Json,
-                    UriTemplate = "data/")]
+                    UriTemplate = "json/")]
         public string GetJson()
         {
             return "kaas";
         }
+        [WebInvoke(Method = "GET",
+                    ResponseFormat = WebMessageFormat.Json,
+                    UriTemplate = "data/")]
         public Stream GetData()
         {
             var json = new WebClient().DownloadString("http://olympos.intellifi.nl/api/events");
