@@ -16,7 +16,6 @@ namespace Persistence
             {
                 host.Open();
                 Console.WriteLine("Service ready");
-
                 Console.ReadKey();
             }
         }
