@@ -8,5 +8,8 @@ namespace WebserviceLibrary
     {
         [OperationContract]
         Stream GetData();
+
+        [OperationContract]
+        string GetJson();
     }
 }
