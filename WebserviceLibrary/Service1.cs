@@ -23,11 +23,11 @@ namespace WebserviceLibrary
                     UriTemplate = "data/")]
         public Stream GetData()
         {
-            var json = new WebClient().DownloadString("http://olympos.intellifi.nl/api/events");
-            JObject o = JObject.Parse(json);
-            JArray results = (JArray)o["results"];
-            string nextUrl = o["next_url"].ToString();
-            Console.WriteLine("IK VIND HELEMAAL MOOI!!!");
+            // lijst met events ophalen
+            var eventjson = new WebClient().DownloadString("http://olympos.intellifi.nl/api/events");
+            JObject events = JObject.Parse(eventjson);
+            JArray results = (JArray)events["results"];
+            string nextUrl = events["next_url"].ToString();
             int i = 0;
             while (nextUrl != "" && i < 5)
             {
@@ -41,7 +41,11 @@ namespace WebserviceLibrary
                 i++;
 
             }
+
+            var locationjson = new WebClient().DownloadString("http://olympos.intellifi.nl/api/events");
+            JObject locations = JObject.Parse(locationjson);
             
+
             
             WebOperationContext.Current.OutgoingResponse.ContentType = "application/json; charset=utf-8";
             MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(results.ToString()));
