@@ -1,0 +1,9 @@
+C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebHost\bin\Debug\WebHost.exe.config
+C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebHost\bin\Debug\WebHost.exe
+C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebHost\bin\Debug\WebHost.pdb
+C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebHost\bin\Debug\WebserviceLibrary.dll
+C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebHost\bin\Debug\WebserviceLibrary.pdb
+C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebHost\obj\Debug\WebHost.csprojResolveAssemblyReference.cache
+C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebHost\obj\Debug\WebHost.exe
+C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebHost\obj\Debug\WebHost.pdb
+C:\Users\Mark\Documents\Visual Studio 2012\Projects\Olympos\WebHost\bin\Debug\Newtonsoft.Json.dll
