@@ -24,6 +24,7 @@ namespace WebserviceLibrary
             JObject o = JObject.Parse(json);
             JArray results = (JArray)o["results"];
             string nextUrl = o["next_url"].ToString();
+            Console.WriteLine("IK VIND HELEMAAL MOOI!!!");
             int i = 0;
             while (nextUrl != "" && i < 5)
             {
