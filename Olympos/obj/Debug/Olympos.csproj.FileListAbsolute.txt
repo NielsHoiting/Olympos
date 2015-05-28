@@ -1,0 +1,6 @@
+c:\users\mark\documents\visual studio 2012\Projects\Olympos\Olympos\bin\Debug\Olympos.exe.config
+c:\users\mark\documents\visual studio 2012\Projects\Olympos\Olympos\bin\Debug\Olympos.exe
+c:\users\mark\documents\visual studio 2012\Projects\Olympos\Olympos\bin\Debug\Olympos.pdb
+c:\users\mark\documents\visual studio 2012\Projects\Olympos\Olympos\obj\Debug\Olympos.csprojResolveAssemblyReference.cache
+c:\users\mark\documents\visual studio 2012\Projects\Olympos\Olympos\obj\Debug\Olympos.exe
+c:\users\mark\documents\visual studio 2012\Projects\Olympos\Olympos\obj\Debug\Olympos.pdb
