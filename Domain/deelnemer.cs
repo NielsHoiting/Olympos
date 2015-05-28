@@ -8,5 +8,6 @@ namespace Domain
 {
     class deelnemer
     {
+        System.Out.Println('Laurens');
     }
 }
