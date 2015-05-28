@@ -18,9 +18,19 @@ namespace WebserviceLibrary
         {
             var json = new WebClient().DownloadString("http://olympos.intellifi.nl/api/events");
             JObject o = JObject.Parse(json);
-            o.get
+            JArray results = (JArray)o["results"];
+            string nextUrl = o["next_url"].ToString();
+            while (nextUrl != "")
+            {
+                var tempJSON = new WebClient().DownloadString(nextUrl);
+                JObject tempObject = JObject.Parse(tempJSON);
+                nextUrl = tempObject["next_url"].ToString();
+
+            }
+            
+            
             WebOperationContext.Current.OutgoingResponse.ContentType = "application/json; charset=utf-8";
-            MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(o.ToString()));
+            MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(results.ToString()));
             return ms;
         }
     }
