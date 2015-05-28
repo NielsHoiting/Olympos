@@ -11,7 +11,7 @@ namespace WebserviceLibrary
 {
     public class Service1 : IService1
     {
-        [WebInvoke(Method = "GET", 
+        [WebInvoke(Method = "GET",
                     ResponseFormat = WebMessageFormat.Json,
                     UriTemplate = "json/")]
         public string GetJson()
