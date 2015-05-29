@@ -53,7 +53,9 @@ namespace WebserviceLibrary
             JObject locations = JObject.Parse(locationJson);
 
             Console.WriteLine(DateTime.Now.ToString());
-            
+
+            Dictionary<string, string> itemDictionary = new Dictionary<string, string>();
+
             foreach (JToken j in results)
             {
 
@@ -61,16 +63,23 @@ namespace WebserviceLibrary
                              where j["topic"]["arguments"]["1"].ToString() == l["id"].ToString()
                              select l["label"].ToString();
 
-                var itemJson = new WebClient().DownloadString("http://olympos.intellifi.nl/api/items/" + j["topic"]["arguments"]["0"].ToString());
-                JObject items = JObject.Parse(itemJson);
-
-
+                string sporterId = "IDNOTFOUND";
+                if (itemDictionary.ContainsKey(j["topic"]["arguments"]["0"].ToString()))
+                {
+                    sporterId = itemDictionary[j["topic"]["arguments"]["0"].ToString()];
+                }
+                else
+                {
+                    var itemJson = new WebClient().DownloadString("http://olympos.intellifi.nl/api/items/" + j["topic"]["arguments"]["0"].ToString());
+                    JObject items = JObject.Parse(itemJson);
+                    sporterId = items["code_hex"].ToString();
+                    itemDictionary.Add(j["topic"]["arguments"]["0"].ToString(), sporterId);
+                }
                 
                 string eventId = j["id"].ToString();
                 string type = j["topic"]["action"].ToString();
-                string time = j["time_event"].ToString();
+                string time = j["time_created"].ToString();
                 string location = locationLabel.FirstOrDefault();
-                string sporterId = items["code_hex"].ToString();
                 Event e = new Event(eventId, type, time, location, sporterId);
                 eventList.Add(e);
 
