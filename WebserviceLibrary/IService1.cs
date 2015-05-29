@@ -11,6 +11,7 @@ namespace WebserviceLibrary
         List<Event> GetData();
 
         [OperationContract]
-        string GetJson();
+        List<Event> GetDataById(string id);
+
     }
 }
