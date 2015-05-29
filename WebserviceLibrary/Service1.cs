@@ -34,7 +34,7 @@ namespace WebserviceLibrary
             string nextUrl = events["next_url"].ToString();
 
             int i = 0;
-            while (nextUrl != "" && i < 5)
+            while (nextUrl != "" && i < 3)
             {
                 var tempJSON = new WebClient().DownloadString(nextUrl);
                 JObject tempObject = JObject.Parse(tempJSON);
