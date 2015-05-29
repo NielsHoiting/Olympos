@@ -15,6 +15,9 @@ namespace WebserviceLibrary
 {
     public class Service1 : IService1
     {
+        Dictionary<string, string> itemDictionary = new Dictionary<string, string>();
+
+
         [WebInvoke(Method = "GET",
                     ResponseFormat = WebMessageFormat.Json,
                     UriTemplate = "json/")]
@@ -54,7 +57,6 @@ namespace WebserviceLibrary
 
             Console.WriteLine(DateTime.Now.ToString());
 
-            Dictionary<string, string> itemDictionary = new Dictionary<string, string>();
 
             foreach (JToken j in results)
             {
