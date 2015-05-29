@@ -19,8 +19,8 @@ namespace WebserviceLibrary
 
         [WebInvoke(Method = "GET",
                     ResponseFormat = WebMessageFormat.Json,
-                    UriTemplate = "data/")]
-        public List<Event> GetData()
+                    UriTemplate = "data/{pages}")]
+        public List<Event> GetData(string pages)
         {
             // lijst met events ophalen
             var eventjson = new WebClient().DownloadString("http://olympos.intellifi.nl/api/events");
@@ -29,7 +29,12 @@ namespace WebserviceLibrary
             string nextUrl = events["next_url"].ToString();
 
             int i = 0;
-            while (nextUrl != "" && i < 3)
+            int pagesInt;
+            if (!Int32.TryParse(pages, out pagesInt))
+            {
+                pagesInt = 5;
+            }
+            while (nextUrl != "" && i < pagesInt)
             {
                 var tempJSON = new WebClient().DownloadString(nextUrl);
                 JObject tempObject = JObject.Parse(tempJSON);
@@ -88,8 +93,8 @@ namespace WebserviceLibrary
 
         [WebInvoke(Method = "GET",
                     ResponseFormat = WebMessageFormat.Json,
-                    UriTemplate = "data/{id}")]
-        public List<Event> GetDataById(string id)
+                    UriTemplate = "data/{pages}/{id}")]
+        public List<Event> GetDataById(string pages, string id)
         {
             // lijst met events ophalen
             var eventjson = new WebClient().DownloadString("http://olympos.intellifi.nl/api/events");
@@ -98,7 +103,13 @@ namespace WebserviceLibrary
             string nextUrl = events["next_url"].ToString();
 
             int i = 0;
-            while (nextUrl != "" && i < 3)
+            Console.WriteLine(DateTime.Now.ToString());
+            int pagesInt;
+            if (!Int32.TryParse(pages,out pagesInt))
+            {
+                pagesInt = 5;
+            }
+            while (nextUrl != "" && i < pagesInt)
             {
                 var tempJSON = new WebClient().DownloadString(nextUrl);
                 JObject tempObject = JObject.Parse(tempJSON);
@@ -115,8 +126,8 @@ namespace WebserviceLibrary
 
             var locationJson = new WebClient().DownloadString("http://olympos.intellifi.nl/api/locations");
             JObject locations = JObject.Parse(locationJson);
+            
 
-            Console.WriteLine(DateTime.Now.ToString());
 
 
             foreach (JToken j in results)
@@ -151,7 +162,7 @@ namespace WebserviceLibrary
 
             }
 
-            Console.WriteLine(DateTime.Now.ToString());
+            Console.WriteLine(DateTime.Now.ToString() + "\n {0} pages loaded", i);
             List<Event> list = (from testEvent in eventList
                               where testEvent.SporterID == id
                               select testEvent).ToList<Event>();

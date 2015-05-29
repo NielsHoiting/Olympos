@@ -8,10 +8,10 @@ namespace WebserviceLibrary
     public interface IService1
     {
         [OperationContract]
-        List<Event> GetData();
+        List<Event> GetData(string pages);
 
         [OperationContract]
-        List<Event> GetDataById(string id);
+        List<Event> GetDataById(string pages, string id);
 
     }
 }
