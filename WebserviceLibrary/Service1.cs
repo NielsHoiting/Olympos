@@ -7,6 +7,8 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Timers;
+using System.Runtime.Serialization;
 
 
 namespace WebserviceLibrary
@@ -47,16 +49,10 @@ namespace WebserviceLibrary
 
             List<Event> eventList = new List<Event>();
 
-
-
-
-            //todo: Loop maken die event objecten aanmaakt en variabelen set
-
-
             var locationJson = new WebClient().DownloadString("http://olympos.intellifi.nl/api/locations");
             JObject locations = JObject.Parse(locationJson);
 
-            
+            Console.WriteLine(DateTime.Now.ToString());
             
             foreach (JToken j in results)
             {
@@ -70,34 +66,38 @@ namespace WebserviceLibrary
 
 
                 
-                string id = j["id"].ToString();
+                string eventId = j["id"].ToString();
                 string type = j["topic"]["action"].ToString();
-                DateTime time = DateTime.Parse(j["time_event"].ToString(), null, System.Globalization.DateTimeStyles.RoundtripKind);
+                string time = j["time_event"].ToString();
                 string location = locationLabel.FirstOrDefault();
                 string sporterId = items["code_hex"].ToString();
-                Event e = new Event(id, type, time, location, sporterId);
+                Event e = new Event(eventId, type, time, location, sporterId);
                 eventList.Add(e);
-                foreach (Event item in eventList){
-                    Console.WriteLine(item.Id);
-                }
+
+
+                
                 
             }
 
-            
-            
+            Console.WriteLine(DateTime.Now.ToString());
             return eventList;
         }
     }
-
+    [DataContract]
     public class Event
     {
+        [DataMember]
         public string Id { get; set; }
+        [DataMember]
         public string Type { get; set; }
-        public DateTime Time { get; set; }
+        [DataMember]
+        public string Time { get; set; }
+        [DataMember]
         public string Location { get; set; }
+        [DataMember]
         public string SporterID { get; set; }
 
-        public Event(string id, string type, DateTime time, string location, string sporterId)
+        public Event(string id, string type, string time, string location, string sporterId)
         {
             Id = id;
             Type = type;
