@@ -1,84 +1,115 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div id="site-wrapper">
-        <div id="site-canvas">
-            <!--START HEADER -->
-            <div class="header">
-                <!-- START OFFCANVAS -->
-                <div id="site-menu">
-                    <div class="profile">
-                        <img class="profile-avatar" src="images/profielfoto.jpg" />
-                        <div class="profile-details">
-                            <p>SCO-123456</p>
-                            <p>Laurens Verkerk</p>
-                            <p>10-03-1966</p>
-                            <p>laurens.verkerk@olympos.nl</p>
-                            <p><b>Geldigheid tot:</b></p>
-                            <p>10-07-2015</p>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    
+    </head>
+    <body>
+        <div id="site-wrapper">
+            <div id="site-canvas">
+                <!--START HEADER -->
+                <div class="header">
+                    <!-- START OFFCANVAS -->
+                    <div id="site-menu">
+                        <div class="profile">
+                            <img class="profile-avatar" src="images/profielfoto.jpg" />
+                            <div class="profile-details">
+                                <p>SCO-123456</p>
+                                <p>Laurens Verkerk</p>
+                                <p>10-03-1966</p>
+                                <p>laurens.verkerk@olympos.nl</p>
+                                <p><b>Geldigheid tot:</b></p>
+                                <p>10-07-2015</p>
+                            </div>
+                            <div class="profile-menu">
+                                <button type="button" class="btn btn-default">Verlengen</button>
+                                <button type="button" class="btn btn-default">Wijzig Profiel</button>
+                            </div>
                         </div>
-                        <div class="profile-menu">
-                            <button type="button" class="btn btn-default">Verlengen</button>
-                            <button type="button" class="btn btn-default">Wijzig Profiel</button>
+                        <hr>
+                        <div class="navigation">
+                            <ul>
+                                <li><a href="#"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>Reserveren</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>Agenda</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>Aanwezigheidsregistratie</a></li>
+                            </ul>
                         </div>
                     </div>
-                    <hr>
-                    <div class="navigation">
-                        <ul>
-                            <li><a href="#"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>Reserveren</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>Agenda</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>Aanwezigheidsregistratie</a></li>
-                        </ul>
+                    <!-- END OFFCANVAS -->
+                    <!-- START TOP MENU-->
+                    <div class="navbar navbar-fixed-top first-navbar">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="index.html">
+                                    <img alt="Brand" src="http://www.olympos.nl/Portals/1/Skins/Olympos/images/logo_small.png">
+                                </a>
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="top-navigation hidden-xs">
+                            <div class="container">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="reserveren.html">Reserveren</a></li>
+                                    <li><a href="agenda.html">Agenda</a></li>
+                                    <li><a href="aanwezigheid.html">Aanwezigheid</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END TOP MENU-->
+                </div>
+                <!-- END HEADER -->
+                <!-- START CONTENT -->
+                <div class="content container">
+                    @RenderBody()
+                </div>
+                <!-- END CONTENT -->
+                <!-- START FOOTER-->
+                <div class="footer container-fluid">
+                    <div class="container">
+                        <div class="col-md-3 col-sm-6 col-xs-12 footer-col">
+                            <p>
+                                <b>Bel de sportdesk via</b> <br />
+                                (030) 253 4471
+                            </p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 footer-col">
+                            <p>
+                                <u>
+                                    Disclaimer<br />
+                                    Algemene voorwaarden
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 footer-col">
+                            <p>
+                                © Olympos 2015 <br />
+                                design by <u>flow</u>
+                            </p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 footer-col">
+                            <img class="social-icon" src="http://www.olympos.nl/Portals/1/Skins/Olympos/images/btn_twitter.png" />
+                            <img class="social-icon" src="http://www.olympos.nl/Portals/1/Skins/Olympos/images/btn_facebook.png" />
+                            <img class="social-icon" src="http://www.olympos.nl/Portals/1/Skins/Olympos/images/btn_ideal.png" />
+                        </div>
                     </div>
                 </div>
-                <!-- END OFFCANVAS -->
+                <!-- END FOOTER-->
             </div>
-            <!-- END HEADER -->
-            <!-- START CONTENT -->
-            <div class="content container">
-                @RenderBody()
-            </div>
-            <!-- END CONTENT -->
-            <!-- START FOOTER-->
-            <div class="footer container-fluid">
-                <div class="container">
-                    <div class="col-md-3 col-sm-6 col-xs-12 footer-col">
-                        <p>
-                            <b>Bel de sportdesk via</b> <br />
-                            (030) 253 4471
-                        </p>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 footer-col">
-                        <p>
-                            <u>
-                                Disclaimer<br />
-                                Algemene voorwaarden
-                            </u>
-                        </p>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 footer-col">
-                        <p>
-                            © Olympos 2015 <br />
-                            design by <u>flow</u>
-                        </p>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 footer-col">
-                        <img class="social-icon" src="http://www.olympos.nl/Portals/1/Skins/Olympos/images/btn_twitter.png" />
-                        <img class="social-icon" src="http://www.olympos.nl/Portals/1/Skins/Olympos/images/btn_facebook.png" />
-                        <img class="social-icon" src="http://www.olympos.nl/Portals/1/Skins/Olympos/images/btn_ideal.png" />
-                    </div>
-                </div>
-            </div>
-            <!-- END FOOTER-->
         </div>
-    </div>
-</body>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/offcanvas")
+    </body>
 </html>
