@@ -13,5 +13,8 @@ namespace WebserviceLibrary
         [OperationContract]
         List<Event> GetDataById(string pages, string id);
 
+        [OperationContract]
+        List<Event> GetDataBySpot(string pages, string spot);
+
     }
 }
