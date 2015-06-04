@@ -20,7 +20,7 @@ namespace WebHost
         {
             requiredHeaders = headers ?? new Dictionary<string, string>();
         }
-
+        //test
         public object AfterReceiveRequest(ref System.ServiceModel.Channels.Message request, System.ServiceModel.IClientChannel channel, System.ServiceModel.InstanceContext instanceContext)
         {
             return null;
