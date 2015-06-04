@@ -12,5 +12,10 @@ namespace WebApplication.Controllers
         {
             return View();
         }
+
+        public ActionResult lesDetail()
+        {
+            return View();
+        }
     }
 }
