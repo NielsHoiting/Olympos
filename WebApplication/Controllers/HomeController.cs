@@ -16,7 +16,13 @@ namespace WebApplication.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
+            ViewBag.Doos = "Hoi";
 
+            return View();
+        }
+
+        public ActionResult Reserveren()
+        {
             return View();
         }
 
