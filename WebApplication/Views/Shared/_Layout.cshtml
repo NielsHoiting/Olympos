@@ -1,44 +1,84 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div id="site-wrapper">
+        <div id="site-canvas">
+            <!--START HEADER -->
+            <div class="header">
+                <!-- START OFFCANVAS -->
+                <div id="site-menu">
+                    <div class="profile">
+                        <img class="profile-avatar" src="images/profielfoto.jpg" />
+                        <div class="profile-details">
+                            <p>SCO-123456</p>
+                            <p>Laurens Verkerk</p>
+                            <p>10-03-1966</p>
+                            <p>laurens.verkerk@olympos.nl</p>
+                            <p><b>Geldigheid tot:</b></p>
+                            <p>10-07-2015</p>
+                        </div>
+                        <div class="profile-menu">
+                            <button type="button" class="btn btn-default">Verlengen</button>
+                            <button type="button" class="btn btn-default">Wijzig Profiel</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="navigation">
+                        <ul>
+                            <li><a href="#"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>Reserveren</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>Agenda</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>Aanwezigheidsregistratie</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- END OFFCANVAS -->
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+            <!-- END HEADER -->
+            <!-- START CONTENT -->
+            <div class="content container">
+                @RenderBody()
             </div>
+            <!-- END CONTENT -->
+            <!-- START FOOTER-->
+            <div class="footer container-fluid">
+                <div class="container">
+                    <div class="col-md-3 col-sm-6 col-xs-12 footer-col">
+                        <p>
+                            <b>Bel de sportdesk via</b> <br />
+                            (030) 253 4471
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 footer-col">
+                        <p>
+                            <u>
+                                Disclaimer<br />
+                                Algemene voorwaarden
+                            </u>
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 footer-col">
+                        <p>
+                            © Olympos 2015 <br />
+                            design by <u>flow</u>
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 footer-col">
+                        <img class="social-icon" src="http://www.olympos.nl/Portals/1/Skins/Olympos/images/btn_twitter.png" />
+                        <img class="social-icon" src="http://www.olympos.nl/Portals/1/Skins/Olympos/images/btn_facebook.png" />
+                        <img class="social-icon" src="http://www.olympos.nl/Portals/1/Skins/Olympos/images/btn_ideal.png" />
+                    </div>
+                </div>
+            </div>
+            <!-- END FOOTER-->
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>
