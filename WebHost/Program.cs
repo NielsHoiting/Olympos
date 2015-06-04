@@ -10,7 +10,7 @@ namespace Persistence
 {
     public class program
     {
-        static void Main(string[] args)
+        static void Main(string[] args) 
         {
             using (ServiceHost host = new ServiceHost(typeof(Service1)))
             {
