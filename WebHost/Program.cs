@@ -8,7 +8,7 @@ using WebserviceLibrary;
 
 namespace Persistence
 {
-    public class program
+    public class program 
     {
         static void Main(string[] args) 
         {

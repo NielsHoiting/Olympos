@@ -1,5 +1,6 @@
 ﻿using System.ServiceModel;
 using System.IO;
+using System.Collections.Generic;
 
 namespace WebserviceLibrary
 {
@@ -7,9 +8,13 @@ namespace WebserviceLibrary
     public interface IService1
     {
         [OperationContract]
-        Stream GetData();
+        List<Event> GetData(string pages);
 
         [OperationContract]
-        string GetJson();
+        List<Event> GetDataById(string pages, string id);
+
+        [OperationContract]
+        List<Event> GetDataBySpot(string pages, string spot);
+
     }
 }
