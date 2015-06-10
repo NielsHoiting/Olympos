@@ -17,6 +17,7 @@ namespace WebApplication.Models
         public int aantal_deelnemers { private set; get; }
         public int max_aantal_deelnemers { private set; get; }
         public int losse_verkoop { private set; get; }
+
         public int vervallen { private set; get; }
 
     }
