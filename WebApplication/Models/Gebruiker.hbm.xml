@@ -2,12 +2,12 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
                    assembly="WebApplication"
                    namespace="WebApplication.Models">
-  <class name="Gebruiker" table="Gebruikers">
+  <class name="Gebruiker" table="gebruiker">
     <id name="sco_nummer">
       <generator class="native" />
     </id>
     <property name="geldig_tot"/>
-    <property name="rol"/>
+    <property name="rol" column="ROLNAAM"/>
     <property name="wachtwoord"/>
     <property name="voornaam"/>
     <property name="tussenvoegsel"/>

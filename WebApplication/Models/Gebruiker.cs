@@ -17,5 +17,9 @@ namespace WebApplication.Models
         public virtual string achternaam { set; get; }
         public virtual DateTime geboortedatum { set; get; }
         public virtual string email_adres { set; get; }
+        public Gebruiker()
+        {
+
+        }
     }
 }
