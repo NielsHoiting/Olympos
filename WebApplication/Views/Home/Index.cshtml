@@ -1,19 +1,30 @@
-﻿@{
+﻿@using WebApplication.Models
+@model LoginViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 <div class="col col-sm-12 col-md-6 col-md-offset-3 text-center">
     <h2 class="heading">Inloggen</h2>
-    <form class="form-signin">
-        <label for="" class="sr-only">SCO-nummer</label>
-        <input id="" class="form-control" placeholder="SCO-nummer" required autofocus>
-        <label for="" class="sr-only">Wachtwoord</label>
-        <input type="password" id="" class="form-control" placeholder="Wachtwoord" required>
-        <div class="checkbox">
-            <input type="checkbox" id="onthouden" value="remember-me">
-            <label for="onthouden" class="label">Onthoud mij</label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-login" type="submit">Inloggen</button>
-    </form>
+
+@using (Html.BeginForm("Index", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+    @Html.AntiForgeryToken()
+      @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.ScoNr, new { @class = "form-control", @placeholder = "SCO-nummer"})
+                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Wachtwoord" })
+                        
+                    </div>
+
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe)
+                    </div>
+                 </div>
+    
+    <input type="submit" value="Log in" class="btn btn-lg btn-primary btn-login" />
+}
     <a href='@Url.Action("Register", "Account", "Account")' class="btn btn-lg btn-primary btn-register">
         Registreren
     </a>
