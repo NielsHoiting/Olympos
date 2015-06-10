@@ -6,10 +6,9 @@
 
 <div class="col col-sm-12 col-md-6 col-md-offset-3 text-center">
     <h2 class="heading">Inloggen</h2>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Login", "Login"))
     {
         @Html.TextBox("gebruikersnaam");
-        <br />
         @Html.TextBox("wachtwoord");
         <input type="submit" value="Log in" class="btn btn-lg btn-primary btn-login" />
     }

@@ -15,50 +15,12 @@ namespace WebApplication.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(string returnUrl)
+        public ActionResult Index()
         {
-            return View();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        {
-            var sconummer = model.ScoNr;
-            var password = model.Password;
-
-            System.Diagnostics.Debug.WriteLine("Nr" + sconummer);
-            System.Diagnostics.Debug.WriteLine("Pass:" + password);
-
-            if (!ModelState.IsValid)
+            if (Session["user"] == null)
             {
-                return View(model);
+                return RedirectToAction("Index", "Login");
             }
-
-            
-
-            return View(model);
-            
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-            ViewBag.Doos = "Hoi";
-
-            return View();
-        }
-
-        public ActionResult Reserveren()
-        {
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }
