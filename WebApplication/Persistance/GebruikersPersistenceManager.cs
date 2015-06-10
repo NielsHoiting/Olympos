@@ -11,14 +11,22 @@ namespace WebApplication.Persistance
 {
     public class GebruikersPersistenceManager : PersistenceManager
     {
-        public Boolean Login(string username, string password)
+        public Gebruiker Login(string username, string password)
         {
-            ISession session = OpenSession();
-            ICriteria criteria = session.CreateCriteria(typeof(Gebruiker));
-            criteria.Add(Expression.Eq("sco_nummer", username));
-            criteria.Add(Expression.Eq("wachtwoord", password));
-            IList<Gebruiker> matchingObjects = criteria.List<Gebruiker>();
-            return matchingObjects.Count() > 0;
+            Gebruiker returnGebruiker = null;
+            using (ISession session = OpenSession())
+            {
+                ICriteria criteria = session.CreateCriteria(typeof(Gebruiker));
+                criteria.Add(Expression.Eq("sco_nummer", username));
+                criteria.Add(Expression.Eq("wachtwoord", password));
+                System.Diagnostics.Debug.WriteLine("iemand logt in met sco_nummer" + username + " en wachtwoord " + password);
+                IList<Gebruiker> matchingObjects = criteria.List<Gebruiker>();
+                if (matchingObjects.Count() > 0)
+                {
+                    returnGebruiker = matchingObjects.First();
+                }
+            }
+            return returnGebruiker;
         }
     }
 }
