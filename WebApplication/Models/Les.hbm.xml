@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="WebApplication"
+                   namespace="WebApplication.Models">
+  <class name="Les" table="lessen_per_sportaanbod">
+    <id name="les_no">
+      <generator class="native" />
+    </id>
+    <property name="sportdocent_sco_no"/>
+    <property name="sportaanbod_no"/>
+    <property name="dag"/>
+    <property name="begintijd"/>
+    <property name="eindtijd"/>
+    <property name="aantal deelnemers"/>
+    <property name="max_aantal_deelnemers"/>
+    <property name="losse_verkoop"/>
+    <property name="vervallen"/>
+  </class>
+</hibernate-mapping>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    class Lessen
+    class Les
     {
         public int les_no { private set; get; }
         public int sportdocent_docent_no { private set; get; }
@@ -16,7 +16,7 @@ namespace WebApplication.Models
         public DateTime eindtijd { private set; get; }
         public int aantal_deelnemers { private set; get; }
         public int max_aantal_deelnemers { private set; get; }
-        public int losse_verkoop { private set; get; } 
+        public int losse_verkoop { private set; get; }
 
         public int vervallen { private set; get; }
 
