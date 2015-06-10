@@ -21,7 +21,7 @@ namespace WebApplication.Persistance
                 {
                     var configuration = new Configuration();
                     configuration.Configure();
-                    configuration.AddAssembly(typeof(Gebruiker).Assembly);
+                    configuration.AddAssembly(typeof(Gebruiker).Assembly); 
                     _sessionFactory = configuration.BuildSessionFactory();
                 }
                 return _sessionFactory;
