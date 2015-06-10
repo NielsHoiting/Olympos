@@ -3,6 +3,12 @@
     ViewBag.Title = "Register";
 }
 
+@using (Html.BeginForm("Search", "Events"))
+{
+    @Html.TextBox("name")
+    <input type="submit" value="Search" />
+}
+
 <div id="site-wrapper">
     <div id="site-canvas">
         <div class="content container">
