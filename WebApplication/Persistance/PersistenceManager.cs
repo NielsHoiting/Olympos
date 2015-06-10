@@ -8,16 +8,16 @@ using WebApplication.Models;
 
 namespace WebApplication.Persistance
 {
-    public class GebruikerManager
+    public class PersistenceManager
     {
-        
+
         private static ISessionFactory _sessionFactory;
- 
+
         private static ISessionFactory SessionFactory
         {
             get
             {
-                if(_sessionFactory == null)
+                if (_sessionFactory == null)
                 {
                     var configuration = new Configuration();
                     configuration.Configure();
@@ -27,11 +27,11 @@ namespace WebApplication.Persistance
                 return _sessionFactory;
             }
         }
- 
+
         public static ISession OpenSession()
         {
             return SessionFactory.OpenSession();
         }
-    
+
     }
 }
