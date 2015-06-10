@@ -179,7 +179,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Gebruiker.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Lessen.cs" />
+    <Compile Include="Models\Les.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Reservering.cs" />
     <Compile Include="Models\Sportaanbod.cs" />
@@ -210,8 +210,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Content Include="Models\ditbestandstaathieraleenzodatikkantestenofgithubmijnprojectbestandookdoorstuurtmetcommittenzodatikweerallebestandenopmijnpckanzien.txt" />
+    <Content Include="Models\Les.hbm.xml" />
+    <Content Include="Models\Reservering.hbm.xml" />
+    <Content Include="Models\Sportaanbod.hbm.xml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
