@@ -9,7 +9,7 @@ namespace WebApplication.Models
     class Les
     {
         public int les_no { private set; get; }
-        public int sportdocent_docent_no { private set; get; }
+        public int sportdocent_sco_no { private set; get; }
         public int sportaanbod_no { private set; get; }
         public DateTime dag { private set; get; }
         public DateTime begintijd { private set; get; }
@@ -17,7 +17,6 @@ namespace WebApplication.Models
         public int aantal_deelnemers { private set; get; }
         public int max_aantal_deelnemers { private set; get; }
         public int losse_verkoop { private set; get; }
-
         public int vervallen { private set; get; }
 
     }
