@@ -25,7 +25,7 @@ namespace WebApplication.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
+        // spatie
         public ApplicationSignInManager SignInManager
         {
             get
