@@ -33,5 +33,17 @@ namespace WebApplication.Persistance
             return SessionFactory.OpenSession();
         }
 
+        public void Save<T>(T item)
+        {
+            using (ISession session = OpenSession())
+            {
+                using (session.BeginTransaction())
+                {
+                    session.SaveOrUpdate(item);
+                    session.Transaction.Commit();
+                }
+            }
+        }
+
     }
 }
