@@ -21,15 +21,17 @@
                      if (l.begintijd.Day == beginDate.AddDays(i).Day)
                      {
                      <div class="row event">
-                         <h4 class="ta-l mar-b-zero">
-                             @CultureInfo.CurrentCulture.TextInfo.ToTitleCase(l.Sportaanbod.Sportcode.ToLower())
-                         </h4>
-                         <p class="sub-res ta-l mar-zero">
-                             @l.begintijd.ToString("dddd dd MMMM yyyy")
-                         </p>
-                         <p class="sub-res ta-l mar-zero">
-                             @l.begintijd.ToString("HH:mm") - @l.eindtijd.ToString("HH:mm")
-                         </p>
+                         <a href="/Reserveren/Les/@l.les_no" class="fill-div">
+                             <h4 class="ta-l mar-b-zero">
+                                 @CultureInfo.CurrentCulture.TextInfo.ToTitleCase(l.Sportaanbod.Sportcode.ToLower())
+                             </h4>
+                             <p class="sub-res ta-l mar-zero">
+                                 @l.begintijd.ToString("dddd dd MMMM yyyy")
+                             </p>
+                             <p class="sub-res ta-l mar-zero">
+                                 @l.begintijd.ToString("HH:mm") - @l.eindtijd.ToString("HH:mm")
+                             </p>
+                         </a>
                      </div>
                      }
                  }

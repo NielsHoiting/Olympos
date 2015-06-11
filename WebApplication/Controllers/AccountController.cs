@@ -11,11 +11,19 @@ namespace WebApplication.Controllers
         // GET: Account
         public ActionResult Index()
         {
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
 
         public ActionResult Profiel()
         {
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
     }
