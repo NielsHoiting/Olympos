@@ -18,11 +18,10 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string username, string password)
+        public ActionResult Login(string gebruikersnaam, string wachtwoord)
         {
-            System.Diagnostics.Debug.WriteLine("iemand logt in met sco_nummer" + username + " en wachtwoord " + password);
             GebruikersPersistenceManager manager = new GebruikersPersistenceManager();
-            Gebruiker gebruiker = manager.Login(username, password);
+            Gebruiker gebruiker = manager.Login(gebruikersnaam, wachtwoord);
             if(gebruiker != null){
                 Session["user"] = gebruiker;
                 return RedirectToAction("Index", "Home");

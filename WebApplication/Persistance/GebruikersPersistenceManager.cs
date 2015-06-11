@@ -17,13 +17,13 @@ namespace WebApplication.Persistance
             using (ISession session = OpenSession())
             {
                 ICriteria criteria = session.CreateCriteria(typeof(Gebruiker));
-                criteria.Add(Expression.Eq("sco_nummer", username));
+                criteria.Add(Expression.Eq("sco_nummer", Int32.Parse(username)));
                 criteria.Add(Expression.Eq("wachtwoord", password));
-                System.Diagnostics.Debug.WriteLine("iemand logt in met sco_nummer" + username + " en wachtwoord " + password);
                 IList<Gebruiker> matchingObjects = criteria.List<Gebruiker>();
                 if (matchingObjects.Count() > 0)
                 {
                     returnGebruiker = matchingObjects.First();
+                    System.Diagnostics.Debug.WriteLine(returnGebruiker.achternaam);
                 }
             }
             return returnGebruiker;
