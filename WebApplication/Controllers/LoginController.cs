@@ -13,7 +13,6 @@ namespace WebApplication.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            System.Diagnostics.Debug.WriteLine("test");
             return View();
         }
 
@@ -24,7 +23,6 @@ namespace WebApplication.Controllers
             Gebruiker gebruiker = manager.Login(gebruikersnaam, wachtwoord);
             if(gebruiker != null){
                 Session["user"] = gebruiker;
-                return RedirectToAction("Index", "Home");
             }
             return View();
         }
