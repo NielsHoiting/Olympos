@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication.Persistance;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -10,6 +12,10 @@ namespace WebApplication.Controllers
     {
         public ActionResult Index()
         {
+            LesPersistanceManager manager = new LesPersistanceManager();
+            Gebruiker g = (Gebruiker)Session["user"];
+           // List<Les> LastMinuteLessen = manager.getLastMinuteLessen(g);
+            //  ViewData["LastMinuteLessen"] = LastMinuteLessen;
             return View();
         }
 

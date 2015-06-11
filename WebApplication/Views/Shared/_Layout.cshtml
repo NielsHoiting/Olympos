@@ -49,9 +49,9 @@
                         <hr>
                         <div class="navigation">
                             <ul>
-                                <li><a href="#"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>Reserveren</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>Agenda</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>Aanwezigheidsregistratie</a></li>
+                                <li><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>@Html.ActionLink("Reserveren", "Index", "Reserveren")</li>
+                                <li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>@Html.ActionLink("Kalender", "Index", "Home")</li>
+                                <li><span class="glyphicon glyphicon-check" aria-hidden="true"></span>@Html.ActionLink("Aanwezigheidsregistratie", "Index", "Home")</li>
                             </ul>
                         </div>
                         }else
@@ -64,7 +64,7 @@
                     <div class="navbar navbar-fixed-top first-navbar">
                         <div class="container">
                             <div class="navbar-header">
-                                <a class="navbar-brand" href="index.html">
+                                <a class="navbar-brand" href="/">
                                     <img alt="Brand" src="http://www.olympos.nl/Portals/1/Skins/Olympos/images/logo_small.png">
                                 </a>
                                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -79,6 +79,7 @@
                             <div class="container">
                                 <ul>
                                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                    <li>@Html.ActionLink("Profiel", "Profiel", "Account")</li>
                                     <li>@Html.ActionLink("Reserveren", "Index", "Reserveren")</li>
                                 </ul>
                             </div>
