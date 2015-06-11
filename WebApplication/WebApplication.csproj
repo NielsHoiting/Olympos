@@ -166,20 +166,15 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ReserverenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Gebruiker.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Les.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Reservering.cs" />
     <Compile Include="Models\Sportaanbod.cs" />
     <Compile Include="Persistance\PersistenceManager.cs" />

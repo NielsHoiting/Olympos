@@ -8,7 +8,7 @@ namespace WebApplication
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+
         }
     }
 }

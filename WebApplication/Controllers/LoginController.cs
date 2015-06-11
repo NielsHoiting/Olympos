@@ -23,8 +23,9 @@ namespace WebApplication.Controllers
             Gebruiker gebruiker = manager.Login(gebruikersnaam, wachtwoord);
             if(gebruiker != null){
                 Session["user"] = gebruiker;
+                return RedirectToAction("Index", "Home");
             }
-            return View();
+            return RedirectToAction("Index", "Login");
         }
     }
 }
