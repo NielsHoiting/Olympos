@@ -338,6 +338,8 @@ input[type=checkbox]:checked + label{
     padding-left: 10px;
 }
 
+.row{ display:block; height:30px;}
+
 @media screen and (min-width: 768px) {
 	.day:not(:last-child){
 		border-right: 1px dashed #e9967f;
