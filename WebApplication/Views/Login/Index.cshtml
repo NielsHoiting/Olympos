@@ -1,5 +1,4 @@
 ﻿@using WebApplication.Models
-@model LoginViewModel
 @{
     ViewBag.Title = "Log in";
 }
@@ -10,7 +9,10 @@
     {
         @Html.TextBox("gebruikersnaam");
         @Html.TextBox("wachtwoord");
-        <input type="submit" value="Log in" class="btn btn-lg btn-primary btn-login" />
+        
+        @Html.CheckBox("onthouden");
+        @Html.Label("Onthoud mij");
+       <input type="submit" value="Log in" class="btn btn-lg btn-primary btn-login" />
     }
     <a href='@Url.Action("Register", "Account", "Account")' class="btn btn-lg btn-primary btn-register">
         Registreren

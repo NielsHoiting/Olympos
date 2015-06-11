@@ -13,20 +13,20 @@ namespace WebApplication.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            System.Diagnostics.Debug.WriteLine("test");
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(string gebruikersnaam, string wachtwoord)
+        public ActionResult Login(string gebruikersnaam, string wachtwoord, bool onthouden)
         {
             GebruikersPersistenceManager manager = new GebruikersPersistenceManager();
+            System.Diagnostics.Debug.Write(onthouden.ToString());
             Gebruiker gebruiker = manager.Login(gebruikersnaam, wachtwoord);
             if(gebruiker != null){
                 Session["user"] = gebruiker;
                 return RedirectToAction("Index", "Home");
             }
-            return View();
+            return RedirectToAction("Index", "Login");
         }
     }
 }
