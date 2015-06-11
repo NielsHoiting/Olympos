@@ -8,14 +8,14 @@
     CultureInfo enAU = new CultureInfo("nl");
 }
 <div class="col col-xs-12 col-md-10 col-md-offset-1">
-    <h2 class="heading text-center">Persoonlijke Agenda</h2>
+    <h2 class="heading text-center">Agenda</h2>
     <div class="agenda">
-        <h3>@beginDate.ToShortDateString() tot @beginDate.AddDays(5).ToShortDateString()</h3>
+        <h3>@beginDate.ToShortDateString() t/m @beginDate.AddDays(4).ToShortDateString()</h3>
         <div class="col-md-1">
         </div>
         @for (int i = 0; i < 5; i++){
             <div class="day col-md-2 col-xs-12">
-                <h4 class="text-center">@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(beginDate.AddDays(i).ToString("dddd"))</h4>
+                <h4 class="text-center">@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(beginDate.AddDays(i).ToString("dddd dd MMMM"))</h4>
                  @foreach (Les l in lessen)
                  {
                      if (l.begintijd.Day == beginDate.AddDays(i).Day)
@@ -28,7 +28,7 @@
                              @l.begintijd.ToString("dddd dd MMMM yyyy")
                          </p>
                          <p class="sub-res ta-l mar-zero">
-                             @l.begintijd.ToString("hh:mm") - @l.eindtijd.ToString("hh:mm")
+                             @l.begintijd.ToString("HH:mm") - @l.eindtijd.ToString("HH:mm")
                          </p>
                      </div>
                      }

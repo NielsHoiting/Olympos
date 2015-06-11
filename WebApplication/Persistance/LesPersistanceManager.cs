@@ -10,6 +10,21 @@ namespace WebApplication.Persistance
 {
     public class LesPersistanceManager : PersistenceManager
     {
+        public List<Les> getLastMinuteLessen(Gebruiker gebruiker)
+        {
+            ISession session = OpenSession();
+            DateTime volgendeDag = DateTime.Now.Date.AddDays(1);
+            ICriteria criteria = session.CreateCriteria(typeof(Les));
+            criteria.Add(Restrictions.Gt("begintijd", DateTime.Now));
+            criteria.Add(Restrictions.Lt("begintijd", volgendeDag));
+            IList<Les> lesList = criteria.List<Les>();
+            var x = from les in lesList
+                    where (from r in les.Reserveringen
+                           where r.Deelnemer.sco_nummer == gebruiker.sco_nummer
+                           select r).FirstOrDefault() == null
+                    select les;
+            return x.ToList<Les>();
+        }
         public List<Les> getAgenda(int skip, Gebruiker gebruiker)
         {
             ISession session = OpenSession();
