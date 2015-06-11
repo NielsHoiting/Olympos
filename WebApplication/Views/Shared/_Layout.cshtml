@@ -9,6 +9,8 @@
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/offcanvas")
     
+        
+    
     </head>
     <body>
         <div id="site-wrapper">
@@ -17,20 +19,30 @@
                 <div class="header">
                     <!-- START OFFCANVAS -->
                     <div id="site-menu">
+                        @if (Session["user"] != null)
+                        {
+                            WebApplication.Models.Gebruiker g = (WebApplication.Models.Gebruiker)Session["user"];
+                            string geboortedatum = g.geboortedatum.ToString("dd-MM-yyyy");
+                            string geldigTot = g.geldig_tot.ToString("dd-MM-yyyy");
                         <div class="profile">
-                            <img class="profile-avatar" src="images/profielfoto.jpg" />
+                           
+                                
+                            
+
+                            <img class="profile-avatar" src="~/Content/Images/placeholder.png" />
                             <div class="profile-details">
-                                <p>SCO-123456</p>
-                                <p>Laurens Verkerk</p>
-                                <p>10-03-1966</p>
-                                <p>laurens.verkerk@olympos.nl</p>
+                                <p>@Html.Raw(g.sco_nummer)</p>
+                                <p>@Html.Raw(g.voornaam). @Html.Raw(g.achternaam)</p>
+                                <p>@Html.Raw(geboortedatum)</p>
+                                <p>@Html.Raw(g.email_adres)</p>
                                 <p><b>Geldigheid tot:</b></p>
-                                <p>10-07-2015</p>
+                                <p>@Html.Raw(geldigTot)</p>
                             </div>
                             <div class="profile-menu">
                                 <button type="button" class="btn btn-default">Verlengen</button>
                                 <button type="button" class="btn btn-default">Wijzig Profiel</button>
                             </div>
+                            
                         </div>
                         <hr>
                         <div class="navigation">
@@ -40,6 +52,10 @@
                                 <li><a href="#"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>Aanwezigheidsregistratie</a></li>
                             </ul>
                         </div>
+                        }else
+                        {
+                        <h3 style="color: white;">U moet inloggen</h3>
+                        }
                     </div>
                     <!-- END OFFCANVAS -->
                     <!-- START TOP MENU-->
