@@ -27,10 +27,12 @@ namespace WebApplication.Controllers
         public ActionResult Les(int id)
         {
             LesPersistanceManager manager = new LesPersistanceManager();
-            
+
             Les les = manager.getLes(id);
             if (les == null)
-        {
+            {
+                return RedirectToAction("Index", "Reserveren");
+            }
             return View();
         }
     }
