@@ -178,6 +178,7 @@
     <Compile Include="Models\Les.cs" />
     <Compile Include="Models\Reservering.cs" />
     <Compile Include="Models\Sportaanbod.cs" />
+    <Compile Include="Persistance\LesPersistanceManager.cs" />
     <Compile Include="Persistance\PersistenceManager.cs" />
     <Compile Include="Persistance\AccountPersistenceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

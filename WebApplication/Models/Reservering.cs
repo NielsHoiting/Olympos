@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    class Reservering
+    public class Reservering
     {
         public virtual int reservering_no { set; get; }
         public virtual Les Les { set; get; }
