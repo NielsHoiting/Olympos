@@ -10,10 +10,10 @@
         @Html.TextBox("gebruikersnaam");
         @Html.TextBox("wachtwoord");
         
-        @Html.CheckBox("Onthoud mij");
-        @Html.Label("Onthoud mij")
+        @Html.CheckBox("onthouden");
+        @Html.Label("Onthoud mij");
+       <input type="submit" value="Log in" class="btn btn-lg btn-primary btn-login" />
     }
-    <input type="submit" value="Log in" class="btn btn-lg btn-primary btn-login" />
     <a href='@Url.Action("Register", "Account", "Account")' class="btn btn-lg btn-primary btn-register">
         Registreren
     </a>
