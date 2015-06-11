@@ -9,12 +9,17 @@
     {
         @Html.TextBox("gebruikersnaam");
         @Html.TextBox("wachtwoord");
-        
-        @Html.CheckBox("onthouden");
+        @Html.CheckBox("onthouden");    
         @Html.Label("Onthoud mij");
-       <input type="submit" value="Log in" class="btn btn-lg btn-primary btn-login" />
+
+        if (TempData["message"] != null)
+        {
+            <span>@TempData["message"]</span>
+        }
+        <input type="submit" value="Log in" class="btn btn-lg btn-primary btn-login" />
+        <a href='@Url.Action("Register", "Account", "Account")' class="btn btn-lg btn-primary btn-register">
+            Registreren
+        </a>
     }
-    <a href='@Url.Action("Register", "Account", "Account")' class="btn btn-lg btn-primary btn-register">
-        Registreren
-    </a>
+    
 </div>

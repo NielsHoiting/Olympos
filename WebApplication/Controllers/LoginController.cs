@@ -26,7 +26,12 @@ namespace WebApplication.Controllers
                 Session["user"] = gebruiker;
                 return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Login");
+            else
+            {
+                TempData["message"] = "Wachtwoord/SCO-Nummer onjuist";
+                return RedirectToAction("Index", "Login");
+            }
+            
         }
     }
 }
