@@ -82,9 +82,9 @@ h3{
 	float: none;
 	margin: 0 auto;
 }
-.content{
-	padding-top: 150px;
-}
+/*.content{
+	padding-top: 70px;
+}*/
 .col{
 	background-color: white;
 	padding: 30px;
@@ -130,6 +130,14 @@ h3{
 		bottom: 0;
 		width: 100%;
 		margin-top: 50px;
+        clear: both;
+   
+        padding: 0;
+        vertical-align: middle;
+        margin: 0;
+        position: fixed;
+        bottom: 0px;
+
 }
 @media screen and (max-width: 767px) {
 	.footer{

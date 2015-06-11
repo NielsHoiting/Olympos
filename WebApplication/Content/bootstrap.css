@@ -763,6 +763,10 @@ pre code {
   margin-left: auto;
 }
 
+.content{
+	padding-top: 50px; !important
+    }
+
 .container:before,
 .container:after {
   display: table;
@@ -928,6 +932,10 @@ pre code {
   .container {
     max-width: 750px;
   }
+
+  .content{
+	padding-top: 75px; !important
+    }
   .col-sm-1,
   .col-sm-2,
   .col-sm-3,
@@ -1082,6 +1090,11 @@ pre code {
   .container {
     max-width: 970px;
   }
+
+   .content{
+	padding-top: 75px; !important
+    }
+
   .col-md-1,
   .col-md-2,
   .col-md-3,
