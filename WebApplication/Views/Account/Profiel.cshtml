@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Profiel";
+}
+
+<div class="col col-table col-sm-12 col-md-10 col-md-offset-1 text-center">
+    <h2 class="heading">Profiel</h2>
+
+@if (Session["user"] != null)
+{
+    WebApplication.Models.Gebruiker g = (WebApplication.Models.Gebruiker)Session["user"];
+    string geboortedatum = g.geboortedatum.ToString("dd-MM-yyyy");
+    string geldigTot = g.geldig_tot.ToString("dd-MM-yyyy");
+
+    <div class="profilePage">
+        <div class="day col-md-4">
+            <img class="profile-avatar" src="~/Content/Images/placeholder.png" />
+        </div>
+        <div class="profile-text col-md-5">
+
+            <b>SCO-Nummer:</b> <p>@Html.Raw(g.sco_nummer)</p>
+            <b>Naam:</b> <p>@Html.Raw(g.voornaam). @Html.Raw(g.achternaam)</p>
+            <b>Geboortedatum:</b> <p>@Html.Raw(geboortedatum)</p>
+            <b>E-mail adres:</b> <p>@Html.Raw(g.email_adres)</p>
+            <b>Geldigheid tot:</b> <p>@Html.Raw(geldigTot)</p>
+        </div>
+    </div>
+}
+
+</div>

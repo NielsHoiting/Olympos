@@ -258,10 +258,10 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Reserveren\Index.cshtml" />
     <Content Include="Views\Reserveren\lesDetail.cshtml" />
+    <Content Include="Views\Account\Profiel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
