@@ -12,6 +12,10 @@ namespace WebApplication.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             LesPersistanceManager manager = new LesPersistanceManager();
             Gebruiker g = (Gebruiker)Session["user"];
             List<Les> LastMinuteLessen = manager.getLastMinuteLessen(g);
@@ -26,11 +30,7 @@ namespace WebApplication.Controllers
             
             Les les = manager.getLes(id);
             if (les == null)
-            {
-                System.Diagnostics.Debug.WriteLine("test");
-
-            }
-            ViewData["Les"] = les;
+        {
             return View();
         }
     }
