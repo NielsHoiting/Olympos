@@ -52,6 +52,7 @@
                                 <li><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>@Html.ActionLink("Reserveren", "Index", "Reserveren")</li>
                                 <li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>@Html.ActionLink("Kalender", "Index", "Home")</li>
                                 <li><span class="glyphicon glyphicon-check" aria-hidden="true"></span>@Html.ActionLink("Aanwezigheidsregistratie", "Index", "Home")</li>
+                                <li><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>@Html.ActionLink("Uitloggen", "Logout", "Account")</li>
                             </ul>
                         </div>
                         }else
@@ -80,7 +81,8 @@
                                 <ul>
                                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                     <li>@Html.ActionLink("Profiel", "Profiel", "Account")</li>
-                                    <li>@Html.ActionLink("Reserveren", "Index", "Reserveren")</li>     
+                                    <li>@Html.ActionLink("Reserveren", "Index", "Reserveren")</li>    
+                                    <li>@Html.ActionLink("Uitloggen", "Logout", "Account")</li>   
                                 </ul>
                             </div>
                         </div>

@@ -26,5 +26,15 @@ namespace WebApplication.Controllers
             }
             return View();
         }
+
+        public ActionResult Logout()
+        {
+            if (Session["user"] != null)
+            {
+                Session.Abandon();
+                return RedirectToAction("Index", "Login");
+            }
+            return RedirectToAction("Index", "Login");
+        }
     }
 }
