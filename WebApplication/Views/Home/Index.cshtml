@@ -1,52 +1,39 @@
 ﻿@using WebApplication.Models
+@using System.Globalization
 @Scripts.Render("~/bundles/agenda")
 @{
     ViewBag.Title = "Home Page";
+    List<Les> lessen = (List<Les>)ViewData["lessen"];
+    DateTime beginDate = (DateTime)ViewData["beginDate"];
+    CultureInfo enAU = new CultureInfo("nl");
 }
 <div class="col col-xs-12 col-md-10 col-md-offset-1">
     <h2 class="heading text-center">Persoonlijke Agenda</h2>
-<!--    <div class="agenda">
-        <h3>Week 11 - 2014</h3>
-        <div class="day col-md-offset-1 col-md-2 col-xs-12">
-            <h4 class="text-center">Maandag</h4>
-            <div class="row event">
-                <a href="les-detail.html">
-                    <h4 class="ta-l mar-b-zero">
-                        Schaatsen
-                    </h4>
-                    <p class="sub-res ta-l mar-zero">
-                        Maandag 17 maart 2014
-                    </p>
-                    <p class="sub-res ta-l mar-zero">
-                        10:00 - 13:00
-                    </p>
-                </a>
+    <div class="agenda">
+        <h3>@beginDate.ToShortDateString() tot @beginDate.AddDays(5).ToShortDateString()</h3>
+        <div class="col-md-1">
+        </div>
+        @for (int i = 0; i < 5; i++){
+            <div class="day col-md-2 col-xs-12">
+                <h4 class="text-center">@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(beginDate.AddDays(i).ToString("dddd"))</h4>
+                 @foreach (Les l in lessen)
+                 {
+                     if (l.begintijd.Day == beginDate.AddDays(i).Day)
+                     {
+                     <div class="row event">
+                         <h4 class="ta-l mar-b-zero">
+                             @CultureInfo.CurrentCulture.TextInfo.ToTitleCase(l.Sportaanbod.Sportcode.ToLower())
+                         </h4>
+                         <p class="sub-res ta-l mar-zero">
+                             @l.begintijd.ToString("dddd dd MMMM yyyy")
+                         </p>
+                         <p class="sub-res ta-l mar-zero">
+                             @l.begintijd.ToString("hh:mm") - @l.eindtijd.ToString("hh:mm")
+                         </p>
+                     </div>
+                     }
+                 }
             </div>
-        </div>
-        <div class="day col-md-2 col-xs-12">
-            <h4 class="text-center">Dinsdag</h4>
-        </div>
-        <div class="day col-md-2 col-xs-12">
-            <h4 class="text-center">Woensdag</h4>
-        </div>
-        <div class="day col-md-2 col-xs-12">
-            <h4 class="text-center">Donderdag</h4>
-        </div>
-        <div class="day col-md-2 col-xs-12">
-            <h4 class="text-center">Vrijdag</h4>
-            <div class="row event">
-                <a href="les-detail.html">
-                    <h4 class="ta-l mar-b-zero">
-                        Schaatsen
-                    </h4>
-                    <p class="sub-res ta-l mar-zero">
-                        Vrijdag 21 maart 2014
-                    </p>
-                    <p class="sub-res ta-l mar-zero">
-                        10:00 - 13:00
-                    </p>
-                </a>
-            </div>
-        </div>
-    </div>-->
+         }
+    </div>
 </div>
