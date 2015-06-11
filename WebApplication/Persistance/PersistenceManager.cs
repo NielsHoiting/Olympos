@@ -21,7 +21,14 @@ namespace WebApplication.Persistance
                 {
                     var configuration = new Configuration();
                     configuration.Configure();
-                    configuration.AddAssembly("WebApplication"); 
+                    try { 
+                    configuration.AddAssembly("WebApplication");
+                        }
+                    catch(MappingException e)
+                    {
+                        System.Diagnostics.Debug.WriteLine(e.Message);
+                        System.Diagnostics.Debug.WriteLine(e.InnerException);
+                    }
                     _sessionFactory = configuration.BuildSessionFactory();
                 }
                 return _sessionFactory;

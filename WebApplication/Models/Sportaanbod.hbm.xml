@@ -2,18 +2,22 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
                    assembly="WebApplication"
                    namespace="WebApplication.Models">
-  <class name="Les" table="lessen_per_sportaanbod">
-    <id name="sportaanbod_no" column="NO_">
+  <class name="Sportaanbod" table="sportaanbod">
+    <id name="SportaanbodNo" column="NO_">
       <generator class="native" />
     </id>
-    <property name="sportcode"/>
-    <property name="startdatum"/>
-    <property name="startdatum_verkoop"/>
-    <property name="einddatum_verkoop"/>
-    <property name="tonen_web_van"/>
-    <property name="tonen_web_tot"/>
-    <property name="max_aantal_deelnemrs"/>
-    <property name="aantal_ingeschreven_deeln"/>
-    <property name="sportniveau"/>
+    <property name="Sportcode" column="Sportcode"/>
+    <property name="Startdatum" column="Startdatum"/>
+    <property name="StartdatumVerkoop" column="Startdatum_verkoop"/>
+    <property name="EinddatumVerkoop" column="Einddatum_verkoop"/>
+    <property name="TonenWebVan" column="Tonen_web_van"/>
+    <property name="TonenWebTot" column="Tonen_web_tot"/>
+    <property name="MaxAantalDeelnemers" column="Max__aantal_deelnemers"/>
+    <property name="AantalIngeschrevenDeelnemers" column="Aantal_ingeschreven_deeln_"/>
+    <property name="SportNiveau" column="Sportniveau"/>
+    <set name="Lessen">
+      <key column="SPORTAANBOD_NO"/>
+      <one-to-many class="Les"/>
+    </set>
   </class>
 </hibernate-mapping>

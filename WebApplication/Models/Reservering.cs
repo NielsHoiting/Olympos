@@ -8,10 +8,10 @@ namespace WebApplication.Models
 {
     class Reservering
     {
-        public int reservering_no { private set; get; }
-        public int les_per_sportaanbod_les_no { private set; get; }
-        public int deelnemer_sco_nummer { private set; get; }
-        public DateTime datum_reservering { private set; get; }
-        public bool is_geweest { private set; get; }
+        public virtual int reservering_no { set; get; }
+        public virtual Les Les { set; get; }
+        public virtual Gebruiker Deelnemer { set; get; }
+        public virtual DateTime datum_reservering { set; get; }
+        public virtual bool is_geweest { set; get; }
     }
 }

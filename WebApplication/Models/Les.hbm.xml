@@ -6,14 +6,21 @@
     <id name="les_no">
       <generator class="native" />
     </id>
-    <property name="sportdocent_sco_no"/>
-    <property name="sportaanbod_no"/>
+    <many-to-one name="Sportaanbod" column="sportaanbod_no" class="Sportaanbod"/>
+    <many-to-one name="Sportdocent" column="sportdocent_sco_no" class="Gebruiker"/>
     <property name="dag"/>
     <property name="begintijd"/>
+    <property name="aantal_deelnemers"/>
     <property name="eindtijd"/>
-    <property name="aantal deelnemers"/>
+    <property name="volgnr" column="volgnr_"/>
     <property name="max_aantal_deelnemers"/>
     <property name="losse_verkoop"/>
     <property name="vervallen"/>
+    <property name="niet_tonen"/>
+    <property name="dagnaam"/>
+    <set name="Reserveringen" table="reservering">
+      <key column="LES_PER_SPORTAANBOD_LES_NO"/>
+      <one-to-many class="Reservering"/>
+    </set>
   </class>
 </hibernate-mapping>

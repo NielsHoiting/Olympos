@@ -2,12 +2,12 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
                    assembly="WebApplication"
                    namespace="WebApplication.Models">
-  <class name="Les" table="lessen_per_sportaanbod">
+  <class name="Reservering" table="reservering">
     <id name="reservering_no">
       <generator class="native" />
     </id>
-    <property name="les_per_sportaanbod_les_no"/>
-    <property name="deelnemer_sco_nummer"/>
+    <many-to-one name="Les" column="les_per_sportaanbod_les_no" class="Les"/>
+    <many-to-one name="Deelnemer" column="deelnemer_sco_nummer" class="Gebruiker"/>
     <property name="datum_reservering"/>
     <property name="is_geweest"/>
   </class>
