@@ -32,8 +32,8 @@ namespace WebApplication.Persistance
             criteria.Add(Restrictions.Eq("Deelnemer", gebruiker));
             IList<Reservering> results = criteria.List<Reservering>();
             
-            DateTime start = DateTime.Now.AddDays(skip*5);
-            DateTime eind = DateTime.Now.AddDays((skip+1)*5);
+            DateTime start = DateTime.Now.Date.AddDays(skip*5);
+            DateTime eind = DateTime.Now.Date.AddDays((skip+1)*5);
             var lessen = from s in results
                          let les = s.Les
                          where les.begintijd > start && les.begintijd < eind

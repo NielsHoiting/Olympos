@@ -1,13 +1,53 @@
 ﻿
+@using WebApplication.Models
 @{
     ViewBag.Title = "Reserveren";
+    List<Les> lastMinuteLessen = (List<Les>)ViewData["LastMinuteLessen"];
 }
+
 <div class="col col-table col-sm-12 col-md-10 col-md-offset-1 text-center">
 <h2 class="heading text-center">Reserveren</h2>
     <div class="day col-md-8 col-xs-12">
         <h3>Vandaag nog aan een les meedoen? </h3>
 
+        <table class="table">
 
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="cursus" checked="">
+                        <label for="cursus">Cursussen</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="groepsles" checked="">
+                        <label for="groepsles">Groepslessen</label>
+                    </td>
+                </tr>
+                @{ int i = 0;}
+                @foreach(Les l in lastMinuteLessen){
+                
+                    <tr>
+                    <td>
+                        <h4 class="ta-l mar-b-zero">
+                            @l.Sportaanbod.Sportcode
+                        </h4>
+                        <p class="sub-res ta-l mar-zero">
+                            @l.begintijd.Date.ToString("dddd dd MMMM yyyy")
+                        </p>
+                        <p class="sub-res ta-l mar-zero">
+                            @l.begintijd.ToString("HH:mm") - @l.eindtijd.ToString("HH:mm")
+                        </p>
+                    </td>
+                    <td class="lh-55">
+                        <a href="#" class="btn btn-lg btn-primary btn-inschrijven">Inschrijven</a>
+                    </td>
+                    <td class="lh-55">
+                        <a href="les-detail.html"><img src="images/arrow.png" width="50px" style="margin-top: 12px"></a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
 
     </div>
     <div class="day col-md-4 col-xs-12">
