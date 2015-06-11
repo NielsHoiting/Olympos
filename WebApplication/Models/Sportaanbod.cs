@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    class Sportaanbod
+    public class Sportaanbod
     {
         public virtual int SportaanbodNo { set; get; }
         public virtual string Sportcode { set; get; }
