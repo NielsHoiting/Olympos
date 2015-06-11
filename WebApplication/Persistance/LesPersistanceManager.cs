@@ -23,7 +23,14 @@ namespace WebApplication.Persistance
                          let les = s.Les
                          where les.begintijd > start && les.begintijd < eind
                          select les;
-            return lessen.ToList<Les>();
+            List<Les> returnList = lessen.ToList<Les>();
+            returnList.Sort((x,y) => {
+                if (x.begintijd > y.begintijd) return 1;
+                else if (x.begintijd == y.begintijd) return 0;
+                else return -1;
+            }
+                );
+            return returnList;
         }
     }
 }
