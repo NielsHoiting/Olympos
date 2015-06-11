@@ -18,12 +18,13 @@
                 <div class="header">
                     <!-- START OFFCANVAS -->
                     <div id="site-menu">
+                        @if (Session["user"] != null)
+                        {
+                            WebApplication.Models.Gebruiker g = (WebApplication.Models.Gebruiker)Session["user"];
+                            string geboortedatum = g.geboortedatum.ToString("dd-MM-yyyy");
+                            string geldigTot = g.geldig_tot.ToString("dd-MM-yyyy");
                         <div class="profile">
-                            @if (Session["user"] != null)
-                            {
-                                WebApplication.Models.Gebruiker g = (WebApplication.Models.Gebruiker)Session["user"];
-                                string geboortedatum = g.geboortedatum.ToString("dd-MM-yyyy");
-                                string geldigTot = g.geldig_tot.ToString("dd-MM-yyyy");
+                           
                                 
                             
 
@@ -40,11 +41,7 @@
                                 <button type="button" class="btn btn-default">Verlengen</button>
                                 <button type="button" class="btn btn-default">Wijzig Profiel</button>
                             </div>
-                            }
-                            else
-                            {
-                                <h1>U moet inloggen</h1>
-                            }
+                            
                         </div>
                         <hr>
                         <div class="navigation">
@@ -54,6 +51,10 @@
                                 <li><a href="#"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>Aanwezigheidsregistratie</a></li>
                             </ul>
                         </div>
+                        }else
+                        {
+                        <h3 style="color: white;">U moet inloggen</h3>
+                        }
                     </div>
                     <!-- END OFFCANVAS -->
                     <!-- START TOP MENU-->

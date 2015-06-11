@@ -290,7 +290,7 @@ h3{
 }
 
 input[type=checkbox]{
-	display: none;
+	display: inline; !important
 }
 
 input[type=checkbox] + label{
@@ -310,7 +310,7 @@ input[type=checkbox]:checked + label{
 }
 
 .label{
- background-image:url(../images/checkbox.jpg);
+ background-image:url(~/Content/Images/checkbox.jpg);
  color: black !important;
  font-size: 14px;
 }
