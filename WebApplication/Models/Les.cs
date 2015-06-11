@@ -8,16 +8,24 @@ namespace WebApplication.Models
 {
     class Les
     {
-        public int les_no { private set; get; }
-        public int sportdocent_sco_no { private set; get; }
-        public int sportaanbod_no { private set; get; }
-        public DateTime dag { private set; get; }
-        public DateTime begintijd { private set; get; }
-        public DateTime eindtijd { private set; get; }
-        public int aantal_deelnemers { private set; get; }
-        public int max_aantal_deelnemers { private set; get; }
-        public int losse_verkoop { private set; get; }
-        public int vervallen { private set; get; }
+        public virtual int les_no { set; get; }
+        public virtual Sportaanbod Sportaanbod { set; get; }
+        public virtual Gebruiker Sportdocent { set; get; }
+        public virtual DateTime dag { set; get; }
+        public virtual DateTime begintijd { set; get; }
+        public virtual int aantal_deelnemers { set; get; }
+        public virtual DateTime eindtijd { set; get; }
+        public virtual int volgnr { set; get; }
+        public virtual int max_aantal_deelnemers { set; get; }
+        public virtual int losse_verkoop { set; get; }
+        public virtual int vervallen { set; get; }
+        public virtual int niet_tonen { set; get; }
+        public virtual string dagnaam { set; get; }
+        public virtual ISet<Reservering> Reserveringen { get; set; }
 
+        public Les()
+        {
+
+        }
     }
 }

@@ -8,15 +8,16 @@ namespace WebApplication.Models
 {
     class Sportaanbod
     {
-        public int sportaanbod_no { private set; get; }
-        public int sportcode { private set; get; }
-        public DateTime startdatum { private set; get; }
-        public DateTime startdatum_verkoop { private set; get; }
-        public DateTime einddatum_verkoop { private set; get; }
-        public DateTime tonen_web_van { private set; get; }
-        public DateTime tonen_web_tot { private set; get; }
-        public int max_aantal_deelnemers { private set; get; }
-        public int aantal_ingeschreven_deeln { private set; get; }
-        public string sportniveau { private set; get; }
+        public virtual int SportaanbodNo { set; get; }
+        public virtual string Sportcode { set; get; }
+        public virtual DateTime Startdatum { set; get; }
+        public virtual DateTime StartdatumVerkoop { set; get; }
+        public virtual DateTime EinddatumVerkoop { set; get; }
+        public virtual DateTime TonenWebVan { set; get; }
+        public virtual DateTime TonenWebTot { set; get; }
+        public virtual int MaxAantalDeelnemers { set; get; }
+        public virtual int AantalIngeschrevenDeelnemers { set; get; }
+        public virtual string SportNiveau { set; get; }
+        public virtual ISet<Les> Lessen { get; set; }
     }
 }
