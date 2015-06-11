@@ -332,6 +332,12 @@ input[type=checkbox]:checked + label{
 	height: 100%;
 	border-bottom: 1px dashed #e9967f;
 }
+
+.profilePage{
+    text-align: left;
+    padding-left: 10px;
+}
+
 @media screen and (min-width: 768px) {
 	.day:not(:last-child){
 		border-right: 1px dashed #e9967f;
