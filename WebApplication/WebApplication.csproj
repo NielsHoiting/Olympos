@@ -221,6 +221,8 @@
     </EmbeddedResource>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\Arista2.0-webfont.woff" />
+    <Content Include="fonts\Arista2.0.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\agenda.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
