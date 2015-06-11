@@ -6,8 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@ViewBag.Title</title>
         @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/offcanvas")
+        @Scripts.Render("~/bundles/bootstrap")
     
         
     
@@ -123,8 +125,5 @@
                 <!-- END FOOTER-->
             </div>
         </div>
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/offcanvas")
     </body>
 </html>

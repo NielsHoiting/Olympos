@@ -23,5 +23,10 @@ namespace WebApplication.Controllers
             }
             return View();
         }
+        public ActionResult SelectCalendarWeek(string week)   
+        {
+            System.Diagnostics.Debug.WriteLine("test");
+            return null;
+        }
     }
 }

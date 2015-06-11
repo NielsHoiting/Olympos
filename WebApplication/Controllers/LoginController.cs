@@ -19,7 +19,7 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult Login(string gebruikersnaam, string wachtwoord, bool onthouden)
         {
-            GebruikersPersistenceManager manager = new GebruikersPersistenceManager();
+            AccountPersistenceManager manager = new AccountPersistenceManager();
             System.Diagnostics.Debug.Write(onthouden.ToString());
             Gebruiker gebruiker = manager.Login(gebruikersnaam, wachtwoord);
             if(gebruiker != null){
