@@ -14,8 +14,9 @@ namespace WebApplication.Controllers
         {
             LesPersistanceManager manager = new LesPersistanceManager();
             Gebruiker g = (Gebruiker)Session["user"];
-           // List<Les> LastMinuteLessen = manager.getLastMinuteLessen(g);
-            //  ViewData["LastMinuteLessen"] = LastMinuteLessen;
+            List<Les> LastMinuteLessen = manager.getLastMinuteLessen(g);
+            System.Diagnostics.Debug.WriteLine(LastMinuteLessen.Count);
+            ViewData["LastMinuteLessen"] = LastMinuteLessen;
             return View();
         }
 
