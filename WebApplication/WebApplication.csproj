@@ -198,6 +198,7 @@
     <Content Include="Content\Images\btn_ideal.png" />
     <Content Include="Content\Images\btn_twitter.png" />
     <Content Include="Content\Images\checkbox.jpg" />
+    <Content Include="Content\Images\placeholder.png" />
     <Content Include="Content\Images\profielfoto.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
