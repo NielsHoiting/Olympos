@@ -3,8 +3,8 @@
     ViewBag.Title = "Profiel";
 }
 
-<div class="col col-table col-sm-12 col-md-10 col-md-offset-1 text-center">
-    <h2 class="heading">Profiel</h2>
+<div class="col col-table col-sm-12 col-md-10 col-md-offset-1">
+    <h2 class="heading text-center">Profiel</h2>
 
 @if (Session["user"] != null)
 {
@@ -12,8 +12,7 @@
     string geboortedatum = g.geboortedatum.ToString("dd-MM-yyyy");
     string geldigTot = g.geldig_tot.ToString("dd-MM-yyyy");
 
-    <div class="profilePage">
-        <div class="day col-md-4">
+        <div class="col-md-4">
             <img class="profile-avatar" src="~/Content/Images/placeholder.png" />
         </div>
         <div class="profile-text col-md-5">
@@ -24,7 +23,6 @@
             <b>E-mail adres:</b> <p>@Html.Raw(g.email_adres)</p>
             <b>Geldigheid tot:</b> <p>@Html.Raw(geldigTot)</p>
         </div>
-    </div>
 }
 
 </div>

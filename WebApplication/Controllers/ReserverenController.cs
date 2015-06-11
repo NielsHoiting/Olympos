@@ -20,8 +20,17 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        public ActionResult lesDetail()
+        public ActionResult Les(int id)
         {
+            LesPersistanceManager manager = new LesPersistanceManager();
+            
+            Les les = manager.getLes(id);
+            if (les == null)
+            {
+                System.Diagnostics.Debug.WriteLine("test");
+
+            }
+            ViewData["Les"] = les;
             return View();
         }
     }

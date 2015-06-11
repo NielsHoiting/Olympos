@@ -1,0 +1,47 @@
+﻿@using WebApplication.Models
+@{
+    ViewBag.Title = "Les Eigenschappen";
+    Les l = (Les)ViewData["les"];
+}
+
+<div class="col col-table col-sm-12 col-md-10 col-md-offset-1 text-center">
+    <h2 class="heading">Schaatsen</h2>
+    <div class="les-detail">
+        <h4 class="ta-l mar-b-zero">
+            Docent
+        </h4>
+        <p class="sub-res ta-l mar-zero">
+            @l.Sportdocent.voornaam @l.Sportdocent.achternaam
+        </p>
+
+        <h4 class="ta-l mar-b-zero">
+            Datum:
+        </h4>
+        <p class="sub-res ta-l mar-zero">
+            @l.begintijd.ToShortDateString()
+        </p>
+
+        <h4 class="ta-l mar-b-zero">
+            Tijd:
+        </h4>
+        <p class="sub-res ta-l mar-zero">
+            @l.begintijd.ToString("HH:mm") - @l.eindtijd.ToString("HH:mm")
+        </p>
+
+        <h4 class="ta-l mar-b-zero">
+            Aantal plaatsen:
+        </h4>
+        <p class="sub-res ta-l mar-zero">
+            @l.aantal_deelnemers
+        </p>
+
+        <h4 class="ta-l mar-b-zero">
+            Aantal gereserveerd:
+        </h4>
+        <p class="sub-res ta-l mar-zero">
+            @l.Reserveringen.Count
+        </p>
+    </div>
+</div>
+
+

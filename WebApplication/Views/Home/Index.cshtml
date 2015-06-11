@@ -11,10 +11,10 @@
     <h2 class="heading text-center">Agenda</h2>
     <div class="agenda">
         <h3>@beginDate.ToShortDateString() t/m @beginDate.AddDays(4).ToShortDateString()</h3>
-        <div class="col-md-1">
+        <div class="col-sm-1">
         </div>
         @for (int i = 0; i < 5; i++){
-            <div class="day col-md-2 col-xs-12">
+            <div class="day col-sm-2 col-xs-12">
                 <h4 class="text-center">@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(beginDate.AddDays(i).ToString("dddd dd MMMM"))</h4>
                  @foreach (Les l in lessen)
                  {

@@ -47,5 +47,18 @@ namespace WebApplication.Persistance
                 );
             return returnList;
         }
+        public Les getLes(int lesId)
+        {
+            ISession session = OpenSession();
+                Les returnLes = null;
+                ICriteria criteria = session.CreateCriteria(typeof(Les));
+                criteria.Add(Restrictions.Eq("les_no", lesId));
+                IList<Les> matchingObjects = criteria.List<Les>();
+                if (matchingObjects.Count() > 0)
+                {
+                    returnLes = matchingObjects.First();
+                }
+                return returnLes;
+        }
     }
 }
