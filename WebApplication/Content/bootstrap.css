@@ -764,7 +764,7 @@ pre code {
 }
 
 .content{
-	padding-top: 50px; !important
+	padding-top: 100px; !important
     }
 
 .container:before,
@@ -934,7 +934,7 @@ pre code {
   }
 
   .content{
-	padding-top: 75px; !important
+	padding-top: 135px; !important
     }
   .col-sm-1,
   .col-sm-2,
@@ -1092,7 +1092,7 @@ pre code {
   }
 
    .content{
-	padding-top: 75px; !important
+	padding-top: 135px; !important
     }
 
   .col-md-1,
@@ -1257,6 +1257,10 @@ pre code {
 @media (min-width: 1200px) {
   .container {
     max-width: 1170px;
+  }
+
+  .content{
+    padding-top: 135px; !important
   }
   .col-lg-1,
   .col-lg-2,
