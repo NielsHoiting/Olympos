@@ -23,6 +23,14 @@
             <b>E-mail adres:</b> <p>@Html.Raw(g.email_adres)</p>
             <b>Geldigheid tot:</b> <p>@Html.Raw(geldigTot)</p>
         </div>
+    <div class="col-md-3">
+        <a href='@Url.Action("Register", "Account", "Account")' class="btn btn-lg btn-primary btn-register">
+            Olympas verlengen
+        </a>
+        <a href='@Url.Action("Register", "Account", "Account")' class="btn btn-lg btn-primary btn-register">
+            Wijzig profiel
+        </a>
+    </div>
 }
 else
 {
