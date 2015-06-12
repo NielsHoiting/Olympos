@@ -1,13 +1,15 @@
 ﻿
 @using WebApplication.Models
+@using System.Globalization
 @{
     ViewBag.Title = "Reserveren";
     List<Les> lastMinuteLessen = (List<Les>)ViewData["LastMinuteLessen"];
+    CultureInfo enAU = new CultureInfo("nl");
 }
 
 <div class="col col-table col-sm-12 col-md-10 col-md-offset-1 text-center">
 <h2 class="heading text-center">Reserveren</h2>
-    <div class="day col-md-8 col-xs-12">
+    <div class="col-md-8 col-xs-12">
         <h3>Vandaag nog aan een les meedoen? </h3>
 
         <table class="table">
@@ -23,13 +25,12 @@
                         <label for="groepsles">Groepslessen</label>
                     </td>
                 </tr>
-                @{ int i = 0;}
                 @foreach(Les l in lastMinuteLessen){
                 
                     <tr>
                     <td>
                         <h4 class="ta-l mar-b-zero">
-                            @l.Sportaanbod.Sportcode
+                            @CultureInfo.CurrentCulture.TextInfo.ToTitleCase(l.Sportaanbod.Sportcode.ToLower())
                         </h4>
                         <p class="sub-res ta-l mar-zero">
                             @l.begintijd.Date.ToString("dddd dd MMMM yyyy")
@@ -42,16 +43,12 @@
                         <a href="#" class="btn btn-lg btn-primary btn-inschrijven">Inschrijven</a>
                     </td>
                     <td class="lh-55">
-                        <a href="/Reserveren/Les/@l.les_no"><img src="~/content/images/arrow.png" width="50px" style="margin-top: 12px"></a>
+                        <a href="/Reserveren/Les/@l.les_no"><img src="~/content/images/arrow.png" style="margin-top: 12px"></a>
                     </td>
                 </tr>
                 }
             </tbody>
         </table>
-
-    </div>
-    <div class="day col-md-4 col-xs-12">
-        <h3> </h3>
     </div>
 </div>
 
