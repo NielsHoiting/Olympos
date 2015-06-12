@@ -6,7 +6,7 @@
 	background: -webkit-linear-gradient(top, rgba(0,0,0,0) 56%,rgba(255,255,255,1) 80%), url('http://www.olympos.nl/Portals/1/Skins/Olympos/images/Index/image3.jpg') no-repeat;
 	background: -o-linear-gradient(top, rgba(0,0,0,0) 56%,rgba(255,255,255,1) 80%), url('http://www.olympos.nl/Portals/1/Skins/Olympos/images/Index/image3.jpg') no-repeat;	
 	background: -ms-linear-gradient(top, rgba(0,0,0,0) 56%,rgba(255,255,255,1) 80%), url('http://www.olympos.nl/Portals/1/Skins/Olympos/images/Index/image3.jpg') no-repeat;
-	background: linear-gradient(to bottom,rgba(0,0,0,0) 56%,rgba(255,255,255,1) 80%), url('http://www.olympos.nl/Portals/1/Skins/Olympos/images/Index/image6.jpg') no-repeat;
+	background: linear-gradient(to bottom,rgba(0,0,0,0) 56%,rgba(255,255,255,1) 80%), url('Images/background-water.jpg') no-repeat;
 	/*TODO: webkit-gradient*/
 }
 h3{
