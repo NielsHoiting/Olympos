@@ -1,9 +1,10 @@
 ﻿@using WebApplication.Models
 @using System.Globalization
 @{
-    Les l = (Les)ViewData["les"];
+    
     CultureInfo enAU = new CultureInfo("nl");
     ViewBag.Title = "Les Eigenschappen";
+    Les l = (Les)ViewData["les"];
 }
 
 <div class="col col-table col-sm-12 col-md-10 col-md-offset-1 text-center">
