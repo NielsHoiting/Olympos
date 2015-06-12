@@ -27,13 +27,31 @@ namespace WebApplication.Controllers
         public ActionResult Les(int id)
         {
             LesPersistanceManager manager = new LesPersistanceManager();
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
             Les les = manager.getLes(id);
             if (les == null)
             {
                 return RedirectToAction("Index", "Reserveren");
             }
+            ViewData["les"] = les;
             return View();
+        }
+        public ActionResult ReserveerLes(int id)
+        {
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            LesPersistanceManager manager = new LesPersistanceManager();
+            Les les = manager.getLes(id);
+
+            ReserveerPersistanceManager reserveerManager = new ReserveerPersistanceManager();
+            reserveerManager.ReserveerLes((Gebruiker)Session["user"], les);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

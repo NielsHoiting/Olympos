@@ -329,7 +329,6 @@ input[type=checkbox]:checked + label{
     text-decoration: none;
 }
 .day{
-	height: 100%;
 	border-bottom: 1px dashed #e9967f;
 }
 
@@ -352,6 +351,10 @@ a.fill-div {
     height: 100%;
     width: 100%;
     text-decoration: none;
+}
+.agenda {
+  height: 700px;
+  overflow-x: scroll;
 }
 
 
