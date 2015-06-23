@@ -354,7 +354,13 @@ a.fill-div {
 }
 .agenda {
   height: 700px;
-  overflow-x: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
+@media only screen and (max-device-width: 480px) {
+     .desktoponly{
+         display: none;
 
+     }
+}
 

@@ -1,6 +1,7 @@
 ﻿
 @using WebApplication.Models
 @using System.Globalization
+@Scripts.Render("~/bundles/reserveren")
 @{
     ViewBag.Title = "Reserveren";
     List<Les> lastMinuteLessen = (List<Les>)ViewData["LastMinuteLessen"];
@@ -26,8 +27,7 @@
                     </td>
                 </tr>
                 @foreach(Les l in lastMinuteLessen){
-                
-                    <tr>
+                <tr>
                     <td>
                         <h4 class="ta-l mar-b-zero">
                             @CultureInfo.CurrentCulture.TextInfo.ToTitleCase(l.Sportaanbod.Sportcode.ToLower())
@@ -40,15 +40,17 @@
                         </p>
                     </td>
                     <td class="lh-55">
-                        <a href="/Reserveren/ReserveerLes/@l.les_no" class="btn btn-lg btn-primary btn-inschrijven">Nog @(l.max_aantal_deelnemers - l.Reserveringen.Count) Plaatsen</a>
+                        <button id="@l.les_no" type="button" class="btn btn-lg btn-primary btn-inschrijven">
+                            Nog @(l.max_aantal_deelnemers - l.Reserveringen.Count) Plaatsen
+                        </button>
                     </td>
                     <td class="lh-55">
-                        <a href="/Reserveren/Les/@l.les_no"><img src="~/content/images/arrow.png" style="margin-top: 12px"></a>
+                        <a href="/Reserveren/Les/@l.les_no"><img src="~/content/images/arrow.png" style="margin-top: 12px" class="desktoponly"></a>
                     </td>
                 </tr>
                 }
             </tbody>
-        </table>
+        </table>  
     </div>
 </div>
 
