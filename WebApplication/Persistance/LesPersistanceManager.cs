@@ -54,33 +54,32 @@ namespace WebApplication.Persistance
                     sportCodes.Add(r.Les.Sportaanbod.Sportcode);
                     System.Diagnostics.Debug.WriteLine(r.Les.Sportaanbod.Sportcode);
                 }
-           string[] test = sportCodes.ToArray();
-           //lessen ophalen met sco nummer
-           ICriteria criteriaSportaanbod = session.CreateCriteria(typeof(Sportaanbod));
-           criteriaSportaanbod.Add(Restrictions.In("Sportaanbod.Sportcode", test));
-           IList<Sportaanbod> SportaanbodList = criteriaSportaanbod.List<Sportaanbod>();
-           //var lessen = from a in SportaanbodList
-           //TODO van sportaanbod lessen maken.
- 
-
-                            
+           
             
-            //al gereserveerde lessen er uit halen
-           //var lessen = from les in lesList
-           //             where (from r in les.Reserveringen
-           //                    where r.Deelnemer.sco_nummer == gebruiker.sco_nummer
-           //                    select r).FirstOrDefault() == null
-           //             select les;
+            string[] test = sportCodes.ToArray();
 
-           ////op datum sorteren
-           //List<Les> returnList = lessen.ToList<Les>();
-           //returnList.Sort((x, y) =>
-           //{
-           //    if (x.begintijd > y.begintijd) return 1;
-           //    else if (x.begintijd == y.begintijd) return 0;
-           //    else return -1;
-               //});
-               System.Diagnostics.Debug.WriteLine(SportaanbodList.Count);
+            ICriteria criteria = session.CreateCriteria(typeof(Les));
+            criteria.CreateAlias("Sportaanbod", "Sportaanbod");
+            criteria.Add(Restrictions.In("Sportaanbod.Sportcode", test));
+            IList<Les> lesList = criteria.List<Les>();
+
+
+
+            var lessen = from les in lesList
+                         where (from r in les.Reserveringen
+                                where r.Deelnemer.sco_nummer == gebruiker.sco_nummer
+                                select r).FirstOrDefault() == null
+                         select les;
+
+            //op datum sorteren
+            List<Les> returnList = lessen.ToList<Les>();
+            returnList.Sort((x, y) =>
+            {
+                if (x.begintijd > y.begintijd) return 1;
+                else if (x.begintijd == y.begintijd) return 0;
+                else return -1;
+            });
+            System.Diagnostics.Debug.WriteLine(returnList.Count);
            return null;
 
         }
