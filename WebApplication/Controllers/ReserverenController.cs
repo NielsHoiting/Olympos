@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication.Persistance;
 using WebApplication.Models;
+using System.Web.Script.Serialization;
 
 namespace WebApplication.Controllers
 {
@@ -52,6 +53,28 @@ namespace WebApplication.Controllers
             ReserveerPersistanceManager reserveerManager = new ReserveerPersistanceManager();
             reserveerManager.ReserveerLes((Gebruiker)Session["user"], les);
             return RedirectToAction("Index", "Home");
+        }
+        public ActionResult GetLesData(string id)
+        {
+            //parsing les(string) to les(int)
+            int LesId = Int32.Parse(id);
+
+            //getting les
+            LesPersistanceManager manager = new LesPersistanceManager();
+            Les les = manager.getLes(LesId);
+
+            //creating object for serializer to serialize
+            var Object = new {
+	            lesNaam = les.Sportaanbod.Sportcode,
+                docent = les.Sportdocent.voornaam + " " + les.Sportdocent.achternaam,
+                datum = les.begintijd.Date.ToString("dddd dd MMMM yyyy"),
+                tijd = les.begintijd.ToString("HH:mm") + " - " + les.eindtijd.ToString("HH:mm"),
+                aantalPlaatsen = les.aantal_deelnemers
+            };
+
+            //serializing object
+            string json = new JavaScriptSerializer().Serialize(Object);
+            return Json(json);
         }
     }
 }

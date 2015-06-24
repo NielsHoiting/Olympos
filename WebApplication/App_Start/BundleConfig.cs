@@ -31,6 +31,8 @@ namespace WebApplication
                         "~/Scripts/offcanvas.js"));
             bundles.Add(new ScriptBundle("~/bundles/agenda").Include(
                         "~/Scripts/agenda.js"));
+            bundles.Add(new ScriptBundle("~/bundles/reserveren").Include(
+                        "~/Scripts/reserveren.js"));
         }
     }
 }
