@@ -12,7 +12,6 @@ namespace WebApplication.Persistance
     {
         public List<Les> getKomendeLessenLessen(Gebruiker gebruiker, int aantal)
         {   
-            //TODO: sorting
             ISession session = OpenSession();
             ICriteria criteria = session.CreateCriteria(typeof(Les));
             criteria.SetFirstResult(0).SetMaxResults(aantal);
@@ -32,7 +31,59 @@ namespace WebApplication.Persistance
             });
             return returnList;
         }
+        public List<Les> getMijnInteresseLessen(Gebruiker gebruiker, int aantalLessen, int aantalDagen, bool isGeweest)
+        {
+            //berekenen datum
+            DateTime datumTerug = DateTime.Today;
+            datumTerug.AddDays(-aantalDagen);
 
+            ISession session = OpenSession();
+            
+            //criteria voor sportcodes ophalen toevoegen
+            ICriteria criteriaReservering = session.CreateCriteria(typeof(Reservering));
+            criteriaReservering.Add(Expression.Eq("Deelnemer", gebruiker));      
+            if (isGeweest)
+                criteriaReservering.Add(Expression.Eq("is_geweest", true));
+            criteriaReservering.Add(Expression.Gt("datum_reservering", datumTerug));
+            IList<Reservering> vorigeReserveringenList = criteriaReservering.List<Reservering>();
+            List<Reservering> vorigeReservering = vorigeReserveringenList.ToList<Reservering>();
+            List<string> sportCodes = new List<string>();
+            //sportcodes in list zetten
+            foreach (Reservering r in vorigeReservering)
+                if (!sportCodes.Contains(r.Les.Sportaanbod.Sportcode)) { 
+                    sportCodes.Add(r.Les.Sportaanbod.Sportcode);
+                    System.Diagnostics.Debug.WriteLine(r.Les.Sportaanbod.Sportcode);
+                }
+           string[] test = sportCodes.ToArray();
+           //lessen ophalen met sco nummer
+           ICriteria criteriaSportaanbod = session.CreateCriteria(typeof(Sportaanbod));
+           criteriaSportaanbod.Add(Restrictions.In("Sportaanbod.Sportcode", test));
+           IList<Sportaanbod> SportaanbodList = criteriaSportaanbod.List<Sportaanbod>();
+           //var lessen = from a in SportaanbodList
+           //TODO van sportaanbod lessen maken.
+ 
+
+                            
+            
+            //al gereserveerde lessen er uit halen
+           //var lessen = from les in lesList
+           //             where (from r in les.Reserveringen
+           //                    where r.Deelnemer.sco_nummer == gebruiker.sco_nummer
+           //                    select r).FirstOrDefault() == null
+           //             select les;
+
+           ////op datum sorteren
+           //List<Les> returnList = lessen.ToList<Les>();
+           //returnList.Sort((x, y) =>
+           //{
+           //    if (x.begintijd > y.begintijd) return 1;
+           //    else if (x.begintijd == y.begintijd) return 0;
+           //    else return -1;
+               //});
+               System.Diagnostics.Debug.WriteLine(SportaanbodList.Count);
+           return null;
+
+        }
         public List<Les> getAgenda(int skip, Gebruiker gebruiker)
         {
             ISession session = OpenSession();

@@ -265,6 +265,7 @@
     <Content Include="Views\Reserveren\Les.cshtml" />
     <Content Include="Views\Account\Profiel.cshtml" />
     <Content Include="Views\Reserveren\KomendeLessen.cshtml" />
+    <Content Include="Views\Reserveren\MijnInteresses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

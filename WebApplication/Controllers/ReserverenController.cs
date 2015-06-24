@@ -15,10 +15,11 @@ namespace WebApplication.Controllers
         public ActionResult Index()
         {
 
-            return RedirectToAction("KomendeLessen", "Reserveren");
+            return RedirectToAction("MijnInteresses", "Reserveren");
         }
         public ActionResult KomendeLessen()
         {
+            
             if (Session["user"] == null)
             {
                 return RedirectToAction("Index", "Login");
@@ -28,6 +29,19 @@ namespace WebApplication.Controllers
             List<Les> KomendeLessen = manager.getKomendeLessenLessen(g, 10);
             ViewData["KomendeLessen"] = KomendeLessen;
             return View();
+        }
+        public ActionResult MijnInteresses()
+        {
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            LesPersistanceManager manager = new LesPersistanceManager();
+            Gebruiker g = (Gebruiker)Session["user"];
+
+            //TODO: variabelen duidelijker maken
+            manager.getMijnInteresseLessen(g, 10, 7, false);
+            return null;
         }
 
         public ActionResult Les(int id)
