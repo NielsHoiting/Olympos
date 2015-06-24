@@ -23,7 +23,6 @@ namespace WebApplication.Persistance
                 if (matchingObjects.Count() > 0)
                 {
                     returnGebruiker = matchingObjects.First();
-                    System.Diagnostics.Debug.WriteLine(returnGebruiker.achternaam);
                 }
             }
             return returnGebruiker;

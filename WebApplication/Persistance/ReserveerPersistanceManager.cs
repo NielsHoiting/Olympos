@@ -22,11 +22,13 @@ namespace WebApplication.Persistance
             r.is_geweest = false;
             r.Les = l;
 
+            if (l.Reserveringen.Contains(r))
+            {
+                System.Diagnostics.Debug.WriteLine("les al gereserveerd");
+            }
+
             ISession session = OpenSession();
             session.Save(r);
-
-
-
             return true;
         }
     }

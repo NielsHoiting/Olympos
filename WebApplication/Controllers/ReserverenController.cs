@@ -50,6 +50,10 @@ namespace WebApplication.Controllers
             }
             LesPersistanceManager manager = new LesPersistanceManager();
             Les les = manager.getLes(id);
+            if (les == null)
+            {
+                return RedirectToAction("Index", "Reserveren");
+            }
 
             ReserveerPersistanceManager reserveerManager = new ReserveerPersistanceManager();
             reserveerManager.ReserveerLes((Gebruiker)Session["user"], les);
@@ -63,6 +67,10 @@ namespace WebApplication.Controllers
             //getting les
             LesPersistanceManager manager = new LesPersistanceManager();
             Les les = manager.getLes(LesId);
+
+            //check if user is logged in and if les exists
+            if (les == null || Session["user"] == null)
+                return RedirectToAction("Index", "Reserveren");
 
             CultureInfo nl = new CultureInfo("nl");
             CultureInfo.CurrentCulture.TextInfo.ToTitleCase(les.Sportaanbod.Sportcode.ToLower());
@@ -80,7 +88,7 @@ namespace WebApplication.Controllers
 
             //serializing object
             string json = new JavaScriptSerializer().Serialize(Object);
-            return Json(json);
+            return Json(json, JsonRequestBehavior.AllowGet);
         }
     }
 }
