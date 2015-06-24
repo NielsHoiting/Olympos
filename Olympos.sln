@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebserviceLibrary", "WebserviceLibrary\WebserviceLibrary.csproj", "{15B3E0D2-6217-493A-A690-158C497F5318}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{A982FC4E-1904-46F5-870E-FF04D7124C86}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication.Tests", "WebApplication.Tests\WebApplication.Tests.csproj", "{D4DF48CE-2832-463B-9270-65231A4C45A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseControl", "DatabaseControl\DatabaseControl.csproj", "{B52BBED8-2A39-4A33-91A5-DA116968A792}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D4DF48CE-2832-463B-9270-65231A4C45A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4DF48CE-2832-463B-9270-65231A4C45A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4DF48CE-2832-463B-9270-65231A4C45A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B52BBED8-2A39-4A33-91A5-DA116968A792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B52BBED8-2A39-4A33-91A5-DA116968A792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B52BBED8-2A39-4A33-91A5-DA116968A792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B52BBED8-2A39-4A33-91A5-DA116968A792}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
