@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication.Persistance;
 using WebApplication.Models;
+using System.Globalization;
 using System.Web.Script.Serialization;
 
 namespace WebApplication.Controllers
@@ -63,13 +64,18 @@ namespace WebApplication.Controllers
             LesPersistanceManager manager = new LesPersistanceManager();
             Les les = manager.getLes(LesId);
 
+            CultureInfo nl = new CultureInfo("nl");
+            CultureInfo.CurrentCulture.TextInfo.ToTitleCase(les.Sportaanbod.Sportcode.ToLower());
+
             //creating object for serializer to serialize
             var Object = new {
-	            lesNaam = les.Sportaanbod.Sportcode,
+                lesId = les.les_no,
+	            lesNaam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(les.Sportaanbod.Sportcode.ToLower()),
                 docent = les.Sportdocent.voornaam + " " + les.Sportdocent.achternaam,
                 datum = les.begintijd.Date.ToString("dddd dd MMMM yyyy"),
                 tijd = les.begintijd.ToString("HH:mm") + " - " + les.eindtijd.ToString("HH:mm"),
-                aantalPlaatsen = les.aantal_deelnemers
+                aantalPlaatsen = les.aantal_deelnemers,
+                aantalGereserveerd = les.Reserveringen.Count
             };
 
             //serializing object

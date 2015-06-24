@@ -357,10 +357,26 @@ a.fill-div {
   overflow-y: scroll;
   overflow-x: hidden;
 }
-@media only screen and (max-device-width: 480px) {
+@media only screen and (max-device-width: 768px) {
      .desktoponly{
          display: none;
-
      }
+}
+@media only screen and (max-device-width: 480px) {
+    .modal-dialog {
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+    }
+
+}
+.modal-dialog{    
+    background-color: white;
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.modal-header{
+    padding-top: 0px;
 }
 
