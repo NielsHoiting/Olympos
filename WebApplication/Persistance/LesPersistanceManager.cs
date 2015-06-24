@@ -10,21 +10,29 @@ namespace WebApplication.Persistance
 {
     public class LesPersistanceManager : PersistenceManager
     {
-        public List<Les> getLastMinuteLessen(Gebruiker gebruiker)
-        {
+        public List<Les> getKomendeLessenLessen(Gebruiker gebruiker, int aantal)
+        {   
+            //TODO: sorting
             ISession session = OpenSession();
-            DateTime volgendeDag = DateTime.Now.Date.AddDays(1);
             ICriteria criteria = session.CreateCriteria(typeof(Les));
-            criteria.Add(Restrictions.Gt("begintijd", DateTime.Now));
-            criteria.Add(Restrictions.Lt("begintijd", volgendeDag));
+            criteria.SetFirstResult(0).SetMaxResults(aantal);
             IList<Les> lesList = criteria.List<Les>();
-            var x = from les in lesList
+            var lessen = from les in lesList
                     where (from r in les.Reserveringen
                            where r.Deelnemer.sco_nummer == gebruiker.sco_nummer
                            select r).FirstOrDefault() == null
                     select les;
-            return x.ToList<Les>();
+
+            List<Les> returnList = lessen.ToList<Les>();
+            returnList.Sort((x, y) =>
+            {
+                if (x.begintijd > y.begintijd) return 1;
+                else if (x.begintijd == y.begintijd) return 0;
+                else return -1;
+            });
+            return returnList;
         }
+
         public List<Les> getAgenda(int skip, Gebruiker gebruiker)
         {
             ISession session = OpenSession();
@@ -43,8 +51,7 @@ namespace WebApplication.Persistance
                 if (x.begintijd > y.begintijd) return 1;
                 else if (x.begintijd == y.begintijd) return 0;
                 else return -1;
-            }
-                );
+            });
             return returnList;
         }
         public Les getLes(int lesId)

@@ -14,15 +14,19 @@ namespace WebApplication.Controllers
     {
         public ActionResult Index()
         {
+
+            return RedirectToAction("KomendeLessen", "Reserveren");
+        }
+        public ActionResult KomendeLessen()
+        {
             if (Session["user"] == null)
             {
                 return RedirectToAction("Index", "Login");
             }
             LesPersistanceManager manager = new LesPersistanceManager();
             Gebruiker g = (Gebruiker)Session["user"];
-            List<Les> LastMinuteLessen = manager.getLastMinuteLessen(g);
-            System.Diagnostics.Debug.WriteLine(LastMinuteLessen.Count);
-            ViewData["LastMinuteLessen"] = LastMinuteLessen;
+            List<Les> KomendeLessen = manager.getKomendeLessenLessen(g, 10);
+            ViewData["KomendeLessen"] = KomendeLessen;
             return View();
         }
 
