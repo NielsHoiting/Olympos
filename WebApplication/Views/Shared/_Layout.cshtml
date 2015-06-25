@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using WebApplication.Models
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -27,10 +28,6 @@
                             string geboortedatum = g.geboortedatum.ToString("dd-MM-yyyy");
                             string geldigTot = g.geldig_tot.ToString("dd-MM-yyyy");
                         <div class="profile">
-                           
-                                
-                            
-
                             <img class="profile-avatar" src="~/Content/Images/placeholder.png" />
                             <div class="profile-details">
                                 <p>@Html.Raw(g.sco_nummer)</p>
@@ -83,8 +80,14 @@
                                     @if (Session["user"] != null) { 
                                         <li>@Html.ActionLink("Profiel", "Profiel", "Account")</li>
                                         <li>@Html.ActionLink("Reserveren", "Index", "Reserveren")</li>    
+                                        if (((Gebruiker)Session["user"]).rol == "Docent")
+                                        {
+                                            <li>@Html.ActionLink("Aanwezigheid", "Index", "Registratie")</li>
+                                        }
                                         <li>@Html.ActionLink("Uitloggen", "Logout", "Account")</li>   
+                                        
                                     }
+                                   
                                 </ul>
                             </div>
                         </div>

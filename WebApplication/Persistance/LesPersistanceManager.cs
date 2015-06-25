@@ -83,6 +83,32 @@ namespace WebApplication.Persistance
            return null;
 
         }
+        public int checkAanwezigheid(Les les)
+        {
+            foreach (Reservering r in les.Reserveringen)
+            {
+                
+            }
+            
+            return 0;
+        }
+        public List<Les> getRegistreerbareLessen(Gebruiker gebruiker)
+        {
+            ISession session = OpenSession();
+            ICriteria criteria = session.CreateCriteria(typeof(Les));
+            criteria.Add(Restrictions.Eq("Sportdocent" , gebruiker));
+            criteria.Add(Restrictions.Gt("begintijd", DateTime.Now.Date));
+            List<Les> results = criteria.List<Les>().ToList<Les>();
+
+
+            results.Sort((x, y) =>
+            {
+                if (x.begintijd > y.begintijd) return 1;
+                else if (x.begintijd == y.begintijd) return 0;
+                else return -1;
+            });
+            return results;
+        }
         public List<Les> getAgenda(int skip, Gebruiker gebruiker)
         {
             ISession session = OpenSession();

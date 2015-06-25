@@ -1,0 +1,80 @@
+﻿@using WebApplication.Models
+@{
+    ViewBag.Title = "Aanwezigheidsregistratie";
+    Les les = (Les)ViewData["les"];
+}
+
+<div class="col col-sm-12 col-md-10 col-md-offset-1">
+    <h2 class="heading text-center">@les.Sportaanbod.Sportcode</h2>
+    <div class="row">
+        <div class="col-sm-12 col-md-8">
+            <h3 class="text-center">Deelnemers</h3>
+            <table class="table">
+                @foreach (Reservering r in les.Reserveringen)
+                { 
+                    <tr>
+                    <td>
+                        @r.Deelnemer.voornaam @r.Deelnemer.achternaam
+                    </td>
+                    <td>
+                        <input type="checkbox" name="vehicle" value="Aanwezig" checked>
+                    </td>
+                </tr>
+                } 
+            </table>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <h3 class="text-center">Deelnemer Toevoegen</h3>
+            <form class="form-signin">
+                <label for="">SCO-Nummer</label>
+                <input id="" class="form-control" placeholder="SCO-Nummer" required>
+                <label for="">Geboortedatum</label>
+                <input id="" class="form-control" placeholder="Geboortedatum" required>
+                <label for="">Achternaam</label>
+                <input id="" class="form-control" placeholder="Achternaam" required>
+                <a href="#" class="btn btn-lg btn-primary btn-inschrijven">Zoeken	</a>
+            </form>
+            <h3 class="text-center">Lesgegevens</h3>
+            <div class="les-detail">
+                <h4 class="ta-l mar-b-zero">
+                    Docent
+                </h4>
+                <p class="sub-res ta-l mar-zero">
+                    Joost Janssen
+                </p>
+
+                <h4 class="ta-l mar-b-zero">
+                    Datum:
+                </h4>
+                <p class="sub-res ta-l mar-zero">
+                    17-03-2015
+                </p>
+
+                <h4 class="ta-l mar-b-zero">
+                    Tijd:
+                </h4>
+                <p class="sub-res ta-l mar-zero">
+                    10:00 - 13:00
+                </p>
+
+                <h4 class="ta-l mar-b-zero">
+                    Aantal plaatsen:
+                </h4>
+                <p class="sub-res ta-l mar-zero">
+                    25
+                </p>
+
+                <h4 class="ta-l mar-b-zero">
+                    Aantal reeds aanwezig:
+                </h4>
+                <p class="sub-res ta-l mar-zero">
+                    23
+                </p>
+            </div>
+            <h3 class="text-center">Acties</h3>
+            <a href="mededeling.html" class="btn btn-lg btn-primary btn-inschrijven">Een mededeling versturen</a>
+            <a href="annuleren-docent.html" class="btn btn-lg btn-primary btn-inschrijven">Annuleer deze les</a>
+        </div>
+    </div>
+</div>
+				</div>

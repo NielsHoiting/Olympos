@@ -1,0 +1,34 @@
+﻿@using WebApplication.Models
+@using System.Globalization
+@{
+    ViewBag.Title = "Aanwezigheidsregistratie";
+    List<Les> lessen = (List<Les>)ViewData["lessen"];
+    CultureInfo nl = new CultureInfo("nl");
+
+}
+
+<div class="col col-table col-sm-12 col-md-10 col-md-offset-1 text-center">
+    <h2 class="heading">Selecteer een les</h2>
+    <table class="table">
+        @foreach (Les l in lessen)
+{
+    <tr>
+        <td>
+            <h4 class="ta-l mar-b-zero">
+                @CultureInfo.CurrentCulture.TextInfo.ToTitleCase(l.Sportaanbod.Sportcode.ToLower())
+            </h4>
+            <p class="sub-res ta-l mar-zero">
+                @l.begintijd.Date.ToString("dddd dd MMMM yyyy")
+            </p>
+            <p class="sub-res ta-l mar-zero">
+                @l.begintijd.ToString("HH:mm") - @l.eindtijd.ToString("HH:mm")
+            </p>
+        </td>
+        <td class="lh-55">
+            <a href="Registratie/les/@l.les_no"><img src="images/arrow.png" width="50px" style="margin-top: 12px" /></a>
+        </td>
+    </tr>
+}
+    </table>
+</div>
+					</div>		
