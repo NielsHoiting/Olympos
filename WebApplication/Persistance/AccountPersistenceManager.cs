@@ -27,5 +27,16 @@ namespace WebApplication.Persistance
             }
             return returnGebruiker;
         }
+
+        public Gebruiker ZoekGebruiker(string achternaam, DateTime geboortedatum)
+        {
+            using (ISession session = OpenSession())
+            {
+                ICriteria criteria = session.CreateCriteria(typeof(Gebruiker));
+                criteria.Add(Restrictions.Eq("achternaam", achternaam));
+                Gebruiker g = criteria.List<Gebruiker>().FirstOrDefault();
+                return g;
+            }
+        }
     }
 }

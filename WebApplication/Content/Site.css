@@ -105,6 +105,7 @@ h3{
 	margin-top: 12px;
 	width: 100%;
 }
+
 .col .heading{
 	font-family: AristaFont, Verdana;
 	margin-top: -79px;
@@ -122,8 +123,21 @@ h3{
 	background-color: #3ba722;
 	border-color: #216E0F;
 }
+
 .btn:hover{
 	background-color: #216E0F;
+}
+
+.disbtn{
+    background-color: #cecece;
+    border-color: #817E7E;
+    color: #999;
+}
+
+.disbtn:hover{
+    background-color: #cecece !important;
+    border-color: #817E7E !important;
+    color: #999 !important;
 }
 
 .footer{

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using WebApplication.Models;
 using WebApplication.Persistance;
 
@@ -40,6 +41,26 @@ namespace WebApplication.Controllers
             }
             ViewData["les"] = les;
             return View();
+        }
+
+        public ActionResult GetDeelnemers(int lesid)
+        {
+
+            //check if user is logged in and if les exists
+            if (Session["user"] == null)
+                return RedirectToAction("Index", "Registratie");
+            LesPersistanceManager manager = new LesPersistanceManager();
+            List<Reservering> reserveringen = manager.getLes(lesid).Reserveringen.ToList<Reservering>();
+            List<Gebruiker> deelnemers = new List<Gebruiker>();
+             
+            foreach (Reservering r in reserveringen)
+            {
+                deelnemers.Add(r.Deelnemer);
+            }
+
+            //serializing object
+            string json = new JavaScriptSerializer().Serialize(deelnemers);
+            return Json(json, JsonRequestBehavior.AllowGet);
         }
 	}
 }

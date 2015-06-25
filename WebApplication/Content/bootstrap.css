@@ -417,6 +417,36 @@ p {
   }
 }
 
+.col .smallbtn-anw{
+  margin-top: 0px !important;
+  width: 100% !important;
+  height: 30px;
+  line-height: 0px;
+}
+
+.col .smallbtn-anw:hover{
+  margin-top: 0px !important;
+  width: 100% !important;
+  height: 30px;
+  line-height: 0px;
+}
+
+.col .smallbtn-afw{
+  margin-top: 0px !important;
+  width: 100% !important;
+  height: 30px;
+  line-height: 0px;
+  background-color: #d32d00;
+}
+
+.col .smallbtn-afw:hover{
+  margin-top: 0px !important;
+  width: 100% !important;
+  height: 30px;
+  line-height: 0px;
+  background-color: #f73d0b;
+}
+
 small {
   font-size: 85%;
 }

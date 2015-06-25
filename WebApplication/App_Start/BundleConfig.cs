@@ -33,6 +33,8 @@ namespace WebApplication
                         "~/Scripts/agenda.js"));
             bundles.Add(new ScriptBundle("~/bundles/reserveren").Include(
                         "~/Scripts/reserveren.js"));
+            bundles.Add(new ScriptBundle("~/bundles/registratie").Include(
+                        "~/Scripts/registratie.js"));
         }
     }
 }
