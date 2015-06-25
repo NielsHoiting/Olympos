@@ -51,16 +51,38 @@ namespace WebApplication.Controllers
                 return RedirectToAction("Index", "Registratie");
             LesPersistanceManager manager = new LesPersistanceManager();
             List<Reservering> reserveringen = manager.getLes(lesid).Reserveringen.ToList<Reservering>();
-            List<Gebruiker> deelnemers = new List<Gebruiker>();
-             
+            List<returnGebruiker> objects = new List<returnGebruiker>();
+
             foreach (Reservering r in reserveringen)
             {
-                deelnemers.Add(r.Deelnemer);
+                System.Diagnostics.Debug.WriteLine(new returnGebruiker(r.Deelnemer.sco_nummer, r.Deelnemer.voornaam + " " + r.Deelnemer.achternaam, r.is_geweest).isAanwezig);
+                objects.Add(new returnGebruiker(r.Deelnemer.sco_nummer, r.Deelnemer.voornaam + " " + r.Deelnemer.achternaam, r.is_geweest));
             }
 
             //serializing object
-            string json = new JavaScriptSerializer().Serialize(deelnemers);
+            string json = new JavaScriptSerializer().Serialize(objects);
             return Json(json, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ToggleAanwezigheid(int sco_nummer, int lesid)
+        {
+
+            LesPersistanceManager manager = new LesPersistanceManager();
+            manager.ToggleAanwezigheid(sco_nummer, lesid);
+            string json = new JavaScriptSerializer().Serialize(true);
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
+        class returnGebruiker{
+
+            public int sco_nummer { get; set; }
+            public string naam { get; set; }
+            public bool isAanwezig { get; set; }
+            public returnGebruiker(int sco_nummer, string naam, bool isAanwezig)
+            {
+                this.sco_nummer = sco_nummer;
+                this.naam = naam;
+                this.isAanwezig = isAanwezig;
+            }
         }
 	}
 }

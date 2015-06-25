@@ -12,18 +12,7 @@
             $("#" + modalId).modal('show');
         });
     });
-    $('.btn-zoeken').click(function () {
-        var lesid = $(this).attr('id');
-        var achternaam = document.getElementById('achternaam_input').value;
-        var geboortedatum = document.getElementById('geboortedatum_input').value;
-        $.post('/Account/ZoekGebruiker', { achternaam: achternaam, geboortedatum: geboortedatum }, function (data) {
-            var gebruiker = $.parseJSON(data);
-            var modalId = "modal" + lesid;
-            createModal(modalId);
-            fillModalLesDetails(modalId, gebruiker);
-            $("#" + modalId).modal('show');
-        });
-    });
+    
 });
 
 
@@ -32,10 +21,29 @@ function updateData() {
     $.post('/Registratie/GetDeelnemers', { lesid: lesid }, function (data) {
         var deelnemers = $.parseJSON(data);
         var deelnemerdata = "";
+        
+        
         for (i = 0; i < deelnemers.length; i++) {
-            deelnemerdata = deelnemerdata + "<tr> <td>" + deelnemers[i].voornaam + " " + deelnemers[i].achternaam + " </td> <td> <button id='deelnemers[i].sco_nummer' type='button' class='btn smallbtn-anw btn-lg btn-primary btn-aanwezigheid'>Aanwezig</button></td></tr>";
+            var aanwezig;
+            var aanwezigtext;
+            if (deelnemers[i].isAanwezig) {
+                aanwezig = 'n';
+                aanwezigtext = "Aanwezig";
+            } else {
+                aanwezig = 'f';
+                aanwezigtext = "Afwezig"
+            }
+            deelnemerdata = deelnemerdata + "<tr> <td>" + deelnemers[i].naam + " </td> <td> <button id='" + deelnemers[i].sco_nummer + "' type='button' class='btn smallbtn-a" + aanwezig + "w btn-lg btn-primary btn-aanwezigheid'>" + aanwezigtext +"</button></td></tr>";
         }
         document.getElementById("deelnemers").innerHTML = deelnemerdata;
+        $('.btn-aanwezigheid').click(function () {
+            var sco_nummer = $(this).attr('id');
+            var lesid = window.location.pathname.split('/')[3];
+            $.post('/Registratie/ToggleAanwezigheid', { sco_nummer: sco_nummer, lesid: lesid}, function (data) {
+                var nieuw = $.parseJSON(data);
+                updateData();
+            });
+        });
     });
 }
 function createModal(id) {

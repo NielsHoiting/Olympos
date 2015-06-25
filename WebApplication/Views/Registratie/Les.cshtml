@@ -41,35 +41,28 @@
                     Docent
                 </h4>
                 <p class="sub-res ta-l mar-zero">
-                    Joost Janssen
+                    @les.Sportdocent.voornaam @les.Sportdocent.achternaam
                 </p>
 
                 <h4 class="ta-l mar-b-zero">
                     Datum:
                 </h4>
                 <p class="sub-res ta-l mar-zero">
-                    17-03-2015
+                   @les.begintijd.Date.ToString("dddd dd MMMM yyyy")
                 </p>
 
                 <h4 class="ta-l mar-b-zero">
                     Tijd:
                 </h4>
                 <p class="sub-res ta-l mar-zero">
-                    10:00 - 13:00
+                    @les.begintijd.ToString("HH:mm") - @les.eindtijd.ToString("HH:mm")
                 </p>
 
                 <h4 class="ta-l mar-b-zero">
                     Aantal plaatsen:
                 </h4>
                 <p class="sub-res ta-l mar-zero">
-                    25
-                </p>
-
-                <h4 class="ta-l mar-b-zero">
-                    Aantal reeds aanwezig:
-                </h4>
-                <p class="sub-res ta-l mar-zero">
-                    23
+                    @les.max_aantal_deelnemers
                 </p>
             </div>
             <h3 class="text-center">Acties</h3>

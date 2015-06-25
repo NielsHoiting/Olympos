@@ -14,8 +14,9 @@ namespace DatabaseControl
     {
         static void Main(string[] args)
         {
-            updateLessen();
-
+            //updateLessen();
+            LesPersistanceManager manager = new LesPersistanceManager();
+            manager.ToggleAanwezigheid(2, 1393);
             
         }
         public static void updateLessen()
@@ -46,7 +47,6 @@ namespace DatabaseControl
                         s.StartdatumVerkoop = s.StartdatumVerkoop.AddDays(dagen);
                         s.TonenWebTot = s.TonenWebTot.AddDays(dagen);
                         s.TonenWebVan = s.TonenWebVan.AddDays(dagen);
-                        s.
                         session.SaveOrUpdate(s);
                     }
                     transaction.Commit();

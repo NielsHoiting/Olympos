@@ -138,5 +138,22 @@ namespace WebApplication.Persistance
                 }
                 return returnLes;
         }
+
+        public bool ToggleAanwezigheid(int sco_nummer, int lesid)
+        {
+            ISession session = OpenSession();
+            ICriteria criteria = session.CreateCriteria(typeof(Reservering));
+            criteria.CreateAlias("Deelnemer", "Gebruiker");
+            criteria.CreateAlias("Les", "Les");
+            criteria.Add(Restrictions.Eq("Deelnemer.sco_nummer", sco_nummer));
+            criteria.Add(Restrictions.Eq("Les.les_no", lesid));
+            Reservering r = criteria.List<Reservering>().ToList<Reservering>().FirstOrDefault();
+            System.Diagnostics.Debug.WriteLine(r.is_geweest);
+            session.BeginTransaction();
+            r.is_geweest = !r.is_geweest;
+            session.SaveOrUpdate(r);
+            session.Transaction.Commit();
+            return r.is_geweest;
+        }
     }
 }
