@@ -52,12 +52,10 @@ namespace WebApplication.Persistance
             foreach (Reservering r in vorigeReservering)
                 if (!sportCodes.Contains(r.Les.Sportaanbod.Sportcode)) { 
                     sportCodes.Add(r.Les.Sportaanbod.Sportcode);
-                    System.Diagnostics.Debug.WriteLine(r.Les.Sportaanbod.Sportcode);
                 }
            
             
             string[] sportCodesArray = sportCodes.ToArray();
-
             ICriteria criteria = session.CreateCriteria(typeof(Les));
             criteria.CreateAlias("Sportaanbod", "Sportaanbod");
             criteria.Add(Restrictions.In("Sportaanbod.Sportcode", sportCodesArray));
@@ -76,7 +74,7 @@ namespace WebApplication.Persistance
                 else if (x.begintijd == y.begintijd) return 0;
                 else return -1;
             });
-            System.Diagnostics.Debug.WriteLine(returnList.Count);
+            //System.Diagnostics.Debug.WriteLine(returnList.Count);
             return returnList;
 
         }
