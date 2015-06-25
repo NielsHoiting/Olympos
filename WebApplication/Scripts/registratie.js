@@ -5,7 +5,7 @@
         var achternaam = document.getElementById('achternaam_input').value;
         var geboortedatum = document.getElementById('geboortedatum_input').value;
         var timestamp=Date.parse(geboortedatum);
-        if (achternaam != "" && isNaN(timestamp)==false){
+        if (achternaam != "" && isNaN(timestamp) == false && timestamp < Date.now() && timestamp >new Date(1900,0)) {
         $.post('/Account/ZoekGebruiker', { achternaam: achternaam , geboortedatum: geboortedatum }, function (data) {
             var gebruiker = $.parseJSON(data);
             var modalId = "modal" + lesid;
@@ -68,6 +68,22 @@ function createModal(id) {
     $('#site-wrapper').after(modalHtml);
 }
 function fillModalLesDetails(id, gebruiker) {
+    if (gebruiker.sco_nummer == 0) {
+        var lesDetailsHeaderHtml = "<h3>Gebruiker niet gevonden</h3>";
+        var lesDetailsBodyHtml = "<div class='les-detail'>"
+                                + "<h3> Controleer uw invoer en probeer het opnieuw</h3>"
+                            + "</div>";
+        var lesDetailsFooterHtml = "<button id='" + gebruiker.sco_nummer + "' type='button' class='btn btn-lg btn-primary btn-inschrijven'>Terug</button>";
+
+        $("#" + id + "> .modal-dialog > .modal-header").html(lesDetailsHeaderHtml);
+        $("#" + id + "> .modal-dialog > .modal-body").html(lesDetailsBodyHtml);
+        $("#" + id + "> .modal-dialog > .modal-footer").html(lesDetailsFooterHtml);
+        $('.btn-inschrijven').click(function () {
+
+            $("#" + id).modal('hide');
+           
+        });
+    } else {
     var lesDetailsHeaderHtml = "<h3>Weet u zeker dat u deze Sporter wilt toevoegen?</h3>";
     var lesDetailsBodyHtml = "<div class='les-detail'>"
                             + "<h3>" + gebruiker.naam + "</h3>"
@@ -93,4 +109,5 @@ function fillModalLesDetails(id, gebruiker) {
         });
         }
     });
+    }
 }
