@@ -47,19 +47,26 @@ namespace WebApplication.Controllers
             if (Session["user"] == null)
                 return RedirectToAction("Index", "Registratie");
 
-            DateTime geboorteDateTime;
-            DateTime.TryParseExact(geboortedatum, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out geboorteDateTime);
+            DateTime geboorteDateTime = DateTime.Now;
+            geboorteDateTime = DateTime.Parse(geboortedatum);
             AccountPersistenceManager manager = new AccountPersistenceManager();
-            Gebruiker g = manager.ZoekGebruiker(achternaam, geboorteDateTime);
+            Gebruiker g = manager.ZoekGebruiker(achternaam, geboorteDateTime.Date);
             
             string helenaam = "Gebruiker niet gevonden";
-            if(g != null)
+            int sco_nummer = 0;
+            if (g != null)
+            {
                 helenaam = g.voornaam + " " + g.achternaam;
-            //creating object for serializer to serialize
+                sco_nummer = g.sco_nummer;
+            }
+            
             var Object = new
             {
-                naam = helenaam
+                naam = helenaam,
+                sco_nummer = sco_nummer
             };
+            //creating object for serializer to serialize
+            
 
             //serializing object
             string json = new JavaScriptSerializer().Serialize(Object);

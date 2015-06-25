@@ -65,23 +65,27 @@ function createModal(id) {
     $('#site-wrapper').after(modalHtml);
 }
 function fillModalLesDetails(id, gebruiker) {
-    var lesDetailsHeaderHtml = "<h3>Weet u zeker dat u wilt inschrijven?</h3>";
+    var lesDetailsHeaderHtml = "<h3>Weet u zeker dat u deze Sporter wilt toevoegen?</h3>";
     var lesDetailsBodyHtml = "<div class='les-detail'>"
                             + "<h3>" + gebruiker.naam + "</h3>"
-                            + "<h4 class='ta-l mar-b-zero'>Docent</h4>"
-                            + "<p class='sub-res ta-l mar-zero'>" + "</p>"
-                            + "<h4 class='ta-l mar-b-zero'>Datum:</h4>"
-                            + "<p class='sub-res ta-l mar-zero'>" + "</p>"
-                            + "<h4 class='ta-l mar-b-zero'>Tijd:</h4>"
-                            + "<p class='sub-res ta-l mar-zero'>" + "</p>"
-                            + "<h4 class='ta-l mar-b-zero'>Aantal plaatsen:</h4>"
-                            + "<p class='sub-res ta-l mar-zero'>" + "</p>"
-                            + "<h4 class='ta-l mar-b-zero'>Aantal gereserveerd:</h4>"
-                            + "<p class='sub-res ta-l mar-zero'>" + "</p>"
+                            + "<h4 class='ta-l mar-b-zero'>foto</h4>"
+                            + "<p class='sub-res ta-l mar-zero'> plek om foto in te voegen</p>"
+
                         + "</div>";
-    var lesDetailsFooterHtml = "<a href='/Reserveren/ReserveerLes/" + "' type='button' class='btn btn-lg btn-primary btn-inschrijven'>Inschrijven</a>";
+    var lesDetailsFooterHtml = "<button id='" + gebruiker.sco_nummer + "' type='button' class='btn btn-lg btn-primary btn-inschrijven'>Toevoegen</button>";
 
     $("#" + id + "> .modal-dialog > .modal-header").html(lesDetailsHeaderHtml);
     $("#" + id + "> .modal-dialog > .modal-body").html(lesDetailsBodyHtml);
     $("#" + id + "> .modal-dialog > .modal-footer").html(lesDetailsFooterHtml);
+    $('.btn-inschrijven').click(function () {
+
+        $("#"+id).modal('hide');
+        var sco_nummer = $(this).attr('id');
+        var lesid = window.location.pathname.split('/')[3];
+        $.post('/Registratie/Inschrijven', { sco_nummer: sco_nummer, lesid: lesid }, function (data) {
+            updateData();
+            $(id).modal('hide');
+
+        });
+    });
 }

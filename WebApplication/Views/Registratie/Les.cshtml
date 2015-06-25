@@ -26,15 +26,11 @@
         </div>
         <div class="col-sm-12 col-md-4">
             <h3 class="text-center">Deelnemer Toevoegen</h3>
-            <form class="form-signin">
-                <label for="">SCO-Nummer</label>
-                <input id="" class="form-control" placeholder="SCO-Nummer" required>
                 <label for="">Geboortedatum</label>
-                <input id="geboortedatum_input" class="form-control" placeholder="Geboortedatum" required>
+                <input type="date" id="geboortedatum_input" class="form-control" required>
                 <label for="">Achternaam</label>
                 <input id="achternaam_input" class="form-control" placeholder="Achternaam" required>
                 <button id="@les.les_no" type="button" class="btn btn-lg btn-primary btn-zoeken">Zoeken	</button>
-            </form>
             <h3 class="text-center">Lesgegevens</h3>
             <div class="les-detail">
                 <h4 class="ta-l mar-b-zero">
@@ -63,6 +59,13 @@
                 </h4>
                 <p class="sub-res ta-l mar-zero">
                     @les.max_aantal_deelnemers
+                </p>
+
+                <h4 class="ta-l mar-b-zero">
+                    Aantal reserveringen:
+                </h4>
+                <p class="sub-res ta-l mar-zero">
+                    @les.aantal_deelnemers
                 </p>
             </div>
             <h3 class="text-center">Acties</h3>

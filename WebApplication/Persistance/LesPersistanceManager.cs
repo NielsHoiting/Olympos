@@ -1,8 +1,10 @@
-﻿using NHibernate;
+﻿using Newtonsoft.Json.Linq;
+using NHibernate;
 using NHibernate.Criterion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using WebApplication.Models;
 
@@ -10,6 +12,7 @@ namespace WebApplication.Persistance
 {
     public class LesPersistanceManager : PersistenceManager
     {
+        static Dictionary<string, string> itemDictionary = new Dictionary<string, string>();
         public List<Les> getKomendeLessen(Gebruiker gebruiker, int aantal)
         {   
             ISession session = OpenSession();
@@ -161,6 +164,91 @@ namespace WebApplication.Persistance
             session.SaveOrUpdate(r);
             session.Transaction.Commit();
             return r.is_geweest;
+        }
+
+        public void checkAanwezigheid(int id)
+        {
+            ISession session = OpenSession();
+            ICriteria criteria = session.CreateCriteria(typeof(Reservering));
+            criteria.CreateAlias("Les", "Les");
+            criteria.Add(Restrictions.Eq("Les.les_no", id));
+            List<Reservering> reserveringen = criteria.List<Reservering>().ToList<Reservering>();
+            var eventjson = new WebClient().DownloadString("http://olympos.intellifi.nl/api/events");
+            JObject events = JObject.Parse(eventjson);
+            JArray results = (JArray)events["results"];
+            string nextUrl = events["next_url"].ToString();
+            bool done = false;
+            DateTime detectlimit = DateTime.Now.AddHours(-5);
+            while (nextUrl != "" && !done)
+            {
+                var tempJSON = new WebClient().DownloadString(nextUrl);
+                JObject tempObject = JObject.Parse(tempJSON);
+                nextUrl = tempObject["next_url"].ToString();
+                foreach (JToken j in (JArray)tempObject["results"])
+                {
+                    DateTime detectTijd = DateTime.Parse(j["time_created"].ToString());
+
+                    if (detectTijd < detectlimit)
+                    {
+                        done = true;
+                        break;
+                    }
+                    results.Add(j);
+                }
+            }
+            session.BeginTransaction();
+            foreach (Reservering r in reserveringen)
+            {
+                string hexCode = r.Deelnemer.sco_nummer.ToString("D24");
+                foreach (JToken j in results)
+                {
+                    string sporterId = "invalid";
+                    if (itemDictionary.ContainsKey(j["topic"]["arguments"]["item"].ToString()))
+                    {
+                        sporterId = itemDictionary[j["topic"]["arguments"]["item"].ToString()];
+                    }
+                    else
+                    {
+                        var itemJson = new WebClient().DownloadString("http://olympos.intellifi.nl/api/items/" + j["topic"]["arguments"]["item"].ToString());
+                        JObject items = JObject.Parse(itemJson);
+                        sporterId = items["code_hex"].ToString();
+                        itemDictionary.Add(j["topic"]["arguments"]["item"].ToString(), sporterId);
+                    }
+                    System.Diagnostics.Debug.WriteLine("SporterID: " + sporterId);
+                    if (sporterId == hexCode)
+                    {
+                        Console.WriteLine("hij vind iets");
+                        r.is_geweest = true;
+                        session.SaveOrUpdate(r);
+                        break;
+                    }
+                }
+            }
+            session.Transaction.Commit();
+        }
+
+        public void Inschrijven(int sco_nummer, int lesid)
+        {
+            
+            ISession session = OpenSession();
+            ICriteria criteria1 = session.CreateCriteria(typeof(Gebruiker));
+            criteria1.Add(Restrictions.Eq("sco_nummer", sco_nummer));
+            Gebruiker g = criteria1.List<Gebruiker>().FirstOrDefault();
+
+            ICriteria criteria2 = session.CreateCriteria(typeof(Les));
+            criteria2.Add(Restrictions.Eq("les_no", lesid));
+            Les l = criteria2.List<Les>().FirstOrDefault();
+
+            Reservering r = new Reservering();
+            r.datum_reservering = DateTime.Now;
+            r.Deelnemer = g;
+            r.is_geweest = true;
+            r.Les = l;
+
+            session.BeginTransaction();
+            session.Save(r);
+            session.Transaction.Commit();
+
         }
     }
 }

@@ -15,9 +15,9 @@ namespace DatabaseControl
         static void Main(string[] args)
         {
             //updateLessen();
-            LesPersistanceManager manager = new LesPersistanceManager();
-            manager.ToggleAanwezigheid(2, 1393);
-            
+            AccountPersistenceManager manager = new AccountPersistenceManager();
+            Console.WriteLine(manager.ZoekGebruiker("Lange", DateTime.Parse("1985-09-20")).voornaam);
+                
         }
         public static void updateLessen()
         {

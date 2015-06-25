@@ -34,6 +34,8 @@ namespace WebApplication.Controllers
             Gebruiker g = (Gebruiker)Session["user"];
             LesPersistanceManager manager = new LesPersistanceManager();
             Les les = manager.getLes(id);
+            manager.checkAanwezigheid(id);
+
             
             if (les == null || les.Sportdocent.sco_nummer != g.sco_nummer)
             {
@@ -71,6 +73,16 @@ namespace WebApplication.Controllers
             manager.ToggleAanwezigheid(sco_nummer, lesid);
             string json = new JavaScriptSerializer().Serialize(true);
             return Json(json, JsonRequestBehavior.AllowGet);
+        
+        
+        }
+
+        public ActionResult Inschrijven(int sco_nummer, int lesid)
+        {
+
+            LesPersistanceManager manager = new LesPersistanceManager();
+            manager.Inschrijven(sco_nummer, lesid);
+            return null;
         }
         class returnGebruiker{
 

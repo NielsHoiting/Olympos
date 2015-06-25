@@ -34,6 +34,7 @@ namespace WebApplication.Persistance
             {
                 ICriteria criteria = session.CreateCriteria(typeof(Gebruiker));
                 criteria.Add(Restrictions.Eq("achternaam", achternaam));
+                criteria.Add(Restrictions.Eq("geboortedatum", geboortedatum));
                 Gebruiker g = criteria.List<Gebruiker>().FirstOrDefault();
                 return g;
             }
