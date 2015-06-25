@@ -1,15 +1,55 @@
-﻿
-@using WebApplication.Models
+﻿@using WebApplication.Models
 @using System.Globalization
 @Scripts.Render("~/bundles/reserveren")
 @{
     ViewBag.Title = "Reserveren";
+    List<Les> GeinteresseerdeLessen = (List<Les>)ViewData["GeinteresseerdeLessen"];
+    CultureInfo nl = new CultureInfo("nl");
 }
 
 <div class="col col-table col-sm-12 col-md-10 col-md-offset-1 text-center">
-<h2 class="heading text-center">Reserveren</h2>
+    <h2 class="heading text-center">Reserveren</h2>
     <div class="col-xs-12">
-       
+        <h3>Persoonlijk geselecteerde lessen</h3>
+
+        <table class="table">   
+
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="cursus" checked="">
+                        <label for="cursus">Cursussen</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="groepsles" checked="">
+                        <label for="groepsles">Groepslessen</label>
+                    </td>
+                </tr>
+                @foreach (Les l in GeinteresseerdeLessen)
+                {
+                    <tr>
+                        <td>
+                            <h4 class="ta-l mar-b-zero">
+                                @CultureInfo.CurrentCulture.TextInfo.ToTitleCase(l.Sportaanbod.Sportcode.ToLower())
+                            </h4>
+                            <p class="sub-res ta-l mar-zero">
+                                @l.begintijd.Date.ToString("dddd dd MMMM yyyy")
+                            </p>
+                            <p class="sub-res ta-l mar-zero">
+                                @l.begintijd.ToString("HH:mm") - @l.eindtijd.ToString("HH:mm")
+                            </p>
+                        </td>
+                        <td class="lh-55">
+                            <button id="@l.les_no" type="button" class="btn btn-lg btn-primary btn-inschrijven">
+                                Nog @(l.max_aantal_deelnemers - l.Reserveringen.Count) Plaatsen
+                            </button>
+                        </td>
+                        <td class="lh-55">
+                            <a href="/Reserveren/Les/@l.les_no"><img src="~/content/images/arrow.png" style="margin-top: 12px" class="desktoponly"></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
-
