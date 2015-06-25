@@ -4,6 +4,8 @@
         var lesid = $(this).attr('id');
         var achternaam = document.getElementById('achternaam_input').value;
         var geboortedatum = document.getElementById('geboortedatum_input').value;
+        var timestamp=Date.parse(geboortedatum);
+        if (achternaam != "" && isNaN(timestamp)==false){
         $.post('/Account/ZoekGebruiker', { achternaam: achternaam , geboortedatum: geboortedatum }, function (data) {
             var gebruiker = $.parseJSON(data);
             var modalId = "modal" + lesid;
@@ -11,6 +13,7 @@
             fillModalLesDetails(modalId, gebruiker);
             $("#" + modalId).modal('show');
         });
+        }
     });
     
         });
