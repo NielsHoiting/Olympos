@@ -266,6 +266,7 @@
     <Content Include="Views\Account\Profiel.cshtml" />
     <Content Include="Views\Reserveren\KomendeLessen.cshtml" />
     <Content Include="Views\Reserveren\MijnInteresses.cshtml" />
+    <Content Include="Views\Reserveren\WeekOverzicht.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

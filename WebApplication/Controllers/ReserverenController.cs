@@ -40,8 +40,8 @@ namespace WebApplication.Controllers
             Gebruiker g = (Gebruiker)Session["user"];
 
             //TODO: variabelen duidelijker maken
-            manager.getMijnInteresseLessen(g, 10, 7, false);
-            return null;
+            ViewData["GeinteresseerdeLessen"] = manager.getMijnInteresseLessen(g, 10, 7, false);
+            return View();
         }
 
         public ActionResult Les(int id)

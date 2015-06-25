@@ -56,15 +56,12 @@ namespace WebApplication.Persistance
                 }
            
             
-            string[] test = sportCodes.ToArray();
+            string[] sportCodesArray = sportCodes.ToArray();
 
             ICriteria criteria = session.CreateCriteria(typeof(Les));
             criteria.CreateAlias("Sportaanbod", "Sportaanbod");
-            criteria.Add(Restrictions.In("Sportaanbod.Sportcode", test));
+            criteria.Add(Restrictions.In("Sportaanbod.Sportcode", sportCodesArray));
             IList<Les> lesList = criteria.List<Les>();
-
-
-
             var lessen = from les in lesList
                          where (from r in les.Reserveringen
                                 where r.Deelnemer.sco_nummer == gebruiker.sco_nummer
@@ -80,7 +77,7 @@ namespace WebApplication.Persistance
                 else return -1;
             });
             System.Diagnostics.Debug.WriteLine(returnList.Count);
-           return null;
+            return returnList;
 
         }
         public List<Les> getAgenda(int skip, Gebruiker gebruiker)
