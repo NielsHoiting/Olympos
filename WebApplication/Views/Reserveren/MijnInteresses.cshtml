@@ -40,7 +40,7 @@
                             </p>
                         </td>
                         <td class="lh-55">
-                            <button id="@l.les_no" type="button" class="btn @if ((l.max_aantal_deelnemers - l.Reserveringen.Count) == 0) { Response.Write("disbtn"); } btn-lg btn-primary btn-inschrijven">
+                            <button id="@l.les_no" type="button" class="btn @if((l.max_aantal_deelnemers - l.Reserveringen.Count) == 0){ @Html.Raw("disbtn") } btn-lg btn-primary btn-inschrijven">
                                 Nog @(l.max_aantal_deelnemers - l.Reserveringen.Count) Plaatsen
                             </button>
                         </td>
