@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    updateData()
     $('.btn-zoeken').click(function () {
         var lesid = $(this).attr('id');
         var achternaam = document.getElementById('achternaam_input').value;
@@ -32,7 +33,7 @@ function updateData() {
         var deelnemers = $.parseJSON(data);
         var deelnemerdata = "";
         for (i = 0; i < deelnemers.length; i++) {
-            deelnemerdata = deelnemerdata + "<tr> <td>" + deelnemers[i].voornaam + " " + deelnemers[i].achternaam + " </td> <td> <input type='checkbox' checked data-toggle='toggle'></td></tr>";
+            deelnemerdata = deelnemerdata + "<tr> <td>" + deelnemers[i].voornaam + " " + deelnemers[i].achternaam + " </td> <td> <input type='checkbox' data-toggle='toggle' data-on='Enabled' data-off='Disabled'></td></tr>";
         }
         document.getElementById("deelnemers").innerHTML = deelnemerdata;
     });
