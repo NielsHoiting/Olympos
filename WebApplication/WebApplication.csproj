@@ -266,11 +266,12 @@
     <Content Include="Views\Account\Profiel.cshtml" />
     <Content Include="Views\Reserveren\KomendeLessen.cshtml" />
     <Content Include="Views\Reserveren\MijnInteresses.cshtml" />
+    <Content Include="Views\Registratie\Les.cshtml" />
+    <Content Include="Views\Registratie\Index.cshtml" />
     <Content Include="Views\Reserveren\WeekOverzicht.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Registratie\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

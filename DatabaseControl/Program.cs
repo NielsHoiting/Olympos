@@ -28,24 +28,25 @@ namespace DatabaseControl
 
                 ICriteria criteria2 = session.CreateCriteria(typeof(Sportaanbod));
                 IList<Sportaanbod> sportaanbod = criteria2.List<Sportaanbod>();
-
+                int dagen = -7;
                 using (ITransaction transaction = session.BeginTransaction())
                 {
                     foreach (Les l in criteria.List<Les>().ToList<Les>())
                     {
-                        l.begintijd = l.begintijd.AddDays(3);
-                        l.eindtijd = l.eindtijd.AddDays(3);
-                        l.dag = l.dag.AddDays(3);
+                        l.begintijd = l.begintijd.AddDays(dagen);
+                        l.eindtijd = l.eindtijd.AddDays(dagen);
+                        l.dag = l.dag.AddDays(dagen);
                         session.SaveOrUpdate(l);
                     }
 
                     foreach (Sportaanbod s in sportaanbod)
                     {
-                        s.EinddatumVerkoop = s.EinddatumVerkoop.AddDays(3);
-                        s.Startdatum = s.Startdatum.AddDays(3);
-                        s.StartdatumVerkoop = s.StartdatumVerkoop.AddDays(3);
-                        s.TonenWebTot = s.TonenWebTot.AddDays(3);
-                        s.TonenWebVan = s.TonenWebVan.AddDays(3);
+                        s.EinddatumVerkoop = s.EinddatumVerkoop.AddDays(dagen);
+                        s.Startdatum = s.Startdatum.AddDays(dagen);
+                        s.StartdatumVerkoop = s.StartdatumVerkoop.AddDays(dagen);
+                        s.TonenWebTot = s.TonenWebTot.AddDays(dagen);
+                        s.TonenWebVan = s.TonenWebVan.AddDays(dagen);
+                        s.
                         session.SaveOrUpdate(s);
                     }
                     transaction.Commit();
