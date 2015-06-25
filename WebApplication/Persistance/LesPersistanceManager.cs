@@ -10,7 +10,7 @@ namespace WebApplication.Persistance
 {
     public class LesPersistanceManager : PersistenceManager
     {
-        public List<Les> getKomendeLessenLessen(Gebruiker gebruiker, int aantal)
+        public List<Les> getKomendeLessen(Gebruiker gebruiker, int aantal)
         {   
             ISession session = OpenSession();
             ICriteria criteria = session.CreateCriteria(typeof(Les));

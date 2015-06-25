@@ -26,7 +26,7 @@ namespace WebApplication.Controllers
             }
             LesPersistanceManager manager = new LesPersistanceManager();
             Gebruiker g = (Gebruiker)Session["user"];
-            List<Les> KomendeLessen = manager.getKomendeLessenLessen(g, 10);
+            List<Les> KomendeLessen = manager.getKomendeLessen(g, 10);
             ViewData["KomendeLessen"] = KomendeLessen;
             return View();
         }
