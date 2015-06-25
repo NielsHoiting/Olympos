@@ -317,11 +317,14 @@ input[type=checkbox]:checked + label{
 	padding: 15px;
 }
 .event{
-	background-color: #d32d00;
+	background-color: #3ba722;
 	border-radius: 6px;
 	padding: 4px;
 	margin: 15px -10px 10px;
 	color: white;
+}
+.geweest{
+    background-color:rgba(0,0,0,0.47) !important;
 }
 .event a{
 	display: block;
@@ -340,10 +343,16 @@ input[type=checkbox]:checked + label{
 @media screen and (min-width: 768px) {
 	.day:not(:last-child){
 		border-right: 1px dashed #e9967f;
-	}
+	}                                                                                                    
 	.day{
 		height: 475px;
 		border-bottom: 0px;
+        float:left;
+	}
+}
+@media screen and (max-width: 768px) {
+   	.day{
+		width: 100% !important;
 	}
 }
 a.fill-div {
@@ -352,9 +361,10 @@ a.fill-div {
     width: 100%;
     text-decoration: none;
 }
+
 .agenda {
   height: 700px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 @media only screen and (max-device-width: 768px) {
@@ -367,7 +377,6 @@ a.fill-div {
         margin-left: 20px !important;
         margin-right: 20px !important;
     }
-
 }
 .modal-dialog{    
     background-color: white;

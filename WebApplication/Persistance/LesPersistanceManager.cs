@@ -78,32 +78,6 @@ namespace WebApplication.Persistance
             return returnList;
 
         }
-        public int checkAanwezigheid(Les les)
-        {
-            foreach (Reservering r in les.Reserveringen)
-            {
-                
-            }
-            
-            return 0;
-        }
-        public List<Les> getRegistreerbareLessen(Gebruiker gebruiker)
-        {
-            ISession session = OpenSession();
-            ICriteria criteria = session.CreateCriteria(typeof(Les));
-            criteria.Add(Restrictions.Eq("Sportdocent" , gebruiker));
-            criteria.Add(Restrictions.Gt("begintijd", DateTime.Now.Date));
-            List<Les> results = criteria.List<Les>().ToList<Les>();
-
-
-            results.Sort((x, y) =>
-            {
-                if (x.begintijd > y.begintijd) return 1;
-                else if (x.begintijd == y.begintijd) return 0;
-                else return -1;
-            });
-            return results;
-        }
         public List<Les> getAgenda(int skip, Gebruiker gebruiker)
         {
             ISession session = OpenSession();
@@ -125,6 +99,22 @@ namespace WebApplication.Persistance
             });
             return returnList;
         }
+        public List<Les> getWeekOverzicht(DateTime start, DateTime eind)
+        {
+            ISession session = OpenSession();
+            ICriteria criteria = session.CreateCriteria(typeof(Les));
+            criteria.Add(Restrictions.Gt("begintijd", start));
+            criteria.Add(Restrictions.Lt("eindtijd", eind));
+            IList<Les> lesList = criteria.List<Les>();
+            List<Les> returnList = lesList.ToList<Les>();
+            returnList.Sort((x, y) =>
+            {
+                if (x.begintijd > y.begintijd) return 1;
+                else if (x.begintijd == y.begintijd) return 0;
+                else return -1; 
+            });
+            return returnList;
+        }
         public Les getLes(int lesId)
         {
             ISession session = OpenSession();
@@ -137,6 +127,23 @@ namespace WebApplication.Persistance
                     returnLes = matchingObjects.First();
                 }
                 return returnLes;
+        }
+        public List<Les> getRegistreerbareLessen(Gebruiker gebruiker)
+        {
+            ISession session = OpenSession();
+            ICriteria criteria = session.CreateCriteria(typeof(Les));
+            criteria.Add(Restrictions.Eq("Sportdocent", gebruiker));
+            criteria.Add(Restrictions.Gt("begintijd", DateTime.Now.Date));
+            List<Les> results = criteria.List<Les>().ToList<Les>();
+
+
+            results.Sort((x, y) =>
+            {
+                if (x.begintijd > y.begintijd) return 1;
+                else if (x.begintijd == y.begintijd) return 0;
+                else return -1;
+            });
+            return results;
         }
     }
 }

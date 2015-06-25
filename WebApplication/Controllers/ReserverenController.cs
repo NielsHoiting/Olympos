@@ -15,7 +15,7 @@ namespace WebApplication.Controllers
         public ActionResult Index()
         {
 
-            return RedirectToAction("MijnInteresses", "Reserveren");
+            return RedirectToAction("WeekOverzicht", "Reserveren");
         }
         public ActionResult KomendeLessen()
         {
@@ -48,8 +48,12 @@ namespace WebApplication.Controllers
         {
             LesPersistanceManager manager = new LesPersistanceManager();
             DateTime begin = DateTime.Today;
-            DateTime eind = DateTime.eu
-            ViewData["GeinteresseerdeLessen"] = manager.getWeekOverzicht()
+            DateTime eind = DateTime.Today.AddDays(6);
+            List<Les> lessen = manager.getWeekOverzicht(begin, eind);
+            System.Diagnostics.Debug.WriteLine(lessen.Count);
+            ViewData["lessen"] = lessen;
+            ViewData["beginDate"] = begin;
+            ViewData["eindDate"] = eind;
             return View();  
         }
 
