@@ -33,7 +33,7 @@ function updateData() {
         var deelnemers = $.parseJSON(data);
         var deelnemerdata = "";
         for (i = 0; i < deelnemers.length; i++) {
-            deelnemerdata = deelnemerdata + "<tr> <td>" + deelnemers[i].voornaam + " " + deelnemers[i].achternaam + " </td> <td> <button id='deelnemers[i].sco_nummer' type='button' class='btn btn-lg btn-primary btn-aanwezigheid'>Aanwezig</button></td></tr>";
+            deelnemerdata = deelnemerdata + "<tr> <td>" + deelnemers[i].voornaam + " " + deelnemers[i].achternaam + " </td> <td> <button id='deelnemers[i].sco_nummer' type='button' class='btn smallbtn-anw btn-lg btn-primary btn-aanwezigheid'>Aanwezig</button></td></tr>";
         }
         document.getElementById("deelnemers").innerHTML = deelnemerdata;
     });
