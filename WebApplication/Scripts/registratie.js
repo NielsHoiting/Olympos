@@ -81,11 +81,13 @@ function fillModalLesDetails(id, gebruiker) {
 
         $("#"+id).modal('hide');
         var sco_nummer = $(this).attr('id');
+        if(sco_nummer != 0){
         var lesid = window.location.pathname.split('/')[3];
         $.post('/Registratie/Inschrijven', { sco_nummer: sco_nummer, lesid: lesid }, function (data) {
             updateData();
             $(id).modal('hide');
 
         });
+        }
     });
 }

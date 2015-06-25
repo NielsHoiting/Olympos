@@ -24,7 +24,7 @@ namespace WebApplication.Persistance
 
             if (l.Reserveringen.Contains(r))
             {
-                System.Diagnostics.Debug.WriteLine("les al gereserveerd");
+                return false;
             }
 
             ISession session = OpenSession();

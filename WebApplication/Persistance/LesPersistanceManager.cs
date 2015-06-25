@@ -244,10 +244,17 @@ namespace WebApplication.Persistance
             r.Deelnemer = g;
             r.is_geweest = true;
             r.Les = l;
-
-            session.BeginTransaction();
-            session.Save(r);
-            session.Transaction.Commit();
+            if (l.Reserveringen.Contains(r))
+            {
+                System.Diagnostics.Debug.WriteLine("les al gereserveerd");
+            }
+            else
+            {
+                session.BeginTransaction();
+                session.Save(r);
+                session.Transaction.Commit();
+            }
+            
 
         }
     }
