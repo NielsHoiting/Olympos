@@ -46,10 +46,10 @@ namespace WebApplication.Controllers
 
         public ActionResult WeekOverzicht()
         {
-            LesPersistanceManager manager = new LesPersistanceManager();
-            DateTime begin = DateTime.Today;
-            DateTime eind = DateTime.eu
-            ViewData["GeinteresseerdeLessen"] = manager.getWeekOverzicht()
+            //LesPersistanceManager manager = new LesPersistanceManager();
+            //DateTime begin = DateTime.Today;
+            //DateTime eind = DateTime.eu
+            //ViewData["GeinteresseerdeLessen"] = manager.getWeekOverzicht()
             return View();  
         }
 
