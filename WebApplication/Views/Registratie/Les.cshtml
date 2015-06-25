@@ -1,4 +1,5 @@
 ﻿@using WebApplication.Models
+@Scripts.Render("~/bundles/registratie")
 @{
     ViewBag.Title = "Aanwezigheidsregistratie";
     Les les = (Les)ViewData["les"];
@@ -9,7 +10,7 @@
     <div class="row">
         <div class="col-sm-12 col-md-8">
             <h3 class="text-center">Deelnemers</h3>
-            <table class="table">
+            <table id="deelnemers" class="table">
                 @foreach (Reservering r in les.Reserveringen)
                 { 
                     <tr>
@@ -29,11 +30,11 @@
                 <label for="">SCO-Nummer</label>
                 <input id="" class="form-control" placeholder="SCO-Nummer" required>
                 <label for="">Geboortedatum</label>
-                <input id="" class="form-control" placeholder="Geboortedatum" required>
+                <input id="geboortedatum_input" class="form-control" placeholder="Geboortedatum" required>
                 <label for="">Achternaam</label>
-                <input id="" class="form-control" placeholder="Achternaam" required>
-                <a href="#" class="btn btn-lg btn-primary btn-inschrijven">Zoeken	</a>
-            </form>
+                <input id="achternaam_input" class="form-control" placeholder="Achternaam" required>
+                <button id="@les.les_no" type="button" class="btn btn-lg btn-primary btn-zoeken">Zoeken	</button>
+</form>
             <h3 class="text-center">Lesgegevens</h3>
             <div class="les-detail">
                 <h4 class="ta-l mar-b-zero">
