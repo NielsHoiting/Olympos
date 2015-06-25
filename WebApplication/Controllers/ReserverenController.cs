@@ -44,6 +44,15 @@ namespace WebApplication.Controllers
             return View();
         }
 
+        public ActionResult WeekOverzicht()
+        {
+            LesPersistanceManager manager = new LesPersistanceManager();
+            DateTime begin = DateTime.Today;
+            DateTime eind = DateTime.eu
+            ViewData["GeinteresseerdeLessen"] = manager.getWeekOverzicht()
+            return View();  
+        }
+
         public ActionResult Les(int id)
         {
             LesPersistanceManager manager = new LesPersistanceManager();

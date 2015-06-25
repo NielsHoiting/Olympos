@@ -52,12 +52,10 @@ namespace WebApplication.Persistance
             foreach (Reservering r in vorigeReservering)
                 if (!sportCodes.Contains(r.Les.Sportaanbod.Sportcode)) { 
                     sportCodes.Add(r.Les.Sportaanbod.Sportcode);
-                    System.Diagnostics.Debug.WriteLine(r.Les.Sportaanbod.Sportcode);
                 }
            
             
             string[] sportCodesArray = sportCodes.ToArray();
-
             ICriteria criteria = session.CreateCriteria(typeof(Les));
             criteria.CreateAlias("Sportaanbod", "Sportaanbod");
             criteria.Add(Restrictions.In("Sportaanbod.Sportcode", sportCodesArray));
@@ -76,9 +74,24 @@ namespace WebApplication.Persistance
                 else if (x.begintijd == y.begintijd) return 0;
                 else return -1;
             });
-            System.Diagnostics.Debug.WriteLine(returnList.Count);
+            //System.Diagnostics.Debug.WriteLine(returnList.Count);
             return returnList;
 
+        }
+        public List<Les> getWeekOverzicht(DateTime start, DateTime eind){
+            ISession session = OpenSession();
+            ICriteria criteria = session.CreateCriteria(typeof(Les));
+            criteria.Add(Restrictions.Gt("begintijd", start));
+            criteria.Add(Restrictions.Lt("eindtijd", eind));
+            IList<Les> lesList = criteria.List<Les>();
+            List<Les> returnList = lesList.ToList<Les>();
+            returnList.Sort((x, y) =>
+            {
+                if (x.begintijd > y.begintijd) return 1;
+                else if (x.begintijd == y.begintijd) return 0;
+                else return -1;
+            });
+            return returnList;
         }
         public List<Les> getAgenda(int skip, Gebruiker gebruiker)
         {
