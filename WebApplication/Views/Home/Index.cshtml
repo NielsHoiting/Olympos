@@ -16,25 +16,7 @@
         @for (int i = 0; i < 5; i++){
             <div class="day col-sm-2 col-xs-12">
                 <h4 class="text-center">@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(beginDate.AddDays(i).ToString("dddd dd MMMM"))</h4>
-                 @foreach (Les l in lessen)
-                 {
-                     if (l.begintijd.Day == beginDate.AddDays(i).Day)
-                     {
-                     <div class="row event">
-                         <a href="/Reserveren/Les/@l.les_no" class="fill-div">
-                             <h4 class="ta-l mar-b-zero">
-                                 @CultureInfo.CurrentCulture.TextInfo.ToTitleCase(l.Sportaanbod.Sportcode.ToLower())
-                             </h4>
-                             <p class="sub-res ta-l mar-zero">
-                                 @l.begintijd.ToString("dddd dd MMMM yyyy")
-                             </p>
-                             <p class="sub-res ta-l mar-zero">
-                                 @l.begintijd.ToString("HH:mm") - @l.eindtijd.ToString("HH:mm")
-                             </p>
-                         </a>
-                     </div>
-                     }
-                 }
+
             </div>
          }
     </div>
