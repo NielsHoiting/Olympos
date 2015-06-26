@@ -14,8 +14,16 @@ namespace WebApplication.Controllers
     {
         public ActionResult Index()
         {
-
-            return RedirectToAction("WeekOverzicht", "Reserveren");
+            string redirecttext = "KomendeLessen";
+            if (Request.Cookies["overzicht"].Value == "week")
+            {
+                redirecttext = "WeekOverzicht";
+            }
+            else if (Request.Cookies["overzicht"].Value == "interesse")
+            {
+                redirecttext = "MijnInteresse";
+            }
+            return RedirectToAction(redirecttext, "Reserveren");
         }
         public ActionResult KomendeLessen()
         {
@@ -24,6 +32,11 @@ namespace WebApplication.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+            System.Diagnostics.Debug.WriteLine(Request.Cookies["overzicht"].Value);
+            
+            HttpCookie aCookie = new HttpCookie("overzicht");
+            aCookie.Value = "komend";
+            Response.Cookies.Add(aCookie);
             LesPersistanceManager manager = new LesPersistanceManager();
             Gebruiker g = (Gebruiker)Session["user"];
             List<Les> KomendeLessen = manager.getKomendeLessen(g, 10);
@@ -49,6 +62,9 @@ namespace WebApplication.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+            HttpCookie aCookie = new HttpCookie("overzicht");
+            aCookie.Value = "interesse";
+            Response.Cookies.Add(aCookie);
             LesPersistanceManager manager = new LesPersistanceManager();
             Gebruiker g = (Gebruiker)Session["user"];
 
@@ -63,6 +79,9 @@ namespace WebApplication.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+            HttpCookie aCookie = new HttpCookie("overzicht");
+            aCookie.Value = "week";
+            Response.Cookies.Add(aCookie);
             LesPersistanceManager manager = new LesPersistanceManager();
             DateTime begin = DateTime.Today;
             DateTime eind = begin.AddDays(7);
