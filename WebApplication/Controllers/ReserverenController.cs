@@ -58,7 +58,11 @@ namespace WebApplication.Controllers
         }
 
         public ActionResult WeekOverzicht(string[] sportcodes)
-        {        
+        {
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             LesPersistanceManager manager = new LesPersistanceManager();
             DateTime begin = DateTime.Today;
             DateTime eind = begin.AddDays(7);

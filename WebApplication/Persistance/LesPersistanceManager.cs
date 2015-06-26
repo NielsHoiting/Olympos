@@ -18,6 +18,7 @@ namespace WebApplication.Persistance
             ISession session = OpenSession();
             ICriteria criteria = session.CreateCriteria(typeof(Les));
             criteria.Add(Restrictions.Gt("begintijd", DateTime.Now));
+            criteria.Add(Restrictions.Eq("niet_tonen", 0));
             IList<Les> lesList = criteria.List<Les>();
             var lessen = from les in lesList
                     where (from r in les.Reserveringen
@@ -140,6 +141,7 @@ namespace WebApplication.Persistance
                 Les returnLes = null;
                 ICriteria criteria = session.CreateCriteria(typeof(Les));
                 criteria.Add(Restrictions.Eq("les_no", lesId));
+                criteria.Add(Restrictions.Eq("niet_tonen", 0));
                 IList<Les> matchingObjects = criteria.List<Les>();
                 if (matchingObjects.Count() > 0)
                 {

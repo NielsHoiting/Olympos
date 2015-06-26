@@ -8,7 +8,6 @@
         for (var i = 0; i < sportcodes.length ; i++) {
             url += "sportcodes=" + sportcodes[i] + "&";
         }
-        alert(url);
         window.location = url;
     });
 });
