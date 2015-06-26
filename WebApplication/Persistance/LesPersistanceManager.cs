@@ -19,13 +19,14 @@ namespace WebApplication.Persistance
             ICriteria criteria = session.CreateCriteria(typeof(Les));
             criteria.Add(Restrictions.Gt("begintijd", DateTime.Now));
             criteria.Add(Restrictions.Eq("niet_tonen", 0));
+            criteria.Add(Restrictions.Eq("vervallen", 0));
             IList<Les> lesList = criteria.List<Les>();
             var lessen = from les in lesList
                     where (from r in les.Reserveringen
                            where r.Deelnemer.sco_nummer == gebruiker.sco_nummer
                            select r).FirstOrDefault() == null
+                           && les.Reserveringen.Count < les.max_aantal_deelnemers
                     select les;
-            
             List<Les> tempList = lessen.ToList<Les>();
             tempList.Sort((x, y) =>
             {
