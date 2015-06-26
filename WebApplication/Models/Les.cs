@@ -22,10 +22,27 @@ namespace WebApplication.Models
         public virtual int niet_tonen { set; get; }
         public virtual string dagnaam { set; get; }
         public virtual ISet<Reservering> Reserveringen { get; set; }
+        public virtual LesStatus Lesstatus
+        {
+            get
+            {
+                if (this.eindtijd < DateTime.Now)
+                    return LesStatus.Voorbij;
+                else if (vervallen == 1)
+                    return LesStatus.Vervallen;
+                else if (this.Reserveringen.Count >= max_aantal_deelnemers)
+                    return LesStatus.Uitverkocht;
+                else if (niet_tonen == 1)
+                    return LesStatus.NietTonen;
+                else
+                    return LesStatus.Beschikbaar;
+            }
+        }
 
         public Les()
         {
 
         }
     }
+    public enum LesStatus {Voorbij, Uitverkocht, Vervallen, NietTonen, Beschikbaar };
 }
