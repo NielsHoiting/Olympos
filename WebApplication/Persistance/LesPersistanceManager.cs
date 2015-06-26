@@ -268,5 +268,16 @@ namespace WebApplication.Persistance
             
 
         }
+
+        public Reservering GetReservering(Gebruiker g, int id)
+        {
+            ISession session = OpenSession();
+            ICriteria criteria = session.CreateCriteria(typeof(Reservering));
+            criteria.CreateAlias("Les", "Les");
+            criteria.Add(Restrictions.Eq("Les.les_no", id));
+            criteria.Add(Restrictions.Eq("Deelnemer", g));
+            Reservering r = criteria.List<Reservering>().FirstOrDefault();
+            return r;
+        }
     }
 }

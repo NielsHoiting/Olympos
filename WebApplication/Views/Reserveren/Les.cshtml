@@ -5,6 +5,7 @@
     CultureInfo enAU = new CultureInfo("nl");
     ViewBag.Title = "Les Eigenschappen";
     Les l = (Les)ViewData["les"];
+    bool reservering = (bool)ViewData["reservering"];
 }
 
 <div class="col col-table col-sm-12 col-md-10 col-md-offset-1 text-center">
@@ -44,6 +45,9 @@
         <p class="sub-res ta-l mar-zero">
             @l.Reserveringen.Count
         </p>
+        @if(reservering) {
+            <a href='/Reserveren/AnnuleerReservering/@l.les_no'  type='button' class='btn btn-lg btn-primary btn-inschrijven'>Reservering annuleren</a>
+        }
     </div>
 </div>
 
