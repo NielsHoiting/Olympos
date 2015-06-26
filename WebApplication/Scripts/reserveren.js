@@ -44,9 +44,14 @@ function fillModalLesDetails(id, les) {
                             + "<h4 class='ta-l mar-b-zero'>Aantal gereserveerd:</h4>"
                             + "<p class='sub-res ta-l mar-zero'>" + les.aantalGereserveerd + "</p>"
                         + "</div>";
-    var lesDetailsFooterHtml = "<a href='/Reserveren/ReserveerLes/" + les.lesId + "' type='button' class='btn btn-lg btn-primary btn-inschrijven'>Inschrijven</a>";
+    var lesDetailsFooterHtml ="<button type='button' class='btn btn-lg btn-primary btn-terug'>Terug</button> <a href='/Reserveren/ReserveerLes/" + les.lesId + "' type='button' class='btn btn-lg btn-primary btn-inschrijven'>Inschrijven</a>";
 
     $("#" + id + "> .modal-dialog > .modal-header").html(lesDetailsHeaderHtml);
     $("#" + id + "> .modal-dialog > .modal-body").html(lesDetailsBodyHtml);
     $("#" + id + "> .modal-dialog > .modal-footer").html(lesDetailsFooterHtml);
+    $('.btn-terug').click(function () {
+
+        $("#" + id).modal('hide');
+
+    });
 }

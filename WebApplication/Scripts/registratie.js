@@ -91,11 +91,17 @@ function fillModalLesDetails(id, gebruiker) {
                             + "<p class='sub-res ta-l mar-zero'> plek om foto in te voegen</p>"
 
                         + "</div>";
-    var lesDetailsFooterHtml = "<button id='" + gebruiker.sco_nummer + "' type='button' class='btn btn-lg btn-primary btn-inschrijven'>Toevoegen</button>";
+    var lesDetailsFooterHtml = "<button type='button' class='btn btn-lg btn-primary btn-terug'>Terug</button> <button id='" + gebruiker.sco_nummer + "' type='button' class='btn btn-lg btn-primary btn-inschrijven'>Toevoegen</button>";
 
     $("#" + id + "> .modal-dialog > .modal-header").html(lesDetailsHeaderHtml);
     $("#" + id + "> .modal-dialog > .modal-body").html(lesDetailsBodyHtml);
     $("#" + id + "> .modal-dialog > .modal-footer").html(lesDetailsFooterHtml);
+
+    $('.btn-terug').click(function () {
+
+        $("#" + id).modal('hide');
+
+    });
     $('.btn-inschrijven').click(function () {
 
         $("#"+id).modal('hide');
