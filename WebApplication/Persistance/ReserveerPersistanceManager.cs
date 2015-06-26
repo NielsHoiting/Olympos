@@ -1,4 +1,5 @@
 ﻿using NHibernate;
+using NHibernate.Criterion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,21 @@ namespace WebApplication.Persistance
             ISession session = OpenSession();
             session.Save(r);
             return true;
+        }
+
+        public void AnnuleerReservering(Gebruiker g, int lesid)
+        {
+            ISession session = OpenSession();
+            ICriteria criteria = session.CreateCriteria(typeof(Reservering));
+            criteria.CreateAlias("Les", "Les");
+            criteria.Add(Restrictions.Eq("Les.les_no", lesid));
+            criteria.Add(Restrictions.Eq("Deelnemer", g));
+            Reservering r = criteria.List<Reservering>().FirstOrDefault();
+            if (r != null) { 
+                session.BeginTransaction();
+                session.Delete(r);
+                session.Transaction.Commit();
+            }
         }
     }
 }

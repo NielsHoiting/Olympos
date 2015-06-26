@@ -17,21 +17,33 @@ namespace WebApplication.Persistance
         {   
             ISession session = OpenSession();
             ICriteria criteria = session.CreateCriteria(typeof(Les));
-            criteria.SetFirstResult(0).SetMaxResults(aantal);
+            criteria.Add(Restrictions.Gt("begintijd", DateTime.Now));
             IList<Les> lesList = criteria.List<Les>();
             var lessen = from les in lesList
                     where (from r in les.Reserveringen
                            where r.Deelnemer.sco_nummer == gebruiker.sco_nummer
                            select r).FirstOrDefault() == null
                     select les;
-
-            List<Les> returnList = lessen.ToList<Les>();
-            returnList.Sort((x, y) =>
+            
+            List<Les> tempList = lessen.ToList<Les>();
+            tempList.Sort((x, y) =>
             {
                 if (x.begintijd > y.begintijd) return 1;
                 else if (x.begintijd == y.begintijd) return 0;
                 else return -1;
             });
+
+
+            List<Les> returnList = new List<Les>();
+            int i = 0;
+            foreach (Les l in tempList)
+            {
+                
+                if(i >= aantal)
+                    break;
+                returnList.Add(l);
+                i++;
+            }
             return returnList;
         }
         public List<Les> getMijnInteresseLessen(Gebruiker gebruiker, int aantalLessen, int aantalDagen, bool isGeweest)
@@ -259,6 +271,17 @@ namespace WebApplication.Persistance
             }
             
 
+        }
+
+        public Reservering GetReservering(Gebruiker g, int id)
+        {
+            ISession session = OpenSession();
+            ICriteria criteria = session.CreateCriteria(typeof(Reservering));
+            criteria.CreateAlias("Les", "Les");
+            criteria.Add(Restrictions.Eq("Les.les_no", id));
+            criteria.Add(Restrictions.Eq("Deelnemer", g));
+            Reservering r = criteria.List<Reservering>().FirstOrDefault();
+            return r;
         }
     }
 }

@@ -30,6 +30,19 @@ namespace WebApplication.Controllers
             ViewData["KomendeLessen"] = KomendeLessen;
             return View();
         }
+
+        public ActionResult AnnuleerReservering(int id)
+        {
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            ReserveerPersistanceManager manager = new ReserveerPersistanceManager();
+            Gebruiker g = (Gebruiker)Session["user"];
+            manager.AnnuleerReservering(g, id);
+
+            return RedirectToAction("Index", "Home"); ;
+        }
         public ActionResult MijnInteresses()
         {
             if (Session["user"] == null)
@@ -58,6 +71,12 @@ namespace WebApplication.Controllers
         }
         public ActionResult Les(int id)
         {
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            Gebruiker g = (Gebruiker)Session["user"];
             LesPersistanceManager manager = new LesPersistanceManager();
 
             Les les = manager.getLes(id);
@@ -66,6 +85,7 @@ namespace WebApplication.Controllers
                 return RedirectToAction("Index", "Reserveren");
             }
             ViewData["les"] = les;
+            ViewData["reservering"] = (manager.GetReservering(g, id) != null);
             return View();
         }
         public ActionResult ReserveerLes(int id)
