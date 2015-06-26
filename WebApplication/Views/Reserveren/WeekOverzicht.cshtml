@@ -22,37 +22,17 @@
     </ul>
 
     <button type="button" class="btn btn-xs" data-toggle="collapse" data-target="#filters">Filters</button>
-    <div id="filters" class="collapse">
-            
+    <div id="filters" class="collapse"> 
         <div class="col-md-4">
-            <div class="form-group">
-                <label for="sportcode-filter">Sportcode:</label>
-                <input type="text" class="form-control" id="sportcode-filter" placeholder="Sportcode">
-                <label for="plaatsen-filter">Aantal plekken vrij:</label>
-                <input type="number" class="form-control" id="plaatsen-filter" placeholder="Plekken vrij">
-            </div>
+            <select id="sportcode-filter" multiple class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <button type="button" id="zoeken" class="btn btn-xs">Zoeken</button>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="tijd-filter">Begintijd:</label>
-                <select class="form-control" id="begintijd-filter">
-                        <option value=""></option>
-                    @for (int i = 0; i <= 14; i++)
-                    {
-                        <option value="@DateTime.Today.AddHours(i + 8).ToShortTimeString()">@DateTime.Today.AddHours(i + 8).ToShortTimeString() tot @DateTime.Today.AddHours(i + 9).ToShortTimeString()</option>
-                    }
-                </select>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" id="instellingen-filter">Instellingen Bewaren?
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-
-        </div>
-        <button type="button" id="zoeken" class="btn btn-xs">Zoeken</button>
     </div>
     <div class="agenda">
         <h3>@beginDate.ToShortDateString() t/m @eindDate.AddDays(-1).ToShortDateString()</h3>

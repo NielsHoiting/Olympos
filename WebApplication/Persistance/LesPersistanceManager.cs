@@ -112,13 +112,17 @@ namespace WebApplication.Persistance
             });
             return returnList;
         }
-        public List<Les> getWeekOverzicht(DateTime start, DateTime eind)
+        public List<Les> GetWeekOverzicht(DateTime start, DateTime eind, String[] sportcodes)
         {
             ISession session = OpenSession();
             ICriteria criteria = session.CreateCriteria(typeof(Les));
             criteria.Add(Restrictions.Gt("begintijd", start));
             criteria.Add(Restrictions.Lt("eindtijd", eind));
             criteria.Add(Restrictions.Eq("niet_tonen", 0));
+            if (sportcodes != null) { 
+                criteria.CreateAlias("Sportaanbod", "Sportaanbod");
+                criteria.Add(Restrictions.In("Sportaanbod.Sportcode", sportcodes));
+            }
             IList<Les> lesList = criteria.List<Les>();
             List<Les> returnList = lesList.ToList<Les>();
             returnList.Sort((x, y) =>
