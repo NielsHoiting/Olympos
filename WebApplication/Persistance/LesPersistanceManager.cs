@@ -72,6 +72,7 @@ namespace WebApplication.Persistance
             
             string[] sportCodesArray = sportCodes.ToArray();
             ICriteria criteria = session.CreateCriteria(typeof(Les));
+            criteria.Add(Restrictions.Eq("niet_tonen", 0));
             criteria.CreateAlias("Sportaanbod", "Sportaanbod");
             criteria.Add(Restrictions.In("Sportaanbod.Sportcode", sportCodesArray));
             IList<Les> lesList = criteria.List<Les>();

@@ -1,6 +1,7 @@
 ﻿@using WebApplication.Models
 @using System.Globalization
 @Scripts.Render("~/bundles/agenda")
+@Scripts.Render("~/bundles/reserveren")
 @{
     ViewBag.Title = "Week Overzicht";
     List<Les> lessen = (List<Les>)ViewData["lessen"];
@@ -9,6 +10,13 @@
     CultureInfo nl = new CultureInfo("nl");
     int totalDagen = (int)(eindDate - beginDate).TotalDays;
     double columnBreedte = 100 / totalDagen;
+    List<String> sportcodes = new List<string>();
+    foreach (Les l in lessen)
+    {
+        if(!sportcodes.Contains(l.Sportaanbod.Sportcode)){
+           sportcodes.Add(l.Sportaanbod.Sportcode);
+        }
+    }
 }
 <div class="col col-xs-12 col-md-10 col-md-offset-1">
     <h2 class="heading text-center">Week Overzicht</h2>
@@ -20,16 +28,15 @@
         <li><a href="/Reserveren/KomendeLessen">Komende lessen</a></li>
         <li><a href="/Reserveren/MijnInteresses">Mijn interesses</a></li>
     </ul>
+    <div class="col-md-4">
+        <button type="button" class="btn btn-xs" data-toggle="collapse" data-target="#filters">Filters</button>
+        <div id="filters" class="collapse">
 
-    <button type="button" class="btn btn-xs" data-toggle="collapse" data-target="#filters">Filters</button>
-    <div id="filters" class="collapse"> 
-        <div class="col-md-4">
             <select id="sportcode-filter" multiple class="form-control">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                @foreach (String s in sportcodes)
+                {
+                    <option>@s.ToLower()</option>
+                }
             </select>
             <button type="button" id="zoeken" class="btn btn-xs">Zoeken</button>
         </div>
@@ -43,6 +50,7 @@
                 @foreach (Les l in lessen)
                 {
                       string cssOpmaak = "";
+
                       string eventString = l.begintijd.ToString("HH:mm") + "-" + l.eindtijd.ToString("HH:mm");
                       LesStatus lesStatus = l.Lesstatus;
                       if (lesStatus == LesStatus.Voorbij)
@@ -53,6 +61,7 @@
                       {
                           cssOpmaak = "vervallen";
                           eventString = "Vervallen";
+                          
                       }
                       else if (lesStatus == LesStatus.Uitverkocht)
                       {
@@ -62,7 +71,7 @@
                     if (l.begintijd.Day == beginDate.AddDays(i).Day)
                     {
                         <div class="row event @cssOpmaak">
-                            <a href="/Reserveren/Les/@l.les_no" class="fill-div">
+                            <a id="@l.les_no" class="fill-div @if(l.Lesstatus == LesStatus.Beschikbaar){@Html.Raw("btn-inschrijven")}">
                                 <h4 class="ta-l mar-b-zero">
                                     @CultureInfo.CurrentCulture.TextInfo.ToTitleCase(l.Sportaanbod.Sportcode.ToLower())
                                 </h4>   
