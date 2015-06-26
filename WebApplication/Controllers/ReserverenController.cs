@@ -44,19 +44,12 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        public ActionResult WeekOverzicht()
-        {
-            //getting parameters
-            string sportcode = Request.Params["sportcode"];
-            string beginTijd = Request.Params["begintijd"];
-            string plekkenVrij = Request.Params["plekkenvrij"];
-            string bewaren = Request.Params["bewaren"];
-            System.Diagnostics.Debug.WriteLine(sportcode + " " + beginTijd + " " + plekkenVrij + " ");
-
+        public ActionResult WeekOverzicht(string[] sportcodes)
+        {        
             LesPersistanceManager manager = new LesPersistanceManager();
             DateTime begin = DateTime.Today;
             DateTime eind = begin.AddDays(7);
-            List<Les> lessen = manager.getWeekOverzicht(begin, eind);
+            List<Les> lessen = manager.GetWeekOverzicht(begin, eind, sportcodes);
             ViewData["lessen"] = lessen;
             ViewData["beginDate"] = begin;
             ViewData["eindDate"] = eind;
