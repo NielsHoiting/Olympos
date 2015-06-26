@@ -14,9 +14,10 @@ namespace DatabaseControl
     {
         static void Main(string[] args)
         {
-            updateLessen();
-
-            
+            //updateLessen();
+            AccountPersistenceManager manager = new AccountPersistenceManager();
+            Console.WriteLine(manager.ZoekGebruiker("Lange", DateTime.Parse("1985-09-20")).voornaam);
+                
         }
         public static void updateLessen()
         {
@@ -46,7 +47,6 @@ namespace DatabaseControl
                         s.StartdatumVerkoop = s.StartdatumVerkoop.AddDays(dagen);
                         s.TonenWebTot = s.TonenWebTot.AddDays(dagen);
                         s.TonenWebVan = s.TonenWebVan.AddDays(dagen);
-                        s.
                         session.SaveOrUpdate(s);
                     }
                     transaction.Commit();

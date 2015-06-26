@@ -26,50 +26,46 @@
         </div>
         <div class="col-sm-12 col-md-4">
             <h3 class="text-center">Deelnemer Toevoegen</h3>
-            <form class="form-signin">
-                <label for="">SCO-Nummer</label>
-                <input id="" class="form-control" placeholder="SCO-Nummer" required>
                 <label for="">Geboortedatum</label>
-                <input id="geboortedatum_input" class="form-control" placeholder="Geboortedatum" required>
+                <input type="date" id="geboortedatum_input" class="form-control" />
                 <label for="">Achternaam</label>
                 <input id="achternaam_input" class="form-control" placeholder="Achternaam" required>
                 <button id="@les.les_no" type="button" class="btn btn-lg btn-primary btn-zoeken">Zoeken	</button>
-            </form>
             <h3 class="text-center">Lesgegevens</h3>
             <div class="les-detail">
                 <h4 class="ta-l mar-b-zero">
                     Docent
                 </h4>
                 <p class="sub-res ta-l mar-zero">
-                    Joost Janssen
+                    @les.Sportdocent.voornaam @les.Sportdocent.achternaam
                 </p>
 
                 <h4 class="ta-l mar-b-zero">
                     Datum:
                 </h4>
                 <p class="sub-res ta-l mar-zero">
-                    17-03-2015
+                   @les.begintijd.Date.ToString("dddd dd MMMM yyyy")
                 </p>
 
                 <h4 class="ta-l mar-b-zero">
                     Tijd:
                 </h4>
                 <p class="sub-res ta-l mar-zero">
-                    10:00 - 13:00
+                    @les.begintijd.ToString("HH:mm") - @les.eindtijd.ToString("HH:mm")
                 </p>
 
                 <h4 class="ta-l mar-b-zero">
                     Aantal plaatsen:
                 </h4>
                 <p class="sub-res ta-l mar-zero">
-                    25
+                    @les.max_aantal_deelnemers
                 </p>
 
                 <h4 class="ta-l mar-b-zero">
-                    Aantal reeds aanwezig:
+                    Aantal reserveringen:
                 </h4>
                 <p class="sub-res ta-l mar-zero">
-                    23
+                    @les.aantal_deelnemers
                 </p>
             </div>
             <h3 class="text-center">Acties</h3>

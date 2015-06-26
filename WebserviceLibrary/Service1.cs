@@ -41,10 +41,10 @@ namespace WebserviceLibrary
                 nextUrl = tempObject["next_url"].ToString();
                 foreach(JToken j in (JArray)tempObject["results"])
                 {
+                    
                     results.Add(j);
                 }
                 i++;
-
             }
 
             List<Event> eventList = new List<Event>();

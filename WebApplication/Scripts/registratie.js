@@ -4,6 +4,8 @@
         var lesid = $(this).attr('id');
         var achternaam = document.getElementById('achternaam_input').value;
         var geboortedatum = document.getElementById('geboortedatum_input').value;
+        var timestamp=Date.parse(geboortedatum);
+        if (achternaam != "" && isNaN(timestamp) == false && timestamp < Date.now() && timestamp >new Date(1900,0)) {
         $.post('/Account/ZoekGebruiker', { achternaam: achternaam , geboortedatum: geboortedatum }, function (data) {
             var gebruiker = $.parseJSON(data);
             var modalId = "modal" + lesid;
@@ -11,20 +13,10 @@
             fillModalLesDetails(modalId, gebruiker);
             $("#" + modalId).modal('show');
         });
+        }
     });
-    $('.btn-zoeken').click(function () {
-        var lesid = $(this).attr('id');
-        var achternaam = document.getElementById('achternaam_input').value;
-        var geboortedatum = document.getElementById('geboortedatum_input').value;
-        $.post('/Account/ZoekGebruiker', { achternaam: achternaam, geboortedatum: geboortedatum }, function (data) {
-            var gebruiker = $.parseJSON(data);
-            var modalId = "modal" + lesid;
-            createModal(modalId);
-            fillModalLesDetails(modalId, gebruiker);
-            $("#" + modalId).modal('show');
+    
         });
-    });
-});
 
 
 function updateData() {
@@ -32,10 +24,29 @@ function updateData() {
     $.post('/Registratie/GetDeelnemers', { lesid: lesid }, function (data) {
         var deelnemers = $.parseJSON(data);
         var deelnemerdata = "";
+        
+        
         for (i = 0; i < deelnemers.length; i++) {
-            deelnemerdata = deelnemerdata + "<tr> <td>" + deelnemers[i].voornaam + " " + deelnemers[i].achternaam + " </td> <td> <button id='deelnemers[i].sco_nummer' type='button' class='btn smallbtn-anw btn-lg btn-primary btn-aanwezigheid'>Aanwezig</button></td></tr>";
+            var aanwezig;
+            var aanwezigtext;
+            if (deelnemers[i].isAanwezig) {
+                aanwezig = 'n';
+                aanwezigtext = "Aanwezig";
+            } else {
+                aanwezig = 'f';
+                aanwezigtext = "Afwezig"
+            }
+            deelnemerdata = deelnemerdata + "<tr> <td>" + deelnemers[i].naam + " </td> <td> <button id='" + deelnemers[i].sco_nummer + "' type='button' class='btn smallbtn-a" + aanwezig + "w btn-lg btn-primary btn-aanwezigheid'>" + aanwezigtext +"</button></td></tr>";
         }
         document.getElementById("deelnemers").innerHTML = deelnemerdata;
+        $('.btn-aanwezigheid').click(function () {
+            var sco_nummer = $(this).attr('id');
+            var lesid = window.location.pathname.split('/')[3];
+            $.post('/Registratie/ToggleAanwezigheid', { sco_nummer: sco_nummer, lesid: lesid}, function (data) {
+                var nieuw = $.parseJSON(data);
+                updateData();
+            });
+        });
     });
 }
 function createModal(id) {
@@ -57,23 +68,46 @@ function createModal(id) {
     $('#site-wrapper').after(modalHtml);
 }
 function fillModalLesDetails(id, gebruiker) {
-    var lesDetailsHeaderHtml = "<h3>Weet u zeker dat u wilt inschrijven?</h3>";
+    if (gebruiker.sco_nummer == 0) {
+        var lesDetailsHeaderHtml = "<h3>Gebruiker niet gevonden</h3>";
+        var lesDetailsBodyHtml = "<div class='les-detail'>"
+                                + "<h3> Controleer uw invoer en probeer het opnieuw</h3>"
+                            + "</div>";
+        var lesDetailsFooterHtml = "<button id='" + gebruiker.sco_nummer + "' type='button' class='btn btn-lg btn-primary btn-inschrijven'>Terug</button>";
+
+        $("#" + id + "> .modal-dialog > .modal-header").html(lesDetailsHeaderHtml);
+        $("#" + id + "> .modal-dialog > .modal-body").html(lesDetailsBodyHtml);
+        $("#" + id + "> .modal-dialog > .modal-footer").html(lesDetailsFooterHtml);
+        $('.btn-inschrijven').click(function () {
+
+            $("#" + id).modal('hide');
+           
+        });
+    } else {
+    var lesDetailsHeaderHtml = "<h3>Weet u zeker dat u deze Sporter wilt toevoegen?</h3>";
     var lesDetailsBodyHtml = "<div class='les-detail'>"
                             + "<h3>" + gebruiker.naam + "</h3>"
-                            + "<h4 class='ta-l mar-b-zero'>Docent</h4>"
-                            + "<p class='sub-res ta-l mar-zero'>" + "</p>"
-                            + "<h4 class='ta-l mar-b-zero'>Datum:</h4>"
-                            + "<p class='sub-res ta-l mar-zero'>" + "</p>"
-                            + "<h4 class='ta-l mar-b-zero'>Tijd:</h4>"
-                            + "<p class='sub-res ta-l mar-zero'>" + "</p>"
-                            + "<h4 class='ta-l mar-b-zero'>Aantal plaatsen:</h4>"
-                            + "<p class='sub-res ta-l mar-zero'>" + "</p>"
-                            + "<h4 class='ta-l mar-b-zero'>Aantal gereserveerd:</h4>"
-                            + "<p class='sub-res ta-l mar-zero'>" + "</p>"
+                            + "<h4 class='ta-l mar-b-zero'>foto</h4>"
+                            + "<p class='sub-res ta-l mar-zero'> plek om foto in te voegen</p>"
+
                         + "</div>";
-    var lesDetailsFooterHtml = "<a href='/Reserveren/ReserveerLes/" + "' type='button' class='btn btn-lg btn-primary btn-inschrijven'>Inschrijven</a>";
+    var lesDetailsFooterHtml = "<button id='" + gebruiker.sco_nummer + "' type='button' class='btn btn-lg btn-primary btn-inschrijven'>Toevoegen</button>";
 
     $("#" + id + "> .modal-dialog > .modal-header").html(lesDetailsHeaderHtml);
     $("#" + id + "> .modal-dialog > .modal-body").html(lesDetailsBodyHtml);
     $("#" + id + "> .modal-dialog > .modal-footer").html(lesDetailsFooterHtml);
+    $('.btn-inschrijven').click(function () {
+
+        $("#"+id).modal('hide');
+        var sco_nummer = $(this).attr('id');
+        if(sco_nummer != 0){
+        var lesid = window.location.pathname.split('/')[3];
+        $.post('/Registratie/Inschrijven', { sco_nummer: sco_nummer, lesid: lesid }, function (data) {
+            updateData();
+            $(id).modal('hide');
+
+        });
+        }
+    });
+    }
 }

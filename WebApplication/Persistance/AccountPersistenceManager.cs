@@ -17,7 +17,9 @@ namespace WebApplication.Persistance
             using (ISession session = OpenSession())
             {
                 ICriteria criteria = session.CreateCriteria(typeof(Gebruiker));
-                criteria.Add(Expression.Eq("sco_nummer", Int32.Parse(username)));
+                int sco_nummer = 0;
+                Int32.TryParse(username, out sco_nummer);
+                criteria.Add(Expression.Eq("sco_nummer", sco_nummer));
                 criteria.Add(Expression.Eq("wachtwoord", password));
                 IList<Gebruiker> matchingObjects = criteria.List<Gebruiker>();
                 if (matchingObjects.Count() > 0)
@@ -34,6 +36,7 @@ namespace WebApplication.Persistance
             {
                 ICriteria criteria = session.CreateCriteria(typeof(Gebruiker));
                 criteria.Add(Restrictions.Eq("achternaam", achternaam));
+                criteria.Add(Restrictions.Eq("geboortedatum", geboortedatum));
                 Gebruiker g = criteria.List<Gebruiker>().FirstOrDefault();
                 return g;
             }
