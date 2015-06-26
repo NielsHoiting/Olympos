@@ -60,7 +60,21 @@ namespace WebApplication.Controllers
                 System.Diagnostics.Debug.WriteLine(new returnGebruiker(r.Deelnemer.sco_nummer, r.Deelnemer.voornaam + " " + r.Deelnemer.achternaam, r.is_geweest).isAanwezig);
                 objects.Add(new returnGebruiker(r.Deelnemer.sco_nummer, r.Deelnemer.voornaam + " " + r.Deelnemer.achternaam, r.is_geweest));
             }
-
+            objects.Sort((i, o) =>
+            {
+                if (i.isAanwezig && !o.isAanwezig)
+                {
+                    return 1;
+                }
+                else if (i.isAanwezig && o.isAanwezig)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return -1;
+                }
+            });
             //serializing object
             string json = new JavaScriptSerializer().Serialize(objects);
             return Json(json, JsonRequestBehavior.AllowGet);
