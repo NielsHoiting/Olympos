@@ -15,7 +15,11 @@ namespace WebApplication.Controllers
         public ActionResult Index()
         {
             string redirecttext = "KomendeLessen";
-            if (Request.Cookies["overzicht"].Value == "week")
+            if (Request.Cookies["overzicht"] == null)
+            {
+
+            }
+            else if (Request.Cookies["overzicht"].Value == "week")
             {
                 redirecttext = "WeekOverzicht";
             }
