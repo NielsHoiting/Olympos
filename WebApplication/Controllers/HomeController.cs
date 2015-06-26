@@ -25,16 +25,11 @@ namespace WebApplication.Controllers
             }
             LesPersistanceManager manager = new LesPersistanceManager();
             Gebruiker g = (Gebruiker)Session["user"];
-            List<Les> lessen = manager.getAgenda(0, g);
+            List<Les> lessen = manager.getAgenda(DateTime.Now,DateTime.Now.AddDays(7), g);
             ViewData["lessen"] = lessen;
             ViewData["beginDate"] = DateTime.Now;
+            ViewData["eindDate"] = DateTime.Now.AddDays(7);
             return View();
-        }
-
-        public ActionResult SelectCalendarWeek(string week)   
-        {
-            System.Diagnostics.Debug.WriteLine("test");
-            return null;
         }
     }
 }

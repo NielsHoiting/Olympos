@@ -46,24 +46,26 @@ namespace WebApplication.Controllers
 
         public ActionResult WeekOverzicht()
         {
+            //getting parameters
+            string sportcode = Request.Params["sportcode"];
+            string beginTijd = Request.Params["begintijd"];
+            string plekkenVrij = Request.Params["plekkenvrij"];
+            string bewaren = Request.Params["bewaren"];
+            System.Diagnostics.Debug.WriteLine(sportcode + " " + beginTijd + " " + plekkenVrij + " ");
+
             LesPersistanceManager manager = new LesPersistanceManager();
             DateTime begin = DateTime.Today;
-            DateTime eind = DateTime.Today.AddDays(6);
+            DateTime eind = begin.AddDays(7);
             List<Les> lessen = manager.getWeekOverzicht(begin, eind);
-            System.Diagnostics.Debug.WriteLine(lessen.Count);
             ViewData["lessen"] = lessen;
             ViewData["beginDate"] = begin;
             ViewData["eindDate"] = eind;
+            
             return View();  
         }
-
         public ActionResult Les(int id)
         {
             LesPersistanceManager manager = new LesPersistanceManager();
-            if (Session["user"] == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
 
             Les les = manager.getLes(id);
             if (les == null)

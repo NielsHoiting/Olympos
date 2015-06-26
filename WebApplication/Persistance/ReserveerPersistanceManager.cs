@@ -22,7 +22,7 @@ namespace WebApplication.Persistance
             r.is_geweest = false;
             r.Les = l;
 
-            if (l.Reserveringen.Contains(r))
+            if (l.Reserveringen.Contains(r) || l.niet_tonen == 1 || l.Lesstatus == LesStatus.Uitverkocht || l.Lesstatus == LesStatus.Voorbij)
             {
                 return false;
             }

@@ -56,7 +56,7 @@ namespace WebApplication.Persistance
             
             //criteria voor sportcodes ophalen toevoegen
             ICriteria criteriaReservering = session.CreateCriteria(typeof(Reservering));
-            criteriaReservering.Add(Expression.Eq("Deelnemer", gebruiker));      
+            criteriaReservering.Add(Expression.Eq("Deelnemer", gebruiker));
             if (isGeweest)
                 criteriaReservering.Add(Expression.Eq("is_geweest", true));
             criteriaReservering.Add(Expression.Gt("datum_reservering", datumTerug));
@@ -93,15 +93,13 @@ namespace WebApplication.Persistance
             return returnList;
 
         }
-        public List<Les> getAgenda(int skip, Gebruiker gebruiker)
+        public List<Les> getAgenda(DateTime start, DateTime eind, Gebruiker gebruiker)
         {
             ISession session = OpenSession();
             ICriteria criteria = session.CreateCriteria(typeof(Reservering));
             criteria.Add(Restrictions.Eq("Deelnemer", gebruiker));
             IList<Reservering> results = criteria.List<Reservering>();
             
-            DateTime start = DateTime.Now.Date.AddDays(skip*5);
-            DateTime eind = DateTime.Now.Date.AddDays((skip+1)*5);
             var lessen = from s in results
                          let les = s.Les
                          where les.begintijd > start && les.begintijd < eind
@@ -120,6 +118,7 @@ namespace WebApplication.Persistance
             ICriteria criteria = session.CreateCriteria(typeof(Les));
             criteria.Add(Restrictions.Gt("begintijd", start));
             criteria.Add(Restrictions.Lt("eindtijd", eind));
+            criteria.Add(Restrictions.Eq("niet_tonen", 0));
             IList<Les> lesList = criteria.List<Les>();
             List<Les> returnList = lesList.ToList<Les>();
             returnList.Sort((x, y) =>
