@@ -156,6 +156,7 @@ namespace WebApplication.Persistance
             ICriteria criteria = session.CreateCriteria(typeof(Les));
             criteria.Add(Restrictions.Eq("Sportdocent", gebruiker));
             criteria.Add(Restrictions.Gt("begintijd", DateTime.Now.Date));
+            criteria.Add(Restrictions.Eq("niet_tonen", 0));
             List<Les> results = criteria.List<Les>().ToList<Les>();
 
 

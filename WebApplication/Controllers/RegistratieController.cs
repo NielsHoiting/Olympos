@@ -39,7 +39,7 @@ namespace WebApplication.Controllers
             
             if (les == null || les.Sportdocent.sco_nummer != g.sco_nummer)
             {
-                return RedirectToAction("Les", "Index");
+                return RedirectToAction("Index", "Registratie");
             }
             ViewData["les"] = les;
             return View();

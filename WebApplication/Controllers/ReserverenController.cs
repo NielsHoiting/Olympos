@@ -15,13 +15,17 @@ namespace WebApplication.Controllers
         public ActionResult Index()
         {
             string redirecttext = "KomendeLessen";
-            if (Request.Cookies["overzicht"].Value == "week")
+            
+            if (Request.Cookies["overzicht"] != null) {
+
+            }
+            else if (Request.Cookies["overzicht"].Value == "week")
             {
                 redirecttext = "WeekOverzicht";
             }
             else if (Request.Cookies["overzicht"].Value == "interesse")
             {
-                redirecttext = "MijnInteresse";
+                redirecttext = "MijnInteresses";
             }
             return RedirectToAction(redirecttext, "Reserveren");
         }
