@@ -16,7 +16,7 @@ namespace WebApplication.Controllers
         {
             string redirecttext = "KomendeLessen";
             
-            if (Request.Cookies["overzicht"] != null) {
+            if (Request.Cookies["overzicht"] == null) {
 
             }
             else if (Request.Cookies["overzicht"].Value == "week")
@@ -36,7 +36,6 @@ namespace WebApplication.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            System.Diagnostics.Debug.WriteLine(Request.Cookies["overzicht"].Value);
             
             HttpCookie aCookie = new HttpCookie("overzicht");
             aCookie.Value = "komend";
