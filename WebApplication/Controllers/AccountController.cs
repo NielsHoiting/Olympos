@@ -46,6 +46,8 @@ namespace WebApplication.Controllers
             //check if user is logged in and if les exists
             if (Session["user"] == null)
                 return RedirectToAction("Index", "Registratie");
+            
+            //Gebruiker zoeken op achternaam en geboortedatum
 
             DateTime geboorteDateTime = DateTime.Now;
             geboorteDateTime = DateTime.Parse(geboortedatum);

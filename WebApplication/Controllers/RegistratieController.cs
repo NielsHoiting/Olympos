@@ -41,7 +41,7 @@ namespace WebApplication.Controllers
             {
                 return RedirectToAction("Index", "Registratie");
             }
-            ViewData["les"] = les;
+            
             return View();
         }
 
@@ -52,6 +52,7 @@ namespace WebApplication.Controllers
             if (Session["user"] == null)
                 return RedirectToAction("Index", "Registratie");
             LesPersistanceManager manager = new LesPersistanceManager();
+            Les les = manager.getLes(lesid);
             List<Reservering> reserveringen = manager.getLes(lesid).Reserveringen.ToList<Reservering>();
             List<returnGebruiker> objects = new List<returnGebruiker>();
 
@@ -75,8 +76,17 @@ namespace WebApplication.Controllers
                     return -1;
                 }
             });
+            // startRegistratie: 15 minuten van tevoren
+            DateTime startRegistratie = les.begintijd.AddMinutes(-15);
+            // eindRegistratie: eind van de dag
+            DateTime eindRegistratie = les.begintijd.AddDays(1).Date;
+            // Registreerbaar van startRegistratie tot eindRegistratie
+            bool isRegistreerbaar = DateTime.Now >= startRegistratie && DateTime.Now < eindRegistratie;
+
+            //returnObject maken
+            returnDeelnemers returnObjects = new returnDeelnemers(objects, isRegistreerbaar);
             //serializing object
-            string json = new JavaScriptSerializer().Serialize(objects);
+            string json = new JavaScriptSerializer().Serialize(returnObjects);
             return Json(json, JsonRequestBehavior.AllowGet);
         }
 
@@ -97,6 +107,17 @@ namespace WebApplication.Controllers
             LesPersistanceManager manager = new LesPersistanceManager();
             manager.Inschrijven(sco_nummer, lesid);
             return null;
+        }
+        class returnDeelnemers
+        {
+            public List<returnGebruiker> Deelnemers{get;set;}
+            public bool IsRegistreerbaar { get; set; }
+
+            public returnDeelnemers(List<returnGebruiker> deelnemers, bool isRegistreerbaar)
+            {
+                Deelnemers = deelnemers;
+                IsRegistreerbaar = isRegistreerbaar;
+            }
         }
         class returnGebruiker{
 

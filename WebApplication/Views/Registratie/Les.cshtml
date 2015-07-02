@@ -11,17 +11,7 @@
         <div class="col-sm-12 col-md-8">
             <h3 class="text-center">Deelnemers</h3>
             <table id="deelnemers" class="table">
-                @foreach (Reservering r in les.Reserveringen)
-                { 
-                    <tr>
-                    <td>
-                        @r.Deelnemer.voornaam @r.Deelnemer.achternaam
-                    </td>
-                    <td>
-                        <input type="checkbox" name="vehicle" value="Aanwezig" checked>
-                    </td>
-                </tr>
-                } 
+                Deelnemers worden geladen
             </table>
         </div>
         <div class="col-sm-12 col-md-4">

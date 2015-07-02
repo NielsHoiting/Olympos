@@ -17,15 +17,19 @@ namespace WebApplication.Controllers
 {
     public class HomeController : Controller
     {
+        //Homepagina
         public ActionResult Index()
         {
             if (Session["user"] == null)
             {
                 return RedirectToAction("Index", "Login");
             }
-            LesPersistanceManager manager = new LesPersistanceManager();
+            //Lessen voor persoonlijk lesoverzicht ophalen
             Gebruiker g = (Gebruiker)Session["user"];
+            LesPersistanceManager manager = new LesPersistanceManager();
             List<Les> lessen = manager.getAgenda(DateTime.Now,DateTime.Now.AddDays(7), g);
+
+            //lessen in ViewData zetten
             ViewData["lessen"] = lessen;
             ViewData["beginDate"] = DateTime.Now;
             ViewData["eindDate"] = DateTime.Now.AddDays(7);
