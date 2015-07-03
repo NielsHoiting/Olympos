@@ -3,6 +3,9 @@
 @using System.Globalization
 @Scripts.Render("~/bundles/reserveren")
 @{
+    // ~/bundles/reserveren gedefinieerd in bundleconfig en bevat reserveren.js
+}
+@{
     ViewBag.Title = "Reserveren";
     List<Les> KomendeLessen = (List<Les>)ViewData["KomendeLessen"];
     CultureInfo nl = new CultureInfo("nl");

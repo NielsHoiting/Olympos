@@ -1,6 +1,9 @@
 ﻿@using WebApplication.Models
 @Scripts.Render("~/bundles/registratie")
 @{
+    // ~/bundles/registratie gedefinieerd in bundleconfig en bevat registratie.js
+}
+@{
     ViewBag.Title = "Aanwezigheidsregistratie";
     Les les = (Les)ViewData["les"];
 }

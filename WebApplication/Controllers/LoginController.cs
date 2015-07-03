@@ -21,8 +21,11 @@ namespace WebApplication.Controllers
         {
             AccountPersistenceManager manager = new AccountPersistenceManager();
             Gebruiker gebruiker = manager.Login(gebruikersnaam, wachtwoord);
+
             if(gebruiker != null){
                 Session["user"] = gebruiker;
+                // todo: Ingelogd blijven cookie genereren en toevoegen
+                
                 return RedirectToAction("Index", "Home");
             }
             else

@@ -187,6 +187,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\testdatabase.mdf" />
+    <Content Include="App_Data\testdatabase_log.ldf">
+      <DependentUpon>testdatabase.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\arrow-left.png" />
@@ -272,9 +276,7 @@
     <Content Include="Views\Registratie\Index.cshtml" />
     <Content Include="Views\Reserveren\WeekOverzicht.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

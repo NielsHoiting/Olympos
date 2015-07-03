@@ -13,6 +13,8 @@ namespace WebApplication.Persistance
     public class LesPersistanceManager : PersistenceManager
     {
         static Dictionary<string, string> itemDictionary = new Dictionary<string, string>();
+
+        // aantal wordt meegegeven in ReserverenController
         public List<Les> getKomendeLessen(Gebruiker gebruiker, int aantal)
         {   
             //Haalt lessen op die beginnen na beginTijd

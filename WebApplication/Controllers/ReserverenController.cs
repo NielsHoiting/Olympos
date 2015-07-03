@@ -42,7 +42,9 @@ namespace WebApplication.Controllers
             Response.Cookies.Add(aCookie);
             LesPersistanceManager manager = new LesPersistanceManager();
             Gebruiker g = (Gebruiker)Session["user"];
-            List<Les> KomendeLessen = manager.getKomendeLessen(g, 10);
+            // aantalLessen op
+            int aantalLessen = 10;
+            List<Les> KomendeLessen = manager.getKomendeLessen(g, aantalLessen);
             ViewData["KomendeLessen"] = KomendeLessen;
             return View();
         }
