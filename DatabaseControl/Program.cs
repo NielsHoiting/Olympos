@@ -14,9 +14,8 @@ namespace DatabaseControl
     {
         static void Main(string[] args)
         {
-            //updateLessen();
-            AccountPersistenceManager manager = new AccountPersistenceManager();
-            Console.WriteLine(manager.ZoekGebruiker("Lange", DateTime.Parse("1985-09-20")).voornaam);
+            updateLessen();
+            
                 
         }
         public static void updateLessen()
@@ -29,7 +28,7 @@ namespace DatabaseControl
 
                 ICriteria criteria2 = session.CreateCriteria(typeof(Sportaanbod));
                 IList<Sportaanbod> sportaanbod = criteria2.List<Sportaanbod>();
-                int dagen = -7;
+                int dagen = 7;
                 using (ITransaction transaction = session.BeginTransaction())
                 {
                     foreach (Les l in criteria.List<Les>().ToList<Les>())

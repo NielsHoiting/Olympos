@@ -15,12 +15,15 @@ namespace WebApplication.Persistance
         static Dictionary<string, string> itemDictionary = new Dictionary<string, string>();
         public List<Les> getKomendeLessen(Gebruiker gebruiker, int aantal)
         {   
+            //Haalt lessen op die beginnen na beginTijd
+            DateTime beginTijd = DateTime.Now;
             ISession session = OpenSession();
             ICriteria criteria = session.CreateCriteria(typeof(Les));
-            criteria.Add(Restrictions.Gt("begintijd", DateTime.Now));
+            criteria.Add(Restrictions.Gt("begintijd", beginTijd));
             criteria.Add(Restrictions.Eq("niet_tonen", 0));
             criteria.Add(Restrictions.Eq("vervallen", 0));
             IList<Les> lesList = criteria.List<Les>();
+            // Verwijderd lessen waar de gebruiker al in zit
             var lessen = from les in lesList
                     where (from r in les.Reserveringen
                            where r.Deelnemer.sco_nummer == gebruiker.sco_nummer
@@ -28,6 +31,7 @@ namespace WebApplication.Persistance
                            && les.Reserveringen.Count < les.max_aantal_deelnemers
                     select les;
             List<Les> tempList = lessen.ToList<Les>();
+            // Sorteert lessen op begintijd
             tempList.Sort((x, y) =>
             {
                 if (x.begintijd > y.begintijd) return 1;
@@ -92,22 +96,23 @@ namespace WebApplication.Persistance
                 else if (x.begintijd == y.begintijd) return 0;
                 else return -1;
             });
-            //System.Diagnostics.Debug.WriteLine(returnList.Count);
             return returnList;
 
         }
         public List<Les> getAgenda(DateTime start, DateTime eind, Gebruiker gebruiker)
         {
+            // haalt lessen op waar de gebruiker in zit
             ISession session = OpenSession();
             ICriteria criteria = session.CreateCriteria(typeof(Reservering));
             criteria.Add(Restrictions.Eq("Deelnemer", gebruiker));
             IList<Reservering> results = criteria.List<Reservering>();
-            
+            // Haalt lessen weg die niet in de agenda zitten
             var lessen = from s in results
                          let les = s.Les
                          where les.begintijd > start && les.begintijd < eind
                          select les;
             List<Les> returnList = lessen.ToList<Les>();
+            // Sorteert lessen
             returnList.Sort((x,y) => {
                 if (x.begintijd > y.begintijd) return 1;
                 else if (x.begintijd == y.begintijd) return 0;
@@ -117,6 +122,7 @@ namespace WebApplication.Persistance
         }
         public List<Les> GetWeekOverzicht(DateTime start, DateTime eind, String[] sportcodes)
         {
+            // Haalt alle lessen op tussen start en eind met filter op sportcodes
             ISession session = OpenSession();
             ICriteria criteria = session.CreateCriteria(typeof(Les));
             criteria.Add(Restrictions.Gt("begintijd", start));
@@ -138,6 +144,7 @@ namespace WebApplication.Persistance
         }
         public Les getLes(int lesId)
         {
+            //haalt info van de les op met les_no lesId
             ISession session = OpenSession();
                 Les returnLes = null;
                 ICriteria criteria = session.CreateCriteria(typeof(Les));
@@ -152,6 +159,7 @@ namespace WebApplication.Persistance
         }
         public List<Les> getRegistreerbareLessen(Gebruiker gebruiker)
         {
+            // Haalt alle komende lessen en lessen van de huidige dat op van een sportdocent
             ISession session = OpenSession();
             ICriteria criteria = session.CreateCriteria(typeof(Les));
             criteria.Add(Restrictions.Eq("Sportdocent", gebruiker));
@@ -171,6 +179,7 @@ namespace WebApplication.Persistance
 
         public bool ToggleAanwezigheid(int sco_nummer, int lesid)
         {
+            //Veranderd aanwezigheid van true naar false of van false naar true
             ISession session = OpenSession();
             ICriteria criteria = session.CreateCriteria(typeof(Reservering));
             criteria.CreateAlias("Deelnemer", "Gebruiker");
@@ -198,7 +207,8 @@ namespace WebApplication.Persistance
             JArray results = (JArray)events["results"];
             string nextUrl = events["next_url"].ToString();
             bool done = false;
-            DateTime detectlimit = DateTime.Now.AddHours(-5);
+            //Variabele voor begin controleren events
+            DateTime detectlimit = DateTime.Now.AddHours(-1);
             while (nextUrl != "" && !done)
             {
                 var tempJSON = new WebClient().DownloadString(nextUrl);
@@ -217,6 +227,7 @@ namespace WebApplication.Persistance
                 }
             }
             session.BeginTransaction();
+            //todo: controle op locatie toevoegen
             foreach (Reservering r in reserveringen)
             {
                 string hexCode = r.Deelnemer.sco_nummer.ToString("D24");
@@ -234,16 +245,48 @@ namespace WebApplication.Persistance
                         sporterId = items["code_hex"].ToString();
                         itemDictionary.Add(j["topic"]["arguments"]["item"].ToString(), sporterId);
                     }
-                    System.Diagnostics.Debug.WriteLine("SporterID: " + sporterId);
                     if (sporterId == hexCode)
                     {
-                        Console.WriteLine("hij vind iets");
                         r.is_geweest = true;
                         session.SaveOrUpdate(r);
                         break;
                     }
                 }
             }
+
+            foreach (JToken j in results)
+            {
+                string sporterId = "invalid";
+                if (itemDictionary.ContainsKey(j["topic"]["arguments"]["item"].ToString()))
+                {
+                    sporterId = itemDictionary[j["topic"]["arguments"]["item"].ToString()];
+                }
+                else
+                {
+                    var itemJson = new WebClient().DownloadString("http://olympos.intellifi.nl/api/items/" + j["topic"]["arguments"]["item"].ToString());
+                    JObject items = JObject.Parse(itemJson);
+                    sporterId = items["code_hex"].ToString();
+                    itemDictionary.Add(j["topic"]["arguments"]["item"].ToString(), sporterId);
+                }
+                int sco_nummer;
+                if (Int32.TryParse(sporterId, out sco_nummer))
+                {
+                    Reservering r = new Reservering();
+                    r.datum_reservering = DateTime.Now;
+                    AccountPersistenceManager accountManager = new AccountPersistenceManager();
+                    Gebruiker g = accountManager.getGebruiker(sco_nummer);
+                    // deze code moet weg gehaalt worden als de echte database wordt gebruikt
+                    if(g == null){
+                        g = accountManager.ZoekGebruiker("Oelen", DateTime.Parse("1986-10-08"));
+                    }
+                    r.Deelnemer = g;
+                    r.is_geweest = true;
+                    r.Les = getLes(id);
+                    session.Save(r);
+                }
+            }
+
+
             session.Transaction.Commit();
         }
 

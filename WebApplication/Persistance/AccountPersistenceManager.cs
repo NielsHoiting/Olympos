@@ -41,5 +41,16 @@ namespace WebApplication.Persistance
                 return g;
             }
         }
+
+        internal Gebruiker getGebruiker(int sco_nummer)
+        {
+            using (ISession session = OpenSession())
+            {
+                ICriteria criteria = session.CreateCriteria(typeof(Gebruiker));
+                criteria.Add(Restrictions.Eq("sco_nummer", sco_nummer));
+                Gebruiker g = criteria.List<Gebruiker>().FirstOrDefault();
+                return g;
+            }
+        }
     }
 }

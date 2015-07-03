@@ -23,20 +23,26 @@ function updateData() {
     var lesid = window.location.pathname.split('/')[3];
     $.post('/Registratie/GetDeelnemers', { lesid: lesid }, function (data) {
         var les = $.parseJSON(data);
+        
         var deelnemerdata = "";
         
-        
-        for (i = 0; i < les.deelnemers.length; i++) {
+        for (i = 0; i < les.Deelnemers.length; i++) {
             var aanwezig;
             var aanwezigtext;
-            if (les.deelnemers[i].isAanwezig) {
+            if (les.Deelnemers[i].isAanwezig) {
                 aanwezig = 'n';
                 aanwezigtext = "Aanwezig";
             } else {
                 aanwezig = 'f';
                 aanwezigtext = "Afwezig"
             }
-            deelnemerdata = deelnemerdata + "<tr> <td>" + les.deelnemers[i].naam + " </td> <td> <button id='" + les.deelnemers[i].sco_nummer + "' type='button' class='btn smallbtn-a" + aanwezig + "w btn-lg btn-primary btn-aanwezigheid'>" + aanwezigtext +"</button></td></tr>";
+            var button = ""
+            if (les.IsRegistreerbaar) {
+                button = "<button id='" + les.Deelnemers[i].sco_nummer + "' type='button' class='btn smallbtn-a" + aanwezig + "w btn-lg btn-primary btn-aanwezigheid'>" + aanwezigtext +"</button>";
+            } else {
+                button = aanwezigtext;
+            }
+            deelnemerdata = deelnemerdata + "<tr> <td>" + les.Deelnemers[i].naam + " </td> <td>" + button + "</td></tr>";
         }
         document.getElementById("deelnemers").innerHTML = deelnemerdata;
         $('.btn-aanwezigheid').click(function () {

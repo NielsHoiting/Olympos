@@ -41,7 +41,7 @@ namespace WebApplication.Controllers
             {
                 return RedirectToAction("Index", "Registratie");
             }
-            
+            ViewData["les"] = les;
             return View();
         }
 
@@ -92,7 +92,7 @@ namespace WebApplication.Controllers
 
         public ActionResult ToggleAanwezigheid(int sco_nummer, int lesid)
         {
-
+            //Veranderd de aanwezigheid via de LesPersistanceManager
             LesPersistanceManager manager = new LesPersistanceManager();
             manager.ToggleAanwezigheid(sco_nummer, lesid);
             string json = new JavaScriptSerializer().Serialize(true);
